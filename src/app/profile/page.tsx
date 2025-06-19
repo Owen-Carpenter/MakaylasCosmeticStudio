@@ -184,10 +184,10 @@ export default function ProfilePage() {
       <main className="flex-grow pt-24 pb-20 gradient-bg relative">
         {/* Background elements */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute -top-20 -left-20 w-60 h-60 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-40 h-40 bg-white rounded-full animate-pulse delay-300"></div>
-          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-white rounded-full animate-pulse delay-200"></div>
-          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-white rounded-full animate-pulse delay-400"></div>
+          <div className="absolute -top-20 -left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300"></div>
+          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-yellow-400 rounded-full animate-pulse delay-200"></div>
+          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-yellow-400 rounded-full animate-pulse delay-400"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6">

@@ -135,8 +135,8 @@ function ServicesContent() {
     <div className="flex flex-col min-h-screen overflow-x-hidden w-full max-w-full">
       <main className="gradient-bg pt-32 pb-20 flex-grow overflow-x-hidden w-full max-w-full">
         <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/4 left-1/3 w-72 h-72 rounded-full bg-white blur-3xl animate-pulse max-md:w-40 max-md:h-40 max-md:left-1/4"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-white blur-3xl animate-pulse delay-300 max-md:w-32 max-md:h-32 max-md:right-1/6"></div>
+          <div className="absolute top-1/4 left-1/3 w-72 h-72 rounded-full bg-yellow-400 blur-3xl animate-pulse max-md:w-40 max-md:h-40 max-md:left-1/4"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-yellow-400 blur-3xl animate-pulse delay-300 max-md:w-32 max-md:h-32 max-md:right-1/6"></div>
         </div>
         
         <div className="content-container relative z-10 w-full max-w-full overflow-x-hidden">

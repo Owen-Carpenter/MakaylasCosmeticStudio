@@ -481,8 +481,8 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto space-y-8">
           <div className="relative">
             <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-20 left-1/4 w-60 h-60 bg-white rounded-full"></div>
-              <div className="absolute bottom-40 right-1/4 w-40 h-40 bg-white rounded-full"></div>
+              <div className="absolute top-20 left-1/4 w-60 h-60 bg-yellow-400 rounded-full"></div>
+              <div className="absolute bottom-40 right-1/4 w-40 h-40 bg-yellow-400 rounded-full"></div>
             </div>
           </div>
           

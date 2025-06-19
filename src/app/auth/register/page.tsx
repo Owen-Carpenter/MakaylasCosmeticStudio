@@ -113,9 +113,9 @@ function RegisterContent() {
     return (
       <div className="min-h-screen flex items-center justify-center gradient-bg py-12">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-1/4 w-72 h-72 bg-white rounded-full mix-blend-overlay blur-3xl"></div>
-          <div className="absolute bottom-40 right-1/4 w-56 h-56 bg-white rounded-full mix-blend-overlay blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white rounded-full mix-blend-overlay blur-3xl opacity-20"></div>
+          <div className="absolute top-20 left-1/4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl"></div>
+          <div className="absolute bottom-40 right-1/4 w-56 h-56 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl opacity-20"></div>
         </div>
         <div className="w-full max-w-md z-10">
           <Card className="w-full backdrop-blur-sm bg-white/90 shadow-2xl border-0 overflow-hidden">
@@ -155,9 +155,9 @@ function RegisterContent() {
     return (
       <div className="min-h-screen flex items-center justify-center gradient-bg py-12">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-1/4 w-72 h-72 bg-white rounded-full mix-blend-overlay blur-3xl"></div>
-          <div className="absolute bottom-40 right-1/4 w-56 h-56 bg-white rounded-full mix-blend-overlay blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white rounded-full mix-blend-overlay blur-3xl opacity-20"></div>
+          <div className="absolute top-20 left-1/4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl"></div>
+          <div className="absolute bottom-40 right-1/4 w-56 h-56 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl opacity-20"></div>
         </div>
         <div className="w-full max-w-md z-10">
           <Card className="w-full backdrop-blur-sm bg-white/90 shadow-2xl border-0 overflow-hidden">
@@ -199,9 +199,9 @@ function RegisterContent() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gradient-bg py-12">
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-1/4 w-72 h-72 bg-white rounded-full mix-blend-overlay blur-3xl"></div>
-        <div className="absolute bottom-40 right-1/4 w-56 h-56 bg-white rounded-full mix-blend-overlay blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white rounded-full mix-blend-overlay blur-3xl opacity-20"></div>
+        <div className="absolute top-20 left-1/4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl"></div>
+        <div className="absolute bottom-40 right-1/4 w-56 h-56 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-400 rounded-full mix-blend-overlay blur-3xl opacity-20"></div>
       </div>
       <div className="w-full max-w-md z-10">
         <div className="text-center mb-8">

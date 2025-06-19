@@ -107,10 +107,10 @@ export default function HomePage() {
       {/* Hero Section with Gradient Background */}
       <section className="relative py-24 gradient-bg text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-20 -left-20 w-60 h-60 bg-white rounded-full animate-pulse max-md:w-40 max-md:h-40 max-md:-top-10 max-md:-left-10"></div>
-          <div className="absolute top-40 right-20 w-40 h-40 bg-white rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:top-20 max-md:right-10"></div>
-          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-white rounded-full animate-pulse delay-200 max-md:w-12 max-md:h-12"></div>
-          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-white rounded-full animate-pulse delay-400 max-md:w-16 max-md:h-16 max-md:-bottom-5"></div>
+          <div className="absolute -top-20 -left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse max-md:w-40 max-md:h-40 max-md:-top-10 max-md:-left-10"></div>
+          <div className="absolute top-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:top-20 max-md:right-10"></div>
+          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-yellow-400 rounded-full animate-pulse delay-200 max-md:w-12 max-md:h-12"></div>
+          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-yellow-400 rounded-full animate-pulse delay-400 max-md:w-16 max-md:h-16 max-md:-bottom-5"></div>
         </div>
         <div className="content-container grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="space-y-8">
@@ -467,8 +467,8 @@ export default function HomePage() {
         </div>
 
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-60 h-60 bg-white rounded-full animate-pulse max-md:w-30 max-md:h-30 max-md:top-10 max-md:left-10"></div>
-          <div className="absolute bottom-40 right-20 w-40 h-40 bg-white rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:bottom-20 max-md:right-10"></div>
+          <div className="absolute top-20 left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse max-md:w-30 max-md:h-30 max-md:top-10 max-md:left-10"></div>
+          <div className="absolute bottom-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:bottom-20 max-md:right-10"></div>
         </div>
         <div className="content-container">
           <div className="text-center mb-16 reveal">

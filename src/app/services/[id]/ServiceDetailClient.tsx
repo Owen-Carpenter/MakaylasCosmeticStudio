@@ -420,8 +420,8 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     <main className="gradient-bg pt-24 pb-20 min-h-screen overflow-x-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-72 h-72 rounded-full bg-white blur-3xl animate-pulse max-md:w-40 max-md:h-40"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-white blur-3xl animate-pulse delay-300 max-md:w-32 max-md:h-32"></div>
+        <div className="absolute top-1/4 left-1/3 w-72 h-72 rounded-full bg-yellow-400 blur-3xl animate-pulse max-md:w-40 max-md:h-40"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-yellow-400 blur-3xl animate-pulse delay-300 max-md:w-32 max-md:h-32"></div>
       </div>
 
       <div className="content-container relative z-10">

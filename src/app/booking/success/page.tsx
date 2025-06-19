@@ -264,8 +264,8 @@ function BookingSuccessPageContent() {
     return (
       <div className="min-h-screen flex items-center justify-center gradient-bg pt-24">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-1/4 w-60 h-60 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute bottom-40 right-1/4 w-40 h-40 bg-white rounded-full animate-pulse"></div>
+          <div className="absolute top-20 left-1/4 w-60 h-60 bg-yellow-400 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-40 right-1/4 w-40 h-40 bg-yellow-400 rounded-full animate-pulse"></div>
         </div>
         <div className="animate-pulse flex flex-col items-center relative z-10">
           <div className="h-12 w-12 rounded-full bg-white mb-4"></div>
@@ -281,10 +281,10 @@ function BookingSuccessPageContent() {
     return (
       <div className="min-h-screen gradient-bg pt-24 pb-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-20 -left-20 w-60 h-60 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-40 h-40 bg-white rounded-full animate-pulse delay-300"></div>
-          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-white rounded-full animate-pulse delay-200"></div>
-          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-white rounded-full animate-pulse delay-400"></div>
+          <div className="absolute -top-20 -left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300"></div>
+          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-yellow-400 rounded-full animate-pulse delay-200"></div>
+          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-yellow-400 rounded-full animate-pulse delay-400"></div>
         </div>
         <Card className="w-full max-w-md mx-auto shadow-xl border-0 overflow-hidden z-10 relative">
           <CardHeader className="bg-gradient-to-r from-rose-500 to-red-600 text-white text-center pt-8 pb-10">
@@ -461,10 +461,10 @@ function BookingSuccessPageContent() {
     <div className="min-h-screen gradient-bg pt-24 pb-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute -top-20 -left-20 w-60 h-60 bg-white rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-40 h-40 bg-white rounded-full animate-pulse delay-300"></div>
-        <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-white rounded-full animate-pulse delay-200"></div>
-        <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-white rounded-full animate-pulse delay-400"></div>
+        <div className="absolute -top-20 -left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300"></div>
+        <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-yellow-400 rounded-full animate-pulse delay-200"></div>
+        <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-yellow-400 rounded-full animate-pulse delay-400"></div>
       </div>
       
       {/* Card with dynamic content based on booking status */}
