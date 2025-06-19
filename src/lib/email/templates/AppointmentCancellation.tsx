@@ -86,7 +86,7 @@ export const AppointmentCancellation: React.FC<AppointmentCancellationProps> = (
               <Hr className="my-4 border-gray-200" />
               
               <Text className="text-gray-500 text-xs text-center">
-                &copy; {new Date().getFullYear()} Servify. All rights reserved.
+                &copy; {new Date().getFullYear()} Makaylas Cosmetic Studio. All rights reserved.
               </Text>
             </Section>
           </Container>

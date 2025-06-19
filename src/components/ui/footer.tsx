@@ -13,10 +13,10 @@ export function Footer() {
       <div className="content-container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent hover:scale-105 transition-transform">Servify</h3>
-            <p className="text-gray-400 mb-4">
-              Modern solutions for service-based businesses.
-            </p>
+            <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent hover:scale-105 transition-transform">Makaylas Cosmetic Studio</h3>
+                          <p className="text-gray-400 mb-4">
+                Premium beauty treatments and cosmetic services.
+              </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-accent transition-colors duration-300 hover:scale-105 transition-transform">
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -63,7 +63,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
-          <p className="mb-2">© {new Date().getFullYear()} Servify. All rights reserved.</p>
+                        <p className="mb-2">© {new Date().getFullYear()} Makaylas Cosmetic Studio. All rights reserved.</p>
           <p className="text-sm text-gray-500">Developed by Owen Carpenter</p>
         </div>
       </div>

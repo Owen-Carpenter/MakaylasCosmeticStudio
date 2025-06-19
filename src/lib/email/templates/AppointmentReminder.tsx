@@ -47,7 +47,7 @@ export default function AppointmentReminder({
           
           {/* Header */}
           <Section style={header}>
-            <Text style={logo}>Servify</Text>
+            <Text style={logo}>Makaylas Cosmetic Studio</Text>
             <Text style={headerSubtitle}>
               {isUrgent ? '⏰ Appointment Starting Soon' : '📅 Appointment Reminder'}
             </Text>
@@ -160,10 +160,10 @@ export default function AppointmentReminder({
           {/* Footer */}
           <Section style={footer}>
             <Text style={footerNote}>
-              This reminder was sent from Servify. If you have any questions, please don&apos;t hesitate to contact us.
+              This reminder was sent from Makaylas Cosmetic Studio. If you have any questions, please don&apos;t hesitate to contact us.
             </Text>
             <Text style={copyright}>
-              © 2024 Servify. All rights reserved.
+              © 2024 Makaylas Cosmetic Studio. All rights reserved.
             </Text>
           </Section>
         </Container>

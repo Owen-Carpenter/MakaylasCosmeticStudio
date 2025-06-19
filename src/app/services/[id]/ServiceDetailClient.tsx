@@ -515,7 +515,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                   <div className="flex items-start gap-2 mb-3">
                     <MapPin size={18} className="text-primary mt-1 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-sm md:text-base">Servify Headquarters</p>
+                      <p className="font-medium text-sm md:text-base">Makaylas Cosmetic Studio</p>
                       <p className="text-gray-600 text-sm md:text-base">123 Service Lane, Suite 456</p>
                       <p className="text-gray-600 text-sm md:text-base">Business District, NY 10001</p>
                     </div>

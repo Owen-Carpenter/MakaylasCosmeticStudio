@@ -28,8 +28,8 @@ export function SEOHead({
   publishedTime,
   modifiedTime
 }: SEOHeadProps) {
-  const fullTitle = title.includes('Servify') ? title : `${title} | Servify - Premium Service Marketplace`;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com';
+  const fullTitle = title.includes('Makaylas Cosmetic Studio') ? title : `${title} | Makaylas Cosmetic Studio - Premium Beauty Services`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com';
   const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
 
   return (
@@ -58,7 +58,7 @@ export function SEOHead({
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={`${baseUrl}${ogImage}`} />
       <meta property="og:image:alt" content={title} />
-      <meta property="og:site_name" content="Servify" />
+      <meta property="og:site_name" content="Makaylas Cosmetic Studio" />
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter Card Tags */}
@@ -105,15 +105,15 @@ export function generateMetadata({
   keywords = [],
   noIndex = false
 }: Omit<SEOHeadProps, 'structuredData'>): Metadata {
-  const fullTitle = title.includes('Servify') ? title : `${title} | Servify`;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com';
+  const fullTitle = title.includes('Makaylas Cosmetic Studio') ? title : `${title} | Makaylas Cosmetic Studio`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com';
   const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
 
   return {
     title: fullTitle,
     description,
     keywords: keywords.join(', '),
-    authors: [{ name: 'Servify Team' }],
+    authors: [{ name: 'Makaylas Cosmetic Studio Team' }],
     robots: noIndex ? 'noindex, nofollow' : 'index, follow',
     alternates: {
       canonical: canonicalUrl
@@ -122,7 +122,7 @@ export function generateMetadata({
       title: fullTitle,
       description,
       url: canonicalUrl,
-      siteName: 'Servify',
+      siteName: 'Makaylas Cosmetic Studio',
       images: [
         {
           url: `${baseUrl}${ogImage}`,

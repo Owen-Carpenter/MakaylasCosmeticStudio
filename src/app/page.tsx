@@ -115,10 +115,10 @@ export default function HomePage() {
         <div className="content-container grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="space-y-8">
             <h1 className="text-4xl md:text-6xl font-bold leading-tight animate-fadeInLeft">
-              Your Services, <span className="text-secondary font-bold">Simplified</span>
+              Start Your <span className="text-secondary font-bold">Cosmetic Journey</span>
             </h1>
             <p className="text-lg md:text-xl opacity-90 max-w-md animate-fadeInLeft delay-200">
-              Servify helps service-based businesses manage appointments, payments, and customer relationships with a modern, user-friendly platform.
+              Makaylas Cosmetic Studio offers premium beauty services with professional appointment booking, payments, and customer care through our modern platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fadeInLeft delay-300">
               <Link href="/services">
@@ -275,9 +275,9 @@ export default function HomePage() {
       <section id="about" className="py-24 bg-white">
         <div className="content-container">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl font-bold mb-4 gradient-text">Why Choose Servify</h2>
+            <h2 className="text-4xl font-bold mb-4 gradient-text">Why Choose Makaylas Cosmetic Studio</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              We&apos;re on a mission to revolutionize how service-based businesses operate and grow.
+              We&apos;re dedicated to providing exceptional beauty treatments and cosmetic services that enhance your natural radiance.
             </p>
           </div>
           
@@ -411,7 +411,7 @@ export default function HomePage() {
           <div className="text-center mb-16 reveal">
             <h2 className="text-4xl font-bold mb-4 gradient-text">What Our Clients Say</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Hear from businesses and customers who have transformed their service experience with Servify.
+              Hear from customers who have experienced our exceptional beauty services at Makaylas Cosmetic Studio.
             </p>
           </div>
           
@@ -497,7 +497,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-bold mb-1 text-xl">Email Us</h3>
-                    <p className="text-white/80 text-sm md:text-base">support@servify.com</p>
+                    <p className="text-white/80 text-sm md:text-base">makaylascosmeticstudio@gmail.com</p>
                   </div>
                 </div>
                 
@@ -608,9 +608,9 @@ export default function HomePage() {
 // Sample testimonials data
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    title: "Salon Owner",
-    quote: "Servify completely transformed how I manage my salon. Bookings are up 30% and I can finally take a day off!"
+          name: "Sarah Johnson",
+      title: "Regular Client",
+                    quote: "Makaylas Cosmetic Studio completely transformed my beauty routine. The quality of service is exceptional and I feel pampered every visit!"
   },
   {
     name: "Mark Davis",
@@ -623,9 +623,9 @@ const testimonials = [
     quote: "Setting up classes and managing memberships is now seamless. Our students love the easy booking process."
   },
   {
-    name: "James Wilson",
-    title: "Plumbing Business Owner",
-    quote: "As a small business, I needed something simple yet powerful. Servify delivers exactly that."
+          name: "Emily Wilson",
+      title: "Beauty Enthusiast",
+                    quote: "As someone who values quality beauty treatments, Makaylas Cosmetic Studio delivers exactly what I need - professional service and amazing results."
   },
   {
     name: "Michelle Lee",

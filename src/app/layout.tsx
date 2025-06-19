@@ -15,8 +15,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Servify - Premium Service Marketplace",
-    template: "%s | Servify"
+    default: "Makaylas Cosmetic Studio - Premium Beauty Services",
+    template: "%s | Makaylas Cosmetic Studio"
   },
   description: "Connect with trusted service providers for all your needs. Book professional services including consulting, beauty, maintenance, and more. Quality guaranteed.",
   keywords: [
@@ -29,15 +29,15 @@ export const metadata: Metadata = {
     "home maintenance",
     "service booking"
   ],
-  authors: [{ name: "Servify Team" }],
-  creator: "Servify",
-  publisher: "Servify",
+  authors: [{ name: "Makaylas Cosmetic Studio Team" }],
+  creator: "Makaylas Cosmetic Studio",
+  publisher: "Makaylas Cosmetic Studio",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com'),
   alternates: {
     canonical: '/',
   },
@@ -45,21 +45,21 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: '/',
-    title: 'Servify - Premium Service Marketplace',
-    description: 'Connect with trusted service providers for all your needs. Book professional services with quality guaranteed.',
-    siteName: 'Servify',
+    title: 'Makaylas Cosmetic Studio - Premium Beauty Services',
+    description: 'Experience premium beauty treatments at Makaylas Cosmetic Studio. Book professional beauty services with exceptional quality guaranteed.',
+    siteName: 'Makaylas Cosmetic Studio',
     images: [
       {
         url: '/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Servify - Premium Service Marketplace',
+                  alt: 'Makaylas Cosmetic Studio - Premium Beauty Services',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Servify - Premium Service Marketplace',
+    title: 'Makaylas Cosmetic Studio - Premium Beauty Services',
     description: 'Connect with trusted service providers for all your needs.',
     images: ['/images/og-default.jpg'],
   },

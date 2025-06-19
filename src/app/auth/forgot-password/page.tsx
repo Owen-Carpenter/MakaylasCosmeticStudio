@@ -63,8 +63,8 @@ export default function ForgotPasswordPage() {
       
       <div className="text-center mb-8">
         <Link href="/" className="inline-block">
-          <h1 className="text-5xl font-bold gradient-text">Servify</h1>
-          <p className="mt-2 text-white/70">Your Service Marketplace</p>
+                      <h1 className="text-5xl font-bold gradient-text">Makaylas Cosmetic Studio</h1>
+                      <p className="mt-2 text-white/70">Premium Beauty Services</p>
         </Link>
       </div>
       

@@ -99,7 +99,7 @@ export function Navigation() {
             "text-2xl font-bold transition-colors",
             isScrolled ? "text-primary" : "text-white"
           )}>
-            Servify
+                            Makaylas Cosmetic Studio
           </div>
         </Link>
 
