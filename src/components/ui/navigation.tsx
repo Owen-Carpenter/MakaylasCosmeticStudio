@@ -89,18 +89,22 @@ export function Navigation() {
       className={cn(
         "fixed w-full z-50 transition-all duration-300",
         isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent py-5"
+          ? "bg-white/90 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
       )}
     >
-      <div className="content-container flex justify-between items-center">
-        <Link href="/" className="z-50">
-          <div className={cn(
-            "text-2xl font-bold transition-colors",
-            isScrolled ? "text-primary" : "text-white"
-          )}>
-                            Makaylas Cosmetic Studio
-          </div>
+      <div className="content-container flex justify-between items-center h-20">
+        <Link href="/" className="z-50 flex items-center h-full py-2">
+          <img 
+            src="/images/mcstudioLogo.png" 
+            alt="Makaylas Cosmetic Studio" 
+            className={cn(
+              "h-full w-auto transition-all duration-300 drop-shadow-lg max-h-16",
+              isScrolled 
+                ? "brightness-100 invert-0 filter-none" 
+                : "brightness-0 invert drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]"
+            )}
+          />
         </Link>
 
         {/* Mobile Menu Button */}

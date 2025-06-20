@@ -35,8 +35,12 @@ export function Navbar() {
     <nav className="bg-white shadow-sm py-4 px-4 sm:px-6 lg:px-8 w-full">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold text-emerald-600">
-          ServiceFlow Pro
+        <Link href="/" className="flex items-center">
+          <img 
+            src="/images/mcstudioLogo.png" 
+            alt="CMS Logo" 
+            className="h-8 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}

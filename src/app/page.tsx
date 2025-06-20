@@ -133,99 +133,71 @@ export default function HomePage() {
             <div className="absolute -top-20 -left-20 w-40 h-40 bg-purple-300 rounded-full filter blur-3xl opacity-20 animate-pulse max-md:w-20 max-md:h-20 max-md:-top-10 max-md:-left-10"></div>
             <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-orange-300 rounded-full filter blur-3xl opacity-20 animate-pulse delay-300 max-md:w-30 max-md:h-30 max-md:-bottom-10 max-md:-right-10"></div>
             <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-4 md:p-6 shadow-xl border border-white/10 h-[380px] md:h-[450px] flex items-center justify-center relative overflow-hidden mx-auto max-w-full">
-              {/* Animated Booking Calendar */}
+              {/* Beauty Services Booking Interface */}
               <div className="w-full max-w-[320px] md:max-w-[360px] h-[340px] md:h-[380px] bg-white rounded-xl shadow-2xl overflow-hidden relative z-20">
-                {/* Calendar Header */}
+                {/* Header */}
                 <div className="bg-primary w-full p-3 md:p-4 text-white">
                   <div className="flex justify-between items-center">
-                    <h3 className="font-bold text-lg md:text-xl">Book a Service</h3>
-                    <div className="flex items-center space-x-1">
-                      <button className="p-1 hover:bg-white/20 rounded-full transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                      </button>
-                      <span className="text-xs md:text-sm font-medium">October 2023</span>
-                      <button className="p-1 hover:bg-white/20 rounded-full transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
+                    <h3 className="font-bold text-lg md:text-xl">Beauty Services</h3>
+                    <div className="flex items-center">
+                      <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      <span className="text-xs md:text-sm font-medium">Premium Care</span>
                     </div>
-                  </div>
-                  
-                  {/* Week Days */}
-                  <div className="grid grid-cols-7 gap-1 mt-3 md:mt-4 text-xs text-white/80">
-                    <div className="text-center">Sun</div>
-                    <div className="text-center">Mon</div>
-                    <div className="text-center">Tue</div>
-                    <div className="text-center">Wed</div>
-                    <div className="text-center">Thu</div>
-                    <div className="text-center">Fri</div>
-                    <div className="text-center">Sat</div>
                   </div>
                 </div>
                 
-                {/* Calendar Body */}
-                <div className="p-2 bg-white">
-                  {/* Calendar Days */}
-                  <div className="grid grid-cols-7 gap-1">
-                    {/* Previous Month */}
-                    {[25, 26, 27, 28, 29, 30].map(day => (
-                      <div key={`prev-${day}`} className="aspect-square flex items-center justify-center text-gray-400 text-xs md:text-sm">
-                        {day}
-                      </div>
-                    ))}
-                    
-                    {/* Current Month - First Row */}
-                    {[1, 2, 3, 4, 5, 6, 7].map(day => (
-                      <div key={day} className={`aspect-square rounded-full flex items-center justify-center text-xs md:text-sm 
-                        ${day === 3 ? 'bg-accent text-white font-bold scale-110 transition-all duration-500 animate-pulse' : 'hover:bg-gray-100'}`}>
-                        {day}
-                      </div>
-                    ))}
-                    
-                    {/* Current Month - Second Row */}
-                    {[8, 9, 10, 11, 12, 13, 14].map(day => (
-                      <div key={day} className={`aspect-square rounded-full flex items-center justify-center text-xs md:text-sm 
-                        ${day === 12 ? 'bg-primary text-white font-bold' : 'hover:bg-gray-100'}`}>
-                        {day}
-                      </div>
-                    ))}
-                    
-                    {/* Rest of the days */}
-                    {[15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map(day => (
-                      <div key={day} className="aspect-square rounded-full flex items-center justify-center text-xs md:text-sm hover:bg-gray-100">
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-                  
-                  {/* Time Slot Selection */}
-                  <div className="mt-3 md:mt-4 p-2 border-t">
-                    <h4 className="text-xs md:text-sm font-semibold text-gray-700 mb-2">Available Times for Oct 12</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2">
-                      <div className="text-center py-1 px-1 md:px-2 bg-gray-100 rounded text-xs text-gray-800">09:00 AM</div>
-                      <div className="text-center py-1 px-1 md:px-2 bg-primary/10 rounded text-xs text-primary font-medium border border-primary/30 animate-pulse">10:30 AM</div>
-                      <div className="text-center py-1 px-1 md:px-2 bg-gray-100 rounded text-xs text-gray-800">12:00 PM</div>
-                      <div className="text-center py-1 px-1 md:px-2 bg-gray-100 rounded text-xs text-gray-800">01:30 PM</div>
-                      <div className="text-center py-1 px-1 md:px-2 bg-gray-100 rounded text-xs text-gray-800">03:00 PM</div>
-                      <div className="text-center py-1 px-1 md:px-2 bg-gray-100 rounded text-xs text-gray-800">04:30 PM</div>
-                    </div>
-                  </div>
-                  
-                  {/* Selected Service */}
-                  <div className="mt-3 md:mt-4 px-2 md:px-3 py-2 bg-gray-50 rounded-lg flex items-center justify-between">
-                    <div>
-                      <h5 className="font-medium text-xs md:text-sm text-gray-900">Business Consultation</h5>
-                      <p className="text-xs text-gray-500">60 min • $150</p>
-                    </div>
-                    <span className="px-2 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium">Selected</span>
-                  </div>
+                                 {/* Services Body */}
+                 <div className="p-6 md:p-8 bg-white h-full flex flex-col justify-center">
+                   {/* Service Icons Grid */}
+                   <div className="grid grid-cols-2 gap-6 md:gap-8 mb-6">
+                     {/* Lash Extensions Icon */}
+                     <div className="flex flex-col items-center group">
+                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                         <svg className="h-8 w-8 md:h-10 md:w-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                         </svg>
+                       </div>
+                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Lash Extensions</span>
+                     </div>
+
+                     {/* Brow Shaping Icon */}
+                     <div className="flex flex-col items-center group">
+                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-accent/10 to-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg animate-pulse">
+                         <svg className="h-8 w-8 md:h-10 md:w-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                         </svg>
+                       </div>
+                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Brow Shaping</span>
+                     </div>
+
+                     {/* Facial Services Icon */}
+                     <div className="flex flex-col items-center group">
+                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                         <svg className="h-8 w-8 md:h-10 md:w-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                         </svg>
+                       </div>
+                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Custom Facials</span>
+                     </div>
+
+                     {/* Waxing Services Icon */}
+                     <div className="flex flex-col items-center group">
+                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-accent/10 to-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                         <svg className="h-8 w-8 md:h-10 md:w-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                         </svg>
+                       </div>
+                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Waxing Services</span>
+                     </div>
+                   </div>
                   
                   {/* Book Button */}
-                  <button className="mt-3 md:mt-4 w-full py-2 bg-primary text-white rounded-md font-medium text-sm hover:bg-primary/90 transition-colors">
-                    Confirm Booking
+                  <button className="mt-4 w-full py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Book Your Appointment
                   </button>
                 </div>
                 
@@ -236,20 +208,20 @@ export default function HomePage() {
               
               {/* Floating Service Cards - Hide on mobile to prevent overflow */}
               <div className="hidden lg:block absolute top-16 -left-10 w-48 h-auto p-3 bg-white rounded-lg shadow-lg transform rotate-[-15deg] z-10 animate-float-slow">
-                <h4 className="font-semibold text-sm text-gray-900">Hair Styling</h4>
-                <p className="text-xs text-gray-500 mb-2">Professional hair styling services</p>
+                <h4 className="font-semibold text-sm text-gray-900">Classic Lashes</h4>
+                <p className="text-xs text-gray-500 mb-2">Natural-looking lash extensions</p>
                 <div className="flex justify-between items-center text-xs">
                   <span className="text-primary font-medium">$85</span>
-                  <span className="text-gray-500">45 min</span>
+                  <span className="text-gray-500">90 min</span>
                 </div>
               </div>
               
               <div className="hidden lg:block absolute bottom-20 -right-14 w-48 h-auto p-3 bg-white rounded-lg shadow-lg transform rotate-[10deg] z-10 animate-float-slow delay-700">
-                <h4 className="font-semibold text-sm text-gray-900">Home Cleaning</h4>
-                <p className="text-xs text-gray-500 mb-2">Professional cleaning services</p>
+                <h4 className="font-semibold text-sm text-gray-900">Hydrating Facial</h4>
+                <p className="text-xs text-gray-500 mb-2">Deep cleansing & moisturizing</p>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-primary font-medium">$120</span>
-                  <span className="text-gray-500">120 min</span>
+                  <span className="text-primary font-medium">$65</span>
+                  <span className="text-gray-500">60 min</span>
                 </div>
               </div>
               
