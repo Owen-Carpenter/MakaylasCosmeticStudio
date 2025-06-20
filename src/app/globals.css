@@ -52,34 +52,34 @@
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(0.985 0.01 85);
   --popover-foreground: oklch(0.15 0 0);
-  /* Rich gold (#B8860B) as primary */
-  --primary: oklch(0.65 0.15 70);
-  --primary-foreground: oklch(0.97 0.015 85);
+  /* Metallic gold (#D3AF37) as primary */
+  --primary: oklch(0.72 0.15 85);
+  --primary-foreground: oklch(0.15 0 0);
   --secondary: oklch(0.92 0.02 80);
   --secondary-foreground: oklch(0.25 0 0);
   --muted: oklch(0.92 0.02 80);
   --muted-foreground: oklch(0.5 0 0);
-  /* Warm bronze (#CD7F32) as accent */
-  --accent: oklch(0.6 0.12 60);
+  /* Darker metallic gold (#B8860B) as accent */
+  --accent: oklch(0.62 0.13 80);
   --accent-foreground: oklch(0.97 0.015 85);
   /* Warm red (#B8441F) for destructive actions */
   --destructive: oklch(0.5 0.15 25);
   --border: oklch(0.88 0.02 80);
   --input: oklch(0.88 0.02 80);
-  --ring: oklch(0.65 0.15 70);
-  --chart-1: oklch(0.65 0.15 70);
-  --chart-2: oklch(0.6 0.12 60);
+  --ring: oklch(0.72 0.15 85);
+  --chart-1: oklch(0.72 0.15 85);
+  --chart-2: oklch(0.62 0.13 80);
   --chart-3: oklch(0.5 0.15 25);
   --chart-4: oklch(0.35 0.04 40);
   --chart-5: oklch(0.25 0.02 20);
   --sidebar: oklch(0.97 0.015 85);
   --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.65 0.15 70);
-  --sidebar-primary-foreground: oklch(0.97 0.015 85);
-  --sidebar-accent: oklch(0.6 0.12 60);
-  --sidebar-accent-foreground: oklch(0.97 0.015 85);
+  --sidebar-primary: oklch(0.72 0.15 85);
+  --sidebar-primary-foreground: oklch(0.15 0 0);
+  --sidebar-accent: oklch(0.62 0.13 80);
+  --sidebar-accent-foreground: oklch(0.15 0 0);
   --sidebar-border: oklch(0.88 0.02 80);
-  --sidebar-ring: oklch(0.65 0.15 70);
+  --sidebar-ring: oklch(0.72 0.15 85);
 }
 
 .dark {
@@ -90,34 +90,34 @@
   --card-foreground: oklch(0.95 0.015 85);
   --popover: oklch(0.22 0.04 40);
   --popover-foreground: oklch(0.95 0.015 85);
-  /* Rich gold (#B8860B) as primary */
-  --primary: oklch(0.65 0.15 70);
+  /* Metallic gold (#D3AF37) as primary */
+  --primary: oklch(0.72 0.15 85);
   --primary-foreground: oklch(0.15 0 0);
   --secondary: oklch(0.25 0.04 40);
   --secondary-foreground: oklch(0.95 0.015 85);
   --muted: oklch(0.25 0.04 40);
   --muted-foreground: oklch(0.7 0.02 80);
-  /* Warm bronze (#CD7F32) as accent */
-  --accent: oklch(0.6 0.12 60);
+  /* Darker metallic gold (#B8860B) as accent */
+  --accent: oklch(0.62 0.13 80);
   --accent-foreground: oklch(0.15 0 0);
   /* Warm red (#B8441F) for destructive actions */
   --destructive: oklch(0.5 0.15 25);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 18%);
-  --ring: oklch(0.65 0.15 70);
-  --chart-1: oklch(0.65 0.15 70);
-  --chart-2: oklch(0.6 0.12 60);
+  --ring: oklch(0.72 0.15 85);
+  --chart-1: oklch(0.72 0.15 85);
+  --chart-2: oklch(0.62 0.13 80);
   --chart-3: oklch(0.5 0.15 25);
   --chart-4: oklch(0.35 0.04 40);
   --chart-5: oklch(0.25 0.02 20);
   --sidebar: oklch(0.22 0.04 40);
   --sidebar-foreground: oklch(0.95 0.015 85);
-  --sidebar-primary: oklch(0.65 0.15 70);
+  --sidebar-primary: oklch(0.72 0.15 85);
   --sidebar-primary-foreground: oklch(0.15 0 0);
-  --sidebar-accent: oklch(0.6 0.12 60);
+  --sidebar-accent: oklch(0.62 0.13 80);
   --sidebar-accent-foreground: oklch(0.15 0 0);
   --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.65 0.15 70);
+  --sidebar-ring: oklch(0.72 0.15 85);
 }
 
 @layer base {
@@ -141,22 +141,33 @@
 
 .gradient-text {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(135deg, #B8860B 0%, #CD7F32 100%);
+  background-image: linear-gradient(135deg, #D3AF37 0%, #B8860B 100%);
 }
 
-/* Primary button styles */
+/* Primary button styles with metallic effect */
 .servify-btn-primary {
   @apply bg-primary text-white hover:bg-primary/90 transition-all duration-200 shadow-md;
+  background-image: linear-gradient(135deg, #D3AF37 0%, #B8860B 100%);
+  box-shadow: 0 4px 15px rgba(211, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.servify-btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(211, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 /* Secondary/outline button styles */
 .servify-btn-secondary {
   @apply bg-white text-primary hover:bg-white/90 border border-primary/20 transition-all duration-200 shadow-sm;
+  border-color: #D3AF37;
+  color: #D3AF37;
 }
 
-/* Accent button styles */
+/* Accent button styles with metallic effect */
 .servify-btn-accent {
   @apply bg-accent text-white hover:bg-accent/90 transition-all duration-200 shadow-md;
+  background-image: linear-gradient(135deg, #B8860B 0%, #9A7209 100%);
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .wave-shape {
