@@ -275,6 +275,13 @@ export default function HomePage() {
       <section id="about" className="py-24 bg-white">
         <div className="content-container">
           <div className="text-center mb-16 reveal">
+            <div className="mb-8">
+              <img 
+                src="/images/MakaylaProfilePhoto.jpg" 
+                alt="Makayla - Professional Esthetician" 
+                className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg border-4 border-primary/20"
+              />
+            </div>
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Makayla&apos;s Cosmetic Studio</h2>
             <p className="text-slate-600 max-w-2xl mx-auto text-lg">
               Located in Conway, Arkansas, we specialize in professional esthetician services including lash extensions, brow shaping, waxing, facials, and skin care treatments.
