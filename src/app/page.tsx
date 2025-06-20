@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { MessageSquare, Star, MapPin, Mail, Phone, Shield, Clock, DollarSign, ChevronRight } from "lucide-react";
+import { Star, MapPin, Mail, Phone, Clock, DollarSign, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -275,38 +275,43 @@ export default function HomePage() {
       <section id="about" className="py-24 bg-white">
         <div className="content-container">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl font-bold mb-4 gradient-text">Why Choose Makaylas Cosmetic Studio</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              We&apos;re dedicated to providing exceptional beauty treatments and cosmetic services that enhance your natural radiance.
+            <h2 className="text-4xl font-bold mb-4 gradient-text">About Makayla&apos;s Cosmetic Studio</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+              Located in Conway, Arkansas, we specialize in professional esthetician services including lash extensions, brow shaping, waxing, facials, and skin care treatments.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <div className="text-center p-8 bg-white rounded-2xl shadow-md card-hover reveal-left">
               <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Clock className="h-8 w-8 text-primary animate-pulse" />
+                <svg className="h-8 w-8 text-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
               </div>
-              <h3 className="text-xl font-bold mb-3">Save Time</h3>
+              <h3 className="text-xl font-bold mb-3">Expert Lash & Brow Services</h3>
               <p className="text-slate-600">
-                Automated scheduling and reminders save you hours of administrative work each week.
+                Professional lash extensions and precision brow shaping to frame your eyes beautifully and enhance your natural features.
               </p>
             </div>
             <div className="text-center p-8 bg-white rounded-2xl shadow-md card-hover reveal delay-200">
               <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Shield className="h-8 w-8 text-primary animate-pulse" />
+                <svg className="h-8 w-8 text-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
               </div>
-              <h3 className="text-xl font-bold mb-3">Secure Platform</h3>
+              <h3 className="text-xl font-bold mb-3">Personalized Skin Care</h3>
               <p className="text-slate-600">
-                Enterprise-grade security keeps your business and customer data protected at all times.
+                Customized facial treatments and skin care solutions tailored to your unique skin type and concerns for optimal results.
               </p>
             </div>
             <div className="text-center p-8 bg-white rounded-2xl shadow-md card-hover reveal-right">
               <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <MessageSquare className="h-8 w-8 text-primary animate-pulse" />
+                <MapPin className="h-8 w-8 text-primary animate-pulse" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Client Engagement</h3>
+              <h3 className="text-xl font-bold mb-3">Conway Location</h3>
               <p className="text-slate-600">
-                Built-in communication tools help you stay connected with your clients from booking to follow-up.
+                Conveniently located at 278 U.S. 65 Suite C, Conway, AR 72032, serving the Conway community with premium beauty services.
               </p>
             </div>
           </div>
@@ -487,7 +492,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-bold mb-1 text-xl">Our Location</h3>
-                    <p className="text-white/80 text-sm md:text-base">123 Business Avenue, San Francisco, CA 94107</p>
+                    <p className="text-white/80 text-sm md:text-base">278 U.S. 65 Suite C, Conway, AR 72032</p>
                   </div>
                 </div>
                 
