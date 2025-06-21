@@ -16,6 +16,20 @@ import { initScrollAnimations } from "@/lib/scroll-animations";
 import { Service } from "@/lib/services";
 import { getServices } from "@/lib/supabase-services";
 import { Footer } from "@/components/ui/footer";
+import dynamic from "next/dynamic";
+
+// Dynamically import the eyelash 3D models to avoid SSR issues
+const CosmeticModel = dynamic(() => import("@/components/3d/EyeLashModels"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+        <p className="text-white/80 text-sm">Loading Eyelash Models...</p>
+      </div>
+    </div>
+  )
+});
 
 // Format category name for display
 const formatCategoryName = (category: string) => {
@@ -129,111 +143,8 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="relative animate-fadeInRight">
-            <div className="absolute -top-20 -left-20 w-40 h-40 bg-purple-300 rounded-full filter blur-3xl opacity-20 animate-pulse max-md:w-20 max-md:h-20 max-md:-top-10 max-md:-left-10"></div>
-            <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-orange-300 rounded-full filter blur-3xl opacity-20 animate-pulse delay-300 max-md:w-30 max-md:h-30 max-md:-bottom-10 max-md:-right-10"></div>
-            <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-4 md:p-6 shadow-xl border border-white/10 h-[380px] md:h-[450px] flex items-center justify-center relative overflow-hidden mx-auto max-w-full">
-              {/* Beauty Services Booking Interface */}
-              <div className="w-full max-w-[320px] md:max-w-[360px] h-[340px] md:h-[380px] bg-white rounded-xl shadow-2xl overflow-hidden relative z-20">
-                {/* Header */}
-                <div className="bg-primary w-full p-3 md:p-4 text-white">
-                  <div className="flex justify-between items-center">
-                    <h3 className="font-bold text-lg md:text-xl">Beauty Services</h3>
-                    <div className="flex items-center">
-                      <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                      <span className="text-xs md:text-sm font-medium">Premium Care</span>
-                    </div>
-                  </div>
-                </div>
-                
-                                 {/* Services Body */}
-                 <div className="p-6 md:p-8 bg-white h-full flex flex-col justify-center">
-                   {/* Service Icons Grid */}
-                   <div className="grid grid-cols-2 gap-6 md:gap-8 mb-6">
-                     {/* Lash Extensions Icon */}
-                     <div className="flex flex-col items-center group">
-                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                         <svg className="h-8 w-8 md:h-10 md:w-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                         </svg>
-                       </div>
-                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Lash Extensions</span>
-                     </div>
-
-                     {/* Brow Shaping Icon */}
-                     <div className="flex flex-col items-center group">
-                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-accent/10 to-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg animate-pulse">
-                         <svg className="h-8 w-8 md:h-10 md:w-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                         </svg>
-                       </div>
-                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Brow Shaping</span>
-                     </div>
-
-                     {/* Facial Services Icon */}
-                     <div className="flex flex-col items-center group">
-                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                         <svg className="h-8 w-8 md:h-10 md:w-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                         </svg>
-                       </div>
-                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Custom Facials</span>
-                     </div>
-
-                     {/* Waxing Services Icon */}
-                     <div className="flex flex-col items-center group">
-                       <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-accent/10 to-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                         <svg className="h-8 w-8 md:h-10 md:w-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                         </svg>
-                       </div>
-                       <span className="text-xs md:text-sm font-medium text-gray-700 text-center">Waxing Services</span>
-                     </div>
-                   </div>
-                  
-                  {/* Book Button */}
-                  <button className="mt-4 w-full py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                    Book Your Appointment
-                  </button>
-                </div>
-                
-                {/* Animated Elements */}
-                <div className="absolute -top-10 -right-10 w-20 h-20 bg-accent rounded-full opacity-30 animate-ping-slow max-md:w-12 max-md:h-12 max-md:-top-6 max-md:-right-6"></div>
-                <div className="absolute -bottom-5 -left-5 w-10 h-10 bg-primary rounded-full opacity-20 animate-ping-slow delay-1000 max-md:w-6 max-md:h-6 max-md:-bottom-3 max-md:-left-3"></div>
-              </div>
-              
-              {/* Floating Service Cards - Hide on mobile to prevent overflow */}
-              <div className="hidden lg:block absolute top-16 -left-10 w-48 h-auto p-3 bg-white rounded-lg shadow-lg transform rotate-[-15deg] z-10 animate-float-slow">
-                <h4 className="font-semibold text-sm text-gray-900">Classic Lashes</h4>
-                <p className="text-xs text-gray-500 mb-2">Natural-looking lash extensions</p>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-primary font-medium">$85</span>
-                  <span className="text-gray-500">90 min</span>
-                </div>
-              </div>
-              
-              <div className="hidden lg:block absolute bottom-20 -right-14 w-48 h-auto p-3 bg-white rounded-lg shadow-lg transform rotate-[10deg] z-10 animate-float-slow delay-700">
-                <h4 className="font-semibold text-sm text-gray-900">Hydrating Facial</h4>
-                <p className="text-xs text-gray-500 mb-2">Deep cleansing & moisturizing</p>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-primary font-medium">$65</span>
-                  <span className="text-gray-500">60 min</span>
-                </div>
-              </div>
-              
-              {/* Confirmation Check Animation */}
-              <div className="absolute -bottom-2 -right-2 w-16 md:w-20 h-16 md:h-20 overflow-hidden">
-                <div className="animate-slide-up-fade delay-2000 bg-accent/80 w-full h-full rounded-full flex items-center justify-center">
-                  <svg className="w-8 md:w-10 h-8 md:h-10 text-white animate-scale-up delay-2000" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
+          <div className="relative animate-fadeInRight h-[380px] md:h-[450px]">
+            <CosmeticModel />
           </div>
         </div>
         <div className="wave-shape">
