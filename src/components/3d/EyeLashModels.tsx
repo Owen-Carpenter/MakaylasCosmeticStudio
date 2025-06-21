@@ -6,24 +6,7 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 
-// Component to load the eyelashes model
-function EyelashesModel({ position }: { position: [number, number, number] }) {
-  const { scene } = useGLTF('/models/eyelashes.glb');
-  const meshRef = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (meshRef.current && state.clock.running) {
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.2;
-    }
-  });
 
-  // Use the original scene, don't clone to reduce memory usage
-  return (
-    <group ref={meshRef} position={position} scale={2}>
-      <primitive object={scene} />
-    </group>
-  );
-}
 
 // Component to load the eyelash curler model
 function EyelashCurlerModel({ position }: { position: [number, number, number] }) {
@@ -36,9 +19,60 @@ function EyelashCurlerModel({ position }: { position: [number, number, number] }
     }
   });
 
+  // Override materials to ensure visibility
+  React.useEffect(() => {
+    if (scene) {
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          // Override material to ensure it's not black
+          child.material = new THREE.MeshStandardMaterial({
+            color: '#D3AF37',
+            metalness: 0.7,
+            roughness: 0.3,
+          });
+        }
+      });
+    }
+  }, [scene]);
+
   // Use the original scene, don't clone to reduce memory usage
   return (
-    <group ref={meshRef} position={position} scale={1.5}>
+    <group ref={meshRef} position={position} scale={0.75}>
+      <primitive object={scene} />
+    </group>
+  );
+}
+
+// Component to load the cream tube model
+function CreamTubeModel({ position }: { position: [number, number, number] }) {
+  const { scene } = useGLTF('/models/cc0_cream_tube.glb');
+  const meshRef = useRef<THREE.Group>(null);
+  
+  useFrame((state) => {
+    if (meshRef.current && state.clock.running) {
+      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.2;
+    }
+  });
+
+  // Override materials to ensure visibility
+  React.useEffect(() => {
+    if (scene) {
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          // Override material to ensure it's not black
+          child.material = new THREE.MeshStandardMaterial({
+            color: '#D3AF37',
+            metalness: 0.8,
+            roughness: 0.2,
+          });
+        }
+      });
+    }
+  }, [scene]);
+
+  // Use the original scene, don't clone to reduce memory usage
+  return (
+    <group ref={meshRef} position={position} scale={15.5}>
       <primitive object={scene} />
     </group>
   );
@@ -48,35 +82,48 @@ function EyelashCurlerModel({ position }: { position: [number, number, number] }
 function LoadingFallback() {
   return (
     <>
-      <mesh position={[0.8, 0, 0]}>
-        <boxGeometry args={[0.5, 0.5, 0.5]} />
+      <mesh position={[-1.2, 0, 0]}>
+        <boxGeometry args={[0.8, 0.4, 0.3]} />
         <meshBasicMaterial color="#D3AF37" />
       </mesh>
       
-      <mesh position={[-0.8, 0, 0]}>
-        <boxGeometry args={[0.3, 0.3, 0.3]} />
+      <mesh position={[1.2, 0, 0]}>
+        <cylinderGeometry args={[0.3, 0.3, 1.2, 8]} />
         <meshBasicMaterial color="#D3AF37" />
       </mesh>
     </>
   );
 }
 
-// Main scene with your actual models - ultra-conservative for stability
+// Main scene with your actual models - well-lit and stable
 function EyeLashScene() {
   return (
     <>
-      {/* Minimal lighting to prevent context loss */}
-      <ambientLight intensity={0.8} />
+      {/* Very bright lighting to fix black models */}
+      <ambientLight intensity={2.0} />
       <directionalLight 
-        position={[2, 2, 2]} 
-        intensity={0.5} 
+        position={[5, 8, 5]} 
+        intensity={2.0} 
         color="#ffffff"
       />
+      <directionalLight 
+        position={[-5, 5, -5]} 
+        intensity={1.5} 
+        color="#ffffff"
+      />
+      <directionalLight 
+        position={[0, -3, 5]} 
+        intensity={1.0} 
+        color="#ffffff"
+      />
+      <pointLight position={[3, 5, 3]} intensity={1.5} color="#ffffff" />
+      <pointLight position={[-3, 5, 3]} intensity={1.5} color="#ffffff" />
+      <pointLight position={[0, 2, -3]} intensity={1.0} color="#D3AF37" />
       
       {/* Your actual 3D models */}
       <Suspense fallback={<LoadingFallback />}>
-        <EyelashesModel position={[0.8, 0, 0]} />
-        <EyelashCurlerModel position={[-0.8, 0, 0]} />
+        <EyelashCurlerModel position={[-1.2, 0, 0]} />
+        <CreamTubeModel position={[1.2, 0, 0]} />
       </Suspense>
     </>
   );
@@ -136,5 +183,5 @@ export default function EyeLashModels() {
 }
 
 // Preload the models for better performance
-useGLTF.preload('/models/eyelashes.glb');
-useGLTF.preload('/models/eyelash_curler.glb'); 
+useGLTF.preload('/models/eyelash_curler.glb');
+useGLTF.preload('/models/cc0_cream_tube.glb'); 
