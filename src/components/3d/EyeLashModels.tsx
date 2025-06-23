@@ -152,17 +152,17 @@ export default function EyeLashModels() {
         style={{ background: 'transparent' }}
         onCreated={handleCreated}
         gl={{
-          antialias: false,
+          antialias: true,
           alpha: true,
-          powerPreference: "low-power",
+          powerPreference: "high-performance",
           failIfMajorPerformanceCaveat: false,
           preserveDrawingBuffer: false,
-          stencil: false,
-          depth: false,
+          stencil: true,
+          depth: true,
           premultipliedAlpha: false,
           logarithmicDepthBuffer: false,
         }}
-        dpr={[0.5, 1]}
+        dpr={[1, 2]}
         performance={{ min: 0.5 }}
         frameloop="always"
       >
