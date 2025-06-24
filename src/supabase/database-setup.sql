@@ -375,17 +375,8 @@ GRANT SELECT ON time_off TO anon;
 -- 9. SAMPLE DATA
 -- =====================================================
 
--- Insert sample services
-INSERT INTO services (title, details, time, category, price) VALUES
-('Business Consultation', 'One-on-one consultation for your business needs. Our expert consultants will help you identify opportunities for growth, optimize operations, and develop strategic plans tailored to your business goals.', '60 min', 'consulting', 99.00),
-('Haircut & Styling', 'Professional haircut and styling service. Our experienced stylists will provide a personalized experience, from consultation to finishing touches, ensuring you leave with a look that suits your style and personality.', '45 min', 'beauty', 49.00),
-('Home Repair', 'General home repair and maintenance. Our skilled technicians can handle a wide range of repairs, from fixing leaky faucets to patching drywall, helping you maintain your home in top condition.', '120 min', 'maintenance', 129.00),
-('Legal Consultation', 'Professional legal advice for various matters. Our attorneys provide clear guidance on legal issues affecting individuals and businesses, helping you navigate complex legal situations with confidence.', '90 min', 'consulting', 149.00),
-('Massage Therapy', 'Relaxing full-body massage to relieve stress. Our certified massage therapists use various techniques to reduce muscle tension, improve circulation, and promote overall well-being.', '60 min', 'beauty', 79.00),
-('Web Development', 'Custom website development and design services. We create responsive, modern websites tailored to your business needs, from simple landing pages to complex web applications.', '180 min', 'technology', 199.00),
-('Personal Training', 'One-on-one fitness training sessions. Our certified trainers will create a personalized workout plan to help you achieve your fitness goals safely and effectively.', '60 min', 'fitness', 69.00),
-('Tax Preparation', 'Professional tax preparation and filing services. Our experienced tax professionals will ensure your taxes are filed accurately and help you maximize your deductions.', '90 min', 'consulting', 89.00)
-ON CONFLICT (id) DO NOTHING;
+-- NOTE: Services data has been moved to services-data.sql
+-- Run services-data.sql after this setup script to insert all services
 
 -- =====================================================
 -- 10. SETUP VERIFICATION
@@ -442,10 +433,10 @@ BEGIN
   SELECT 
     'Sample Data' as component,
     CASE 
-      WHEN COUNT(*) >= 5 THEN 'OK'
+      WHEN COUNT(*) >= 25 THEN 'OK'
       ELSE 'WARNING'
     END as status,
-    'Found ' || COUNT(*) || ' sample services' as details
+    'Found ' || COUNT(*) || ' services' as details
   FROM services;
   
 END;
@@ -464,12 +455,12 @@ BEGIN
   RAISE NOTICE 'Tables created: users, services, bookings, time_off';
   RAISE NOTICE 'Functions created: 5+ utility functions';
   RAISE NOTICE 'Policies created: 10+ RLS policies';
-  RAISE NOTICE 'Sample data: 8 sample services inserted';
   RAISE NOTICE '';
   RAISE NOTICE 'Next steps:';
-  RAISE NOTICE '1. Update your environment variables';
-  RAISE NOTICE '2. Create your first admin user';
-  RAISE NOTICE '3. Test the application';
+  RAISE NOTICE '1. Run services-data.sql to insert all services';
+  RAISE NOTICE '2. Update your environment variables';
+  RAISE NOTICE '3. Create your first admin user';
+  RAISE NOTICE '4. Test the application';
   RAISE NOTICE '';
   RAISE NOTICE 'Run: SELECT * FROM verify_database_setup();';
   RAISE NOTICE 'to verify the setup was successful.';
