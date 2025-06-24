@@ -11,7 +11,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- =====================================================
--- 1. UTILITY FUNCTIONS
+-- 1. BASIC UTILITY FUNCTIONS
 -- =====================================================
 
 -- Function to update timestamps automatically
@@ -22,19 +22,6 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
--- Function to check if current user is admin
-CREATE OR REPLACE FUNCTION is_admin()
-RETURNS BOOLEAN
-LANGUAGE sql
-SECURITY DEFINER
-STABLE
-AS $$
-  SELECT EXISTS (
-    SELECT 1 FROM users
-    WHERE id = auth.uid() AND role = 'admin'
-  );
-$$;
 
 -- =====================================================
 -- 2. USERS TABLE
@@ -61,6 +48,19 @@ CREATE TRIGGER users_set_timestamp
   BEFORE UPDATE ON users
   FOR EACH ROW
   EXECUTE FUNCTION trigger_set_timestamp();
+
+-- Function to check if current user is admin (now that users table exists)
+CREATE OR REPLACE FUNCTION is_admin()
+RETURNS BOOLEAN
+LANGUAGE sql
+SECURITY DEFINER
+STABLE
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM users
+    WHERE id = auth.uid() AND role = 'admin'
+  );
+$$;
 
 -- =====================================================
 -- 3. SERVICES TABLE
