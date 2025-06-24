@@ -10,20 +10,31 @@ const publicApiRoutes = ['/api/auth']
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   
-  // Check if the path is a public route or static file
-  const isPublicRoute = publicRoutes.some(route => 
-    pathname === route || 
-    pathname.includes('/_next/') || 
-    pathname.includes('/favicon.ico')
-  )
+  // Check if the path is a static file (including public folder assets)
+  const isStaticFile = pathname.includes('/_next/') || 
+                      pathname.includes('/favicon.ico') ||
+                      pathname.startsWith('/images/') ||
+                      pathname.startsWith('/models/') ||
+                      pathname.startsWith('/site.webmanifest') ||
+                      pathname.startsWith('/sitemap.xml') ||
+                      pathname.includes('.svg') ||
+                      pathname.includes('.png') ||
+                      pathname.includes('.jpg') ||
+                      pathname.includes('.jpeg') ||
+                      pathname.includes('.gif') ||
+                      pathname.includes('.glb') ||
+                      pathname.includes('.gltf')
+  
+  // Check if the path is a public route
+  const isPublicRoute = publicRoutes.some(route => pathname === route)
   
   // Check if the path is a public API route
   const isPublicApiRoute = publicApiRoutes.some(route => 
     pathname.startsWith(route)
   )
   
-  // If requesting a public path or public API route, allow the request to proceed
-  if (isPublicRoute || isPublicApiRoute) {
+  // If requesting a static file, public route, or public API route, allow the request to proceed
+  if (isStaticFile || isPublicRoute || isPublicApiRoute) {
     return NextResponse.next()
   }
   
