@@ -336,7 +336,6 @@ export default function HomePage() {
                             </div>
                             <div>
                               <p className="font-medium text-sm md:text-base">{testimonial.name}</p>
-                              <p className="text-xs md:text-sm text-slate-500">{testimonial.title}</p>
                             </div>
                           </div>
                         </CardContent>
@@ -503,28 +502,27 @@ export default function HomePage() {
 // Sample testimonials data
 const testimonials = [
   {
-          name: "Sarah Johnson",
-      title: "Regular Client",
-                    quote: "Makaylas Cosmetic Studio completely transformed my beauty routine. The quality of service is exceptional and I feel pampered every visit!"
+    name: "Sarah Johnson",
+    quote: "Makaylas Cosmetic Studio completely transformed my beauty routine. The quality of service is exceptional and I feel pampered every visit!"
   },
   {
-    name: "Mark Davis",
-    title: "Consulting Firm CEO",
-    quote: "The client management features have helped us maintain stronger relationships with our key accounts."
+    name: "Ashley Martinez",
+    quote: "My lash extensions look absolutely stunning! Makayla's attention to detail is incredible and they last so much longer than other places I've tried."
   },
   {
-    name: "Elena Rodriguez",
-    title: "Yoga Studio Manager",
-    quote: "Setting up classes and managing memberships is now seamless. Our students love the easy booking process."
+    name: "Jessica Thompson",
+    quote: "Makayla did my wedding makeup and brows - I felt like a princess! The booking system made it so easy to schedule my trial and wedding day appointments."
   },
   {
-          name: "Emily Wilson",
-      title: "Beauty Enthusiast",
-                    quote: "As someone who values quality beauty treatments, Makaylas Cosmetic Studio delivers exactly what I need - professional service and amazing results."
+    name: "Emily Wilson",
+    quote: "As someone who values quality beauty treatments, Makaylas Cosmetic Studio delivers exactly what I need - professional service and amazing results."
   },
   {
-    name: "Michelle Lee",
-    title: "Massage Therapist",
-    quote: "The automated reminders have cut my no-shows by half! My schedule stays fuller and more profitable."
+    name: "Rachel Davis",
+    quote: "The customized facial treatments have completely improved my skin! Makayla really knows how to address specific skin concerns with professional care."
+  },
+  {
+    name: "Morgan Clark",
+    quote: "Finally found someone who can shape my brows perfectly! The precision and technique at Makayla's studio is unmatched in Conway."
   }
 ];
