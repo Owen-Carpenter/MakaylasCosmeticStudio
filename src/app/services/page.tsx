@@ -228,8 +228,8 @@ function ServicesContent() {
           </div>
 
           {/* Services Grid - Enhanced Animations */}
-          <div className="w-full max-w-full overflow-visible px-8 -mx-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-full">
+          <div className="w-full max-w-full overflow-visible px-4 sm:px-8 sm:-mx-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-full justify-items-center sm:justify-items-stretch">
               {loading ? (
                 <div className="col-span-full flex justify-center items-center py-20">
                   <div className="text-white text-lg animate-pulse">Loading services...</div>
