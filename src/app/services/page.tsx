@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Clock, DollarSign, ChevronRight, Filter, ArrowUpDown, Loader2 } from "lucide-react";
+import { Clock, ChevronRight, Filter, ArrowUpDown, Loader2, Eye, Sparkles, Heart, Scissors } from "lucide-react";
 import { initScrollAnimations } from "@/lib/scroll-animations";
 import { Service } from "@/lib/services";
 import { getServices } from "@/lib/supabase-services";
@@ -131,6 +131,27 @@ function ServicesContent() {
     return category.charAt(0).toUpperCase() + category.slice(1);
   };
 
+  // Get icon for service category
+  const getCategoryIcon = (category: string) => {
+    const iconProps = {
+      className: "w-full h-full",
+      strokeWidth: 1.5
+    };
+    
+    switch (category.toLowerCase()) {
+      case 'lashes':
+        return <Eye {...iconProps} />;
+      case 'brows':
+        return <Eye {...iconProps} />;
+      case 'facials':
+        return <Sparkles {...iconProps} />;
+      case 'waxing':
+        return <Scissors {...iconProps} />;
+      default:
+        return <Heart {...iconProps} />;
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden w-full max-w-full">
       <main className="gradient-bg pt-32 pb-20 flex-grow overflow-x-hidden w-full max-w-full">
@@ -239,13 +260,13 @@ function ServicesContent() {
                          active:scale-[0.99] active:shadow-[0_10px_30px_rgba(255,255,255,0.1)]
                          cursor-pointer">
                         
-                                                 {/* Animated Background Number */}
-                         <div className="absolute inset-0 flex items-center justify-center text-[150px] sm:text-[200px] font-bold opacity-[0.08] pointer-events-none select-none z-0 
+                                                 {/* Animated Background Icon */}
+                         <div className="absolute inset-0 flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 mx-auto my-auto opacity-[0.08] pointer-events-none select-none z-0 
                            transition-all duration-500 ease-out 
-                           group-hover:opacity-[0.12] group-hover:scale-105 group-hover:rotate-3
-                           bg-clip-text text-transparent bg-gradient-to-br from-white to-white/30 overflow-hidden" 
+                           group-hover:opacity-[0.15] group-hover:scale-110 group-hover:rotate-6
+                           text-white overflow-hidden" 
                            style={{ '--rotation': `${(index % 3) - 1}deg` } as React.CSSProperties}>
-                           {(index + 1).toString().padStart(2, '0')}
+                           {getCategoryIcon(service.category)}
                          </div>
 
                         {/* Glowing Border Effect on Hover */}
@@ -288,8 +309,6 @@ function ServicesContent() {
                              </div>
                              <div className="flex items-center font-medium flex-shrink-0
                                transition-all duration-300">
-                               <DollarSign className="h-4 w-4 mr-1 text-accent flex-shrink-0 
-                                 transition-all duration-300 group-hover:text-yellow-300 group-hover:drop-shadow-md group-hover:rotate-6" />
                                <span className="text-accent transition-all duration-300 
                                  group-hover:text-yellow-300 group-hover:font-bold group-hover:drop-shadow-md">
                                  ${service.price}
