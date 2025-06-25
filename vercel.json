@@ -6,7 +6,7 @@
     },
     {
       "path": "/api/notifications/send-reminders",
-      "schedule": "0 * * * *"
+      "schedule": "0 18 * * *"
     }
   ]
 } 
