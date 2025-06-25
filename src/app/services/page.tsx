@@ -206,55 +206,118 @@ function ServicesContent() {
             </div>
           </div>
 
-          {/* Services Grid - SIMPLIFIED ANIMATIONS */}
-          <div className="w-full max-w-full overflow-hidden">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4 sm:px-0 w-full max-w-full">
+          {/* Services Grid - Enhanced Animations */}
+          <div className="w-full max-w-full overflow-visible px-8 -mx-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-full">
               {loading ? (
                 <div className="col-span-full flex justify-center items-center py-20">
-                  <div className="text-white text-lg">Loading services...</div>
+                  <div className="text-white text-lg animate-pulse">Loading services...</div>
                 </div>
               ) : filteredServices.length > 0 ? (
                 filteredServices.map((service, index) => (
-                  <Link href={`/services/${service.id}`} key={service.id} className="transition-transform hover:scale-[1.02] duration-300 w-full max-w-full">
-                    <Card className="h-full overflow-hidden transition-all duration-300
-                      border border-white/20 shadow-xl
-                      bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md
-                      hover:shadow-[0_10px_40px_rgba(255,255,255,0.15)] hover:border-white/30 relative group w-full max-w-full">
-                      <div className="absolute inset-0 flex items-center justify-center text-[150px] sm:text-[250px] font-bold opacity-[0.15] pointer-events-none select-none z-0 animate-float-slow bg-clip-text text-transparent bg-gradient-to-br from-white to-white/30 overflow-hidden" style={{ '--rotation': `${(index % 3) - 1}deg` } as React.CSSProperties}>
-                        {(index + 1).toString().padStart(2, '0')}
-                      </div>
-                      <CardHeader className="pb-2 relative z-10 w-full max-w-full overflow-hidden">
-                        <div className="flex justify-between items-start gap-3 w-full">
-                          <div className="flex-1 min-w-0 overflow-hidden">
-                            <CardTitle className="text-lg sm:text-xl text-primary font-bold group-hover:text-primary/80 transition-colors truncate">{service.title}</CardTitle>
-                            <CardDescription className="mt-1 text-white/80 text-sm line-clamp-2 break-words">{service.details}</CardDescription>
-                          </div>
-                          <span className="text-xs px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white whitespace-nowrap flex-shrink-0 border border-white/10 max-w-[120px] truncate">
-                            {formatCategoryName(service.category)}
-                          </span>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="relative z-10 w-full max-w-full overflow-hidden">
-                        <div className="flex justify-between text-sm text-white/70 mt-2 w-full gap-2">
-                          <div className="flex items-center min-w-0 flex-1">
-                            <Clock className="h-4 w-4 mr-1 text-white/90 flex-shrink-0" />
-                            <span className="truncate">{service.time}</span>
-                          </div>
-                          <div className="flex items-center font-medium flex-shrink-0">
-                            <DollarSign className="h-4 w-4 mr-1 text-accent group-hover:text-accent/80 transition-colors flex-shrink-0" />
-                            <span className="text-accent group-hover:text-accent/80 transition-colors">{service.price}</span>
-                          </div>
-                        </div>
-                      </CardContent>
-                      <CardFooter className="border-t border-white/10 pt-4 relative z-10 w-full max-w-full">
-                        <Button className="w-full bg-primary hover:bg-primary/90 text-white 
-                          backdrop-blur-sm transition-all duration-200 group-hover:shadow-lg group-hover:scale-[1.02] text-sm">
-                          <span>Book Now</span>
-                          <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform flex-shrink-0" />
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </Link>
+                  <div 
+                    key={service.id} 
+                    className="w-full max-w-full animate-in fade-in slide-in-from-bottom-8 duration-700"
+                    style={{ 
+                      animationDelay: `${index * 100}ms`,
+                      animationFillMode: 'both'
+                    }}
+                  >
+                    <Link 
+                      href={`/services/${service.id}`} 
+                      className="block w-full max-w-full group"
+                    >
+                                             <Card className="h-full overflow-hidden transition-all duration-300 ease-out
+                         border border-white/20 shadow-xl
+                         bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md
+                         hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] 
+                         hover:border-white/40 
+                         hover:scale-[1.02] 
+                         hover:-translate-y-1
+                         relative group-hover:bg-gradient-to-br group-hover:from-white/25 group-hover:to-white/10
+                         transform w-full max-w-full
+                         active:scale-[0.99] active:shadow-[0_10px_30px_rgba(255,255,255,0.1)]
+                         cursor-pointer">
+                        
+                                                 {/* Animated Background Number */}
+                         <div className="absolute inset-0 flex items-center justify-center text-[150px] sm:text-[200px] font-bold opacity-[0.08] pointer-events-none select-none z-0 
+                           transition-all duration-500 ease-out 
+                           group-hover:opacity-[0.12] group-hover:scale-105 group-hover:rotate-3
+                           bg-clip-text text-transparent bg-gradient-to-br from-white to-white/30 overflow-hidden" 
+                           style={{ '--rotation': `${(index % 3) - 1}deg` } as React.CSSProperties}>
+                           {(index + 1).toString().padStart(2, '0')}
+                         </div>
+
+                        {/* Glowing Border Effect on Hover */}
+                        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm -z-10"></div>
+                        
+                                                 <CardHeader className="pb-2 relative z-10 w-full max-w-full overflow-hidden 
+                           transition-transform duration-300 group-hover:translate-y-0.5">
+                           <div className="flex justify-between items-start gap-3 w-full">
+                             <div className="flex-1 min-w-0 overflow-hidden">
+                               <CardTitle className="text-lg sm:text-xl text-primary font-bold 
+                                 transition-all duration-300 
+                                 group-hover:text-white group-hover:drop-shadow-lg
+                                 truncate transform origin-left">
+                                 {service.title}
+                               </CardTitle>
+                               <CardDescription className="mt-1 text-white/80 text-sm line-clamp-2 break-words
+                                 transition-all duration-300 group-hover:text-white/90">
+                                 {service.details}
+                               </CardDescription>
+                             </div>
+                             <span className="text-xs px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white 
+                               whitespace-nowrap flex-shrink-0 border border-white/10 max-w-[120px] truncate
+                               transition-all duration-300 
+                               group-hover:bg-accent/30 group-hover:border-accent/40 group-hover:scale-[1.02]
+                               group-hover:shadow-lg">
+                               {formatCategoryName(service.category)}
+                             </span>
+                           </div>
+                         </CardHeader>
+                        
+                                                 <CardContent className="relative z-10 w-full max-w-full overflow-hidden
+                           transition-transform duration-300 group-hover:translate-x-1">
+                           <div className="flex justify-between text-sm text-white/70 mt-2 w-full gap-2">
+                             <div className="flex items-center min-w-0 flex-1 
+                               transition-all duration-300 group-hover:text-white">
+                               <Clock className="h-4 w-4 mr-1 text-white/90 flex-shrink-0 
+                                 transition-all duration-300 group-hover:text-accent group-hover:rotate-6" />
+                               <span className="truncate">{service.time}</span>
+                             </div>
+                             <div className="flex items-center font-medium flex-shrink-0
+                               transition-all duration-300">
+                               <DollarSign className="h-4 w-4 mr-1 text-accent flex-shrink-0 
+                                 transition-all duration-300 group-hover:text-yellow-300 group-hover:drop-shadow-md group-hover:rotate-6" />
+                               <span className="text-accent transition-all duration-300 
+                                 group-hover:text-yellow-300 group-hover:font-bold group-hover:drop-shadow-md">
+                                 ${service.price}
+                               </span>
+                             </div>
+                           </div>
+                         </CardContent>
+                        
+                                                 <CardFooter className="border-t border-white/10 pt-4 relative z-10 w-full max-w-full
+                           transition-all duration-300 group-hover:border-white/30 group-hover:bg-white/5">
+                           <Button className="w-full bg-primary hover:bg-primary/90 text-white 
+                             backdrop-blur-sm transition-all duration-300 
+                             group-hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)] 
+                             group-hover:scale-[1.02] 
+                             group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent
+                             text-sm relative overflow-hidden
+                             before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent
+                             before:translate-x-[-100%] before:transition-transform before:duration-700
+                             group-hover:before:translate-x-[100%]">
+                             <span className="relative z-10 transition-transform duration-300">Book Now</span>
+                             <ChevronRight className="h-4 w-4 ml-1 flex-shrink-0 relative z-10
+                               transition-all duration-300 
+                               group-hover:translate-x-1 group-hover:drop-shadow-lg" />
+                           </Button>
+                         </CardFooter>
+                      </Card>
+                    </Link>
+                  </div>
                 ))
               ) : (
                 <div className="col-span-full text-center py-12 bg-white/10 backdrop-blur-sm rounded-lg mx-4 sm:mx-0 w-full max-w-full">
