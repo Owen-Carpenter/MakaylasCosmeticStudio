@@ -5,14 +5,15 @@ import { generateServiceSchema, generateBreadcrumbSchema } from '@/lib/seo/struc
 import ServiceDetailClient from './ServiceDetailClient';
 
 interface ServicePageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const service = await getServiceById(params.id);
+  const { id } = await params;
+  const service = await getServiceById(id);
   
   if (!service) {
     return {
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     openGraph: {
       title,
       description,
-      url: `/services/${service.id}`,
+      url: `/services/${id}`,
       type: 'article',
       images: [
         {
@@ -65,7 +66,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
       images: [`/images/services/${service.category}.jpg`],
     },
     alternates: {
-      canonical: `/services/${service.id}`,
+      canonical: `/services/${id}`,
     },
   };
 }
@@ -80,7 +81,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
-  const service = await getServiceById(params.id);
+  const { id } = await params;
+  const service = await getServiceById(id);
 
   if (!service) {
     notFound();
@@ -91,7 +93,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Services', url: '/services' },
-    { name: service.title, url: `/services/${service.id}` }
+    { name: service.title, url: `/services/${id}` }
   ]);
 
   return (

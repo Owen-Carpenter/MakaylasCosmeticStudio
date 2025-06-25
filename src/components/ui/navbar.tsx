@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -36,9 +37,11 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img 
+          <Image 
             src="/images/mcstudioLogo.png" 
             alt="CMS Logo" 
+            width={120}
+            height={32}
             className="h-8 w-auto"
           />
         </Link>

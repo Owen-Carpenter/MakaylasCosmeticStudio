@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import Image from "next/image";
 import { Star, MapPin, Mail, Phone, Clock, DollarSign, ChevronRight } from "lucide-react";
 import {
   Carousel,
@@ -159,9 +160,11 @@ export default function HomePage() {
         <div className="content-container">
           <div className="text-center mb-16 reveal">
             <div className="mb-8">
-              <img 
+              <Image 
                 src="/images/MakaylaProfilePhoto.jpg" 
                 alt="Makayla - Professional Esthetician" 
+                width={128}
+                height={128}
                 className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg border-4 border-primary/20"
               />
             </div>

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -95,9 +96,11 @@ export function Navigation() {
     >
       <div className="content-container flex justify-between items-center h-20">
         <Link href="/" className="z-50 flex items-center h-full py-2">
-          <img 
+          <Image 
             src="/images/mcstudioLogo.png" 
             alt="Makaylas Cosmetic Studio" 
+            width={150}
+            height={64}
             className={cn(
               "h-full w-auto transition-all duration-300 drop-shadow-lg max-h-16",
               isScrolled 

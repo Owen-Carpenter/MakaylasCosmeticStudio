@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useRef, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, Float } from '@react-three/drei';
-import * as THREE from 'three';
 import SimpleCosmeticDisplay from './SimpleCosmeticDisplay';
 
 // Component to load a single GLTF model (uncomment when you have model files)
