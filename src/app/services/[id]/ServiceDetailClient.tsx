@@ -41,7 +41,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
   const { data: session } = useSession();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string>("");
-  const [selectedLocation, setSelectedLocation] = useState<string>("main-office");
+
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>(ALL_TIME_SLOTS);
   const [timeSlotDisplay, setTimeSlotDisplay] = useState<Record<string, { available: boolean; reason?: string }>>({});
   const [existingBookings, setExistingBookings] = useState<DbBooking[]>([]);
@@ -369,7 +369,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
       date: selectedDate,
       time: selectedTime,
       price: service.price,
-      location: selectedLocation,
+              location: "Makaylas Cosmetic Studio",
       duration: service.time,
       userId: session?.user?.id || 'guest'
     };
@@ -403,12 +403,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     }
   };
   
-  // Locations - would come from real data in production
-  const locations = [
-    { id: "main-office", name: "Main Office - Downtown" },
-    { id: "north-branch", name: "North Branch" },
-    { id: "south-branch", name: "South Branch" },
-  ];
+
   
   // Format category name for display
   const formatCategoryName = (category: string) => {
@@ -487,19 +482,19 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2">
                       <Check size={18} className="text-green-500 mt-1 flex-shrink-0" />
-                      <span className="text-sm md:text-base">Professional consultation with our experts</span>
+                      <span className="text-sm md:text-base">Professional beauty consultation and assessment</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check size={18} className="text-green-500 mt-1 flex-shrink-0" />
-                      <span className="text-sm md:text-base">Personalized service tailored to your needs</span>
+                      <span className="text-sm md:text-base">Premium quality products and techniques</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check size={18} className="text-green-500 mt-1 flex-shrink-0" />
-                      <span className="text-sm md:text-base">Follow-up support after your appointment</span>
+                      <span className="text-sm md:text-base">Aftercare instructions and tips</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check size={18} className="text-green-500 mt-1 flex-shrink-0" />
-                      <span className="text-sm md:text-base">Access to premium resources and tools</span>
+                      <span className="text-sm md:text-base">Clean, sanitized tools and comfortable environment</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -508,20 +503,25 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
               <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-lg overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-lg md:text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-600">
-                    Location
+                    Location & Contact
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-start gap-2 mb-3">
-                    <MapPin size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-sm md:text-base">Makaylas Cosmetic Studio</p>
-                      <p className="text-gray-600 text-sm md:text-base">123 Service Lane, Suite 456</p>
-                      <p className="text-gray-600 text-sm md:text-base">Business District, NY 10001</p>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-2">
+                      <MapPin size={18} className="text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium text-sm md:text-base">Makaylas Cosmetic Studio</p>
+                        <p className="text-gray-600 text-sm md:text-base">278 U.S. 65 Suite C</p>
+                        <p className="text-gray-600 text-sm md:text-base">Conway, AR 72032</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-100 h-32 rounded-lg mt-4 flex items-center justify-center">
-                    <p className="text-gray-500 text-sm">Interactive map</p>
+                    <div className="flex items-center gap-2">
+                      <svg className="h-4 w-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21L8.5 10.5a11 11 0 004.5 4.5l1.13-1.724a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <p className="text-gray-600 text-sm md:text-base">(501) 575-7209</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -671,24 +671,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                     )}
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-700">Select Location</label>
-                    <Select 
-                      value={selectedLocation} 
-                      onValueChange={setSelectedLocation}
-                    >
-                      <SelectTrigger className="w-full border rounded-md h-10">
-                        <SelectValue placeholder="Select location" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {locations.map((location) => (
-                          <SelectItem key={location.id} value={location.id} className="cursor-pointer">
-                            {location.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+
 
                   {selectedDate && selectedTime && (
                     <div className="bg-gray-50 p-4 rounded-lg">

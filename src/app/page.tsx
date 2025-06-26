@@ -404,7 +404,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-bold mb-1 text-xl">Call Us</h3>
-                    <p className="text-white/80 text-sm md:text-base">(555) 123-4567</p>
+                    <p className="text-white/80 text-sm md:text-base">(501) 575-7209</p>
                   </div>
                 </div>
               </div>
