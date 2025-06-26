@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS bookings (
   appointment_date VARCHAR(255) NOT NULL,
   appointment_time VARCHAR(50) NOT NULL,
   status VARCHAR(50) NOT NULL DEFAULT 'pending',
-  payment_status VARCHAR(50) DEFAULT 'unpaid',
+  payment_status VARCHAR(50) DEFAULT 'unpaid' CHECK (payment_status IN ('unpaid', 'paid', 'refunded', 'failed')),
   payment_intent VARCHAR(255),
   amount_paid DECIMAL(10, 2) NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),

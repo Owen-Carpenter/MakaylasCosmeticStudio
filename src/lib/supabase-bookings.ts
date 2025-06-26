@@ -9,7 +9,7 @@ export interface SupabaseBooking {
   appointment_date: string;
   appointment_time: string;
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
-  payment_status: 'pending' | 'paid' | 'refunded' | 'failed';
+  payment_status: 'unpaid' | 'paid' | 'refunded' | 'failed';
   payment_intent: string;
   amount_paid: number;
   created_at: string;

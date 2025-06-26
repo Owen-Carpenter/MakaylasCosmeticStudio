@@ -65,7 +65,7 @@ export async function enhanceBookingsWithStripeData(
           
           // If payment is complete, set payment_status to paid and status to confirmed
           if (isComplete) {
-            if (enhancedBookings[i].payment_status === 'pending') {
+            if (enhancedBookings[i].payment_status === 'unpaid') {
               enhancedBookings[i].payment_status = 'paid';
             }
             if (enhancedBookings[i].status === 'pending') {

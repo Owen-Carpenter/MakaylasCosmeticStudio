@@ -123,7 +123,7 @@ export async function POST(req: Request) {
         appointment_date: formatDateForDB(bookingData.date),
         appointment_time: bookingData.time,
         status: 'pending', // Always pending until webhook confirms payment
-        payment_status: 'pending', // Always pending until webhook confirms payment
+        payment_status: 'unpaid', // Always unpaid until webhook confirms payment
         payment_intent: stripeSession.id,
         amount_paid: 0, // Amount will be updated after successful payment
         created_at: new Date().toISOString(),
