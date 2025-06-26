@@ -45,7 +45,7 @@ export default function AppointmentReminder({
       <Body style={main}>
         <Container style={container}>
           
-          {/* Header */}
+          {/* Header with exact brand colors */}
           <Section style={header}>
             <Text style={logo}>Makayla&apos;s Cosmetic Studio</Text>
             <Text style={headerSubtitle}>Beauty & Wellness Services</Text>
@@ -169,13 +169,13 @@ export default function AppointmentReminder({
 
           {/* Footer */}
           <Section style={footer}>
-                          <Text style={footerNote}>
-                This reminder was sent from Makayla&apos;s Cosmetic Studio. If you have any questions about your beauty appointment, please don&apos;t hesitate to contact us at (501) 575-7209.
-              </Text>
-                          <Text style={copyright}>
-                © 2024 Makayla&apos;s Cosmetic Studio. All rights reserved.<br/>
-                278 U.S. 65 Suite C, Conway, AR 72032
-              </Text>
+            <Text style={footerNote}>
+              This reminder was sent from Makayla&apos;s Cosmetic Studio. If you have any questions about your beauty appointment, please don&apos;t hesitate to contact us at (501) 575-7209.
+            </Text>
+            <Text style={copyright}>
+              © 2024 Makayla&apos;s Cosmetic Studio. All rights reserved.<br/>
+              278 U.S. 65 Suite C, Conway, AR 72032
+            </Text>
           </Section>
         </Container>
       </Body>
@@ -183,9 +183,9 @@ export default function AppointmentReminder({
   );
 }
 
-// Modern, beauty-focused styles with Makayla's branding
+// Brand-aligned styles with exact website colors
 const main = {
-  backgroundColor: '#fefdf8', // Warm cream background
+  backgroundColor: '#fefdf8', // Cream background matching website
   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif',
   padding: '20px 0',
 };
@@ -200,7 +200,7 @@ const container = {
 };
 
 const header = {
-  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', // Golden gradient for beauty brand
+  background: 'linear-gradient(135deg, #D3AF37 0%, #B8860B 100%)', // Exact brand colors
   padding: '32px 40px',
   textAlign: 'center' as const,
 };
@@ -215,8 +215,8 @@ const logo = {
 
 const headerSubtitle = {
   color: 'rgba(255, 255, 255, 0.9)',
-  fontSize: '14px',
-  fontWeight: '400',
+  fontSize: '16px',
+  fontWeight: '500',
   margin: '0 0 16px 0',
   letterSpacing: '0.5px',
 };
@@ -239,27 +239,27 @@ const content = {
 const greeting = {
   fontSize: '18px',
   fontWeight: '600',
-  color: '#1f2937',
+  color: '#1f2937', // High contrast dark text
   margin: '0 0 16px 0',
 };
 
 const message = {
   fontSize: '16px',
   lineHeight: '1.6',
-  color: '#4b5563',
+  color: '#374151', // Good contrast gray
   margin: '0 0 32px 0',
 };
 
 const appointmentCard = {
-  backgroundColor: '#fef3c7', // Light golden background
-  border: '2px solid #fbbf24',
+  backgroundColor: '#fefdf8', // Light cream background
+  border: '2px solid #D3AF37', // Brand gold border
   borderRadius: '12px',
   overflow: 'hidden',
   margin: '24px 0',
 };
 
 const cardHeader = {
-  backgroundColor: '#f59e0b',
+  backgroundColor: '#D3AF37', // Primary brand color
   padding: '16px 24px',
 };
 
@@ -293,7 +293,7 @@ const detailContent = {
 const detailLabel = {
   fontSize: '12px',
   fontWeight: '600',
-  color: '#6b7280',
+  color: '#6b7280', // Medium gray for labels
   textTransform: 'uppercase' as const,
   letterSpacing: '0.5px',
   margin: '0 0 4px 0',
@@ -302,7 +302,7 @@ const detailLabel = {
 const detailValue = {
   fontSize: '16px',
   fontWeight: '600',
-  color: '#1f2937',
+  color: '#1f2937', // High contrast for values
   margin: '0',
 };
 
@@ -312,7 +312,7 @@ const buttonSection = {
 };
 
 const primaryButton = {
-  backgroundColor: '#f59e0b',
+  background: 'linear-gradient(135deg, #D3AF37 0%, #B8860B 100%)', // Brand gradient
   color: '#ffffff',
   fontSize: '16px',
   fontWeight: '600',
@@ -320,11 +320,12 @@ const primaryButton = {
   padding: '14px 28px',
   borderRadius: '8px',
   display: 'inline-block',
-  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 4px 15px rgba(211, 175, 55, 0.3)', // Brand-colored shadow
 };
 
 const urgentButton = {
-  backgroundColor: '#dc2626',
+  backgroundColor: '#B8441F', // Destructive color from brand palette
+  background: 'linear-gradient(135deg, #B8441F 0%, #9A3A1A 100%)',
   animation: 'pulse 2s infinite',
 };
 
@@ -344,7 +345,7 @@ const urgentTipsCard = {
 const tipsTitle = {
   fontSize: '16px',
   fontWeight: '700',
-  color: '#1f2937',
+  color: '#1f2937', // High contrast
   margin: '0 0 16px 0',
 };
 
@@ -354,7 +355,7 @@ const tipsList = {
 
 const tipItem = {
   fontSize: '14px',
-  color: '#4b5563',
+  color: '#4b5563', // Good contrast
   margin: '0 0 8px 0',
   lineHeight: '1.5',
 };
@@ -373,25 +374,25 @@ const footerActions = {
 const footerTitle = {
   fontSize: '16px',
   fontWeight: '600',
-  color: '#1f2937',
+  color: '#1f2937', // High contrast
   margin: '0 0 8px 0',
 };
 
 const footerText = {
   fontSize: '14px',
-  color: '#6b7280',
+  color: '#6b7280', // Medium contrast
   margin: '0 0 20px 0',
   lineHeight: '1.5',
 };
 
 const secondaryButton = {
   backgroundColor: 'transparent',
-  color: '#f59e0b',
+  color: '#D3AF37', // Brand color
   fontSize: '14px',
   fontWeight: '600',
   textDecoration: 'none',
   padding: '10px 20px',
-  border: '2px solid #f59e0b',
+  border: '2px solid #D3AF37', // Brand border
   borderRadius: '6px',
   display: 'inline-block',
 };
@@ -404,14 +405,14 @@ const footer = {
 
 const footerNote = {
   fontSize: '14px',
-  color: '#6b7280',
+  color: '#6b7280', // Medium contrast
   margin: '0 0 16px 0',
   lineHeight: '1.5',
 };
 
 const copyright = {
   fontSize: '12px',
-  color: '#9ca3af',
+  color: '#9ca3af', // Light gray but still readable
   margin: '0',
   lineHeight: '1.4',
 }; 

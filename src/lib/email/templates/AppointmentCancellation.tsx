@@ -32,53 +32,105 @@ export const AppointmentCancellation: React.FC<AppointmentCancellationProps> = (
   time = '10:00 AM',
       baseUrl,
 }) => {
-  const previewText = `Your ${serviceName} appointment has been cancelled - Makayla's Cosmetic Studio`;
+  const previewText = `Your ${serviceName} appointment has been cancelled - Makayla&apos;s Cosmetic Studio`;
 
   return (
     <Html>
       <Head />
       <Preview>{previewText}</Preview>
       <Tailwind>
-        <Body className="bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 font-sans">
-          <Container className="mx-auto p-6 max-w-md">
-            <Section className="bg-white p-6 rounded-lg shadow-lg border border-rose-100">
-              {/* Header with branding */}
-              <Section className="text-center mb-6 p-4 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-lg">
-                <Heading className="text-2xl font-bold text-white mb-1">Makayla&apos;s Cosmetic Studio</Heading>
-                <Text className="text-amber-50 text-sm">Beauty & Wellness Services</Text>
+        <Body style={{ backgroundColor: '#fefdf8', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+          <Container style={{ margin: '0 auto', padding: '20px', maxWidth: '600px' }}>
+            <Section style={{ backgroundColor: '#ffffff', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+              
+              {/* Header with exact brand colors */}
+              <Section style={{ textAlign: 'center', marginBottom: '32px', padding: '32px', background: 'linear-gradient(135deg, #D3AF37 0%, #B8860B 100%)', borderRadius: '12px' }}>
+                <Heading style={{ color: '#ffffff', fontSize: '28px', fontWeight: '700', margin: '0 0 8px 0', textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>
+                  Makayla&apos;s Cosmetic Studio
+                </Heading>
+                <Text style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '16px', margin: '0', fontWeight: '500' }}>
+                  Beauty & Wellness Services
+                </Text>
               </Section>
 
-              <Heading className="text-xl font-bold text-gray-900 mb-2 text-center">Appointment Cancelled</Heading>
-              <Text className="text-gray-700">Hello {name},</Text>
-              <Text className="text-gray-700">Your beauty appointment has been successfully cancelled as requested. We understand that schedules can change!</Text>
+              <Heading style={{ fontSize: '24px', fontWeight: '700', color: '#1f2937', marginBottom: '24px', textAlign: 'center' }}>
+                Appointment Cancelled
+              </Heading>
               
-              <Section className="bg-gradient-to-r from-rose-50 to-pink-50 p-4 rounded-md my-4 border border-rose-200">
-                <Heading className="text-md font-bold text-gray-900 mb-3">Cancelled Appointment Details</Heading>
-                <Row className="mt-2">
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm font-medium">Booking #:</Text></Column>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm">{bookingId}</Text></Column>
+              <Text style={{ fontSize: '16px', color: '#374151', lineHeight: '1.6', marginBottom: '8px' }}>
+                Hello {name},
+              </Text>
+              
+              <Text style={{ fontSize: '16px', color: '#374151', lineHeight: '1.6', marginBottom: '32px' }}>
+                Your beauty appointment has been successfully cancelled as requested. We understand that schedules can change!
+              </Text>
+              
+              {/* Cancelled appointment details */}
+              <Section style={{ backgroundColor: '#fef2f2', padding: '24px', borderRadius: '8px', marginBottom: '32px', border: '2px solid #fecaca' }}>
+                <Heading style={{ fontSize: '18px', fontWeight: '700', color: '#1f2937', marginBottom: '20px' }}>
+                  Cancelled Appointment Details
+                </Heading>
+                
+                <Row style={{ marginBottom: '12px' }}>
+                  <Column style={{ width: '40%' }}>
+                    <Text style={{ fontSize: '14px', fontWeight: '600', color: '#4b5563', margin: '0' }}>Booking #:</Text>
+                  </Column>
+                  <Column style={{ width: '60%' }}>
+                    <Text style={{ fontSize: '14px', color: '#1f2937', margin: '0', fontWeight: '500' }}>{bookingId}</Text>
+                  </Column>
                 </Row>
-                <Row>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm font-medium">Service:</Text></Column>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm">{serviceName}</Text></Column>
+                
+                <Row style={{ marginBottom: '12px' }}>
+                  <Column style={{ width: '40%' }}>
+                    <Text style={{ fontSize: '14px', fontWeight: '600', color: '#4b5563', margin: '0' }}>Service:</Text>
+                  </Column>
+                  <Column style={{ width: '60%' }}>
+                    <Text style={{ fontSize: '14px', color: '#1f2937', margin: '0', fontWeight: '500' }}>{serviceName}</Text>
+                  </Column>
                 </Row>
-                <Row>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm font-medium">Date:</Text></Column>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm">{date}</Text></Column>
+                
+                <Row style={{ marginBottom: '12px' }}>
+                  <Column style={{ width: '40%' }}>
+                    <Text style={{ fontSize: '14px', fontWeight: '600', color: '#4b5563', margin: '0' }}>Date:</Text>
+                  </Column>
+                  <Column style={{ width: '60%' }}>
+                    <Text style={{ fontSize: '14px', color: '#1f2937', margin: '0', fontWeight: '500' }}>{date}</Text>
+                  </Column>
                 </Row>
-                <Row>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm font-medium">Time:</Text></Column>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm">{time}</Text></Column>
+                
+                <Row style={{ marginBottom: '12px' }}>
+                  <Column style={{ width: '40%' }}>
+                    <Text style={{ fontSize: '14px', fontWeight: '600', color: '#4b5563', margin: '0' }}>Time:</Text>
+                  </Column>
+                  <Column style={{ width: '60%' }}>
+                    <Text style={{ fontSize: '14px', color: '#1f2937', margin: '0', fontWeight: '500' }}>{time}</Text>
+                  </Column>
                 </Row>
+                
                 <Row>
-                  <Column className="w-1/2"><Text className="text-gray-700 text-sm font-medium">Status:</Text></Column>
-                  <Column className="w-1/2"><Text className="text-rose-600 text-sm font-medium">Cancelled ❌</Text></Column>
+                  <Column style={{ width: '40%' }}>
+                    <Text style={{ fontSize: '14px', fontWeight: '600', color: '#4b5563', margin: '0' }}>Status:</Text>
+                  </Column>
+                  <Column style={{ width: '60%' }}>
+                    <Text style={{ fontSize: '14px', color: '#dc2626', margin: '0', fontWeight: '600' }}>Cancelled ❌</Text>
+                  </Column>
                 </Row>
               </Section>
               
-              <Section className="text-center my-6">
+              {/* Action button with brand colors */}
+              <Section style={{ textAlign: 'center', marginBottom: '32px' }}>
                 <Button 
-                  className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white px-6 py-3 rounded-md font-medium shadow-md"
+                  style={{ 
+                    background: 'linear-gradient(135deg, #D3AF37 0%, #B8860B 100%)', 
+                    color: '#ffffff', 
+                    padding: '14px 28px', 
+                    borderRadius: '8px', 
+                    fontSize: '16px', 
+                    fontWeight: '600', 
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    boxShadow: '0 4px 15px rgba(211, 175, 55, 0.3)'
+                  }}
                   href={`${baseUrl}/services`}
                 >
                   Book Another Service ✨
@@ -86,20 +138,28 @@ export const AppointmentCancellation: React.FC<AppointmentCancellationProps> = (
               </Section>
 
               {/* Rebooking encouragement */}
-              <Section className="bg-gradient-to-r from-yellow-50 to-amber-50 p-4 rounded-md my-4 border border-amber-200">
-                <Text className="text-gray-800 text-sm font-medium mb-2">💄 We&apos;d Love to See You Again!</Text>
-                <Text className="text-gray-600 text-xs">• Browse our full range of beauty services</Text>
-                <Text className="text-gray-600 text-xs">• Check out our latest lash and brow treatments</Text>
-                <Text className="text-gray-600 text-xs">• Book online 24/7 for your convenience</Text>
+              <Section style={{ backgroundColor: '#fefdf8', padding: '20px', borderRadius: '8px', marginBottom: '32px', border: '1px solid #D3AF37' }}>
+                <Text style={{ fontSize: '16px', fontWeight: '600', color: '#1f2937', marginBottom: '12px' }}>
+                  💄 We&apos;d Love to See You Again!
+                </Text>
+                <Text style={{ fontSize: '14px', color: '#4b5563', margin: '0 0 6px 0', lineHeight: '1.5' }}>
+                  • Browse our full range of beauty services
+                </Text>
+                <Text style={{ fontSize: '14px', color: '#4b5563', margin: '0 0 6px 0', lineHeight: '1.5' }}>
+                  • Check out our latest lash and brow treatments
+                </Text>
+                <Text style={{ fontSize: '14px', color: '#4b5563', margin: '0', lineHeight: '1.5' }}>
+                  • Book online 24/7 for your convenience
+                </Text>
               </Section>
               
-              <Text className="text-gray-600 text-sm">
+              <Text style={{ fontSize: '14px', color: '#4b5563', lineHeight: '1.6', marginBottom: '32px' }}>
                 If you didn&apos;t request this cancellation or have any questions, please contact us immediately at (501) 575-7209. We&apos;re always here to help with your beauty needs!
               </Text>
               
-              <Hr className="my-4 border-gray-200" />
+              <Hr style={{ margin: '32px 0', borderColor: '#e5e7eb', borderWidth: '1px' }} />
               
-              <Text className="text-gray-500 text-xs text-center">
+              <Text style={{ fontSize: '12px', color: '#6b7280', textAlign: 'center', lineHeight: '1.4', margin: '0' }}>
                 &copy; {new Date().getFullYear()} Makayla&apos;s Cosmetic Studio. All rights reserved.<br/>
                 278 U.S. 65 Suite C, Conway, AR 72032
               </Text>
