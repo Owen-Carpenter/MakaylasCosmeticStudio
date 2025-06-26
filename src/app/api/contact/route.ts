@@ -32,34 +32,34 @@ export async function POST(request: Request) {
     // Get the sender email from environment variables with proper validation
     const fromEmail = getSenderEmail();
     
-    // Format the email content with HTML
+    // Format the email content with HTML - Makayla's Cosmetic Studio branding
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
+        <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
           <h1 style="color: white; margin: 0; font-size: 28px;">New Contact Form Submission</h1>
-          <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">From Servify Website</p>
+          <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">From Makayla's Cosmetic Studio Website</p>
         </div>
         
         <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
           <div style="margin-bottom: 25px;">
             <h3 style="color: #333; margin: 0 0 10px 0; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">Contact Information</h3>
-            <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 4px solid #667eea;">
+            <div style="background: #fef3c7; padding: 15px; border-radius: 5px; border-left: 4px solid #f59e0b;">
               <p style="margin: 0 0 8px 0;"><strong>Name:</strong> ${name}</p>
-              <p style="margin: 0 0 8px 0;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a></p>
+              <p style="margin: 0 0 8px 0;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #f59e0b; text-decoration: none;">${email}</a></p>
               <p style="margin: 0;"><strong>Subject:</strong> ${subject}</p>
             </div>
           </div>
           
           <div style="margin-bottom: 25px;">
             <h3 style="color: #333; margin: 0 0 15px 0; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">Message</h3>
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; border-left: 4px solid #764ba2; line-height: 1.6;">
+            <div style="background: #fef3c7; padding: 20px; border-radius: 5px; border-left: 4px solid #d97706; line-height: 1.6;">
               ${message.replace(/\n/g, '<br/>')}
             </div>
           </div>
           
           <div style="text-align: center; padding: 20px 0; border-top: 1px solid #eee;">
             <a href="mailto:${email}?subject=Re: ${subject}" 
-               style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+               style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); 
                       color: white; 
                       text-decoration: none; 
                       padding: 12px 25px; 
@@ -71,7 +71,8 @@ export async function POST(request: Request) {
           </div>
           
           <p style="color: #666; font-size: 12px; margin-top: 30px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
-            This email was sent from the Servify contact form at ${new Date().toLocaleString()}
+            This email was sent from Makayla's Cosmetic Studio contact form at ${new Date().toLocaleString()}<br/>
+            278 U.S. 65 Suite C, Conway, AR 72032 | (501) 575-7209
           </p>
         </div>
       </div>
@@ -79,9 +80,9 @@ export async function POST(request: Request) {
     
     // Send the email using Resend
     const { error } = await resend.emails.send({
-      from: `${name} via Servify <${fromEmail}>`,
+      from: `${name} via Makayla's Cosmetic Studio <${fromEmail}>`,
       to: [contactEmail],
-      subject: `Contact Form: ${subject}`,
+      subject: `Contact Form: ${subject} - Makayla's Cosmetic Studio`,
       html: htmlContent,
       replyTo: email, // Allow direct replies to the person who submitted the form
     });
@@ -97,7 +98,7 @@ export async function POST(request: Request) {
     // Return success response
     return NextResponse.json({
       success: true,
-      message: "Thank you for your message! We'll get back to you soon."
+      message: "Thank you for your message! We'll get back to you soon to discuss your beauty needs."
     });
     
   } catch (error) {

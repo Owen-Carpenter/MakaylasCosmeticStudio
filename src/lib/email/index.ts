@@ -57,13 +57,13 @@ export async function sendPaymentReceiptEmail({
     );
 
     // Send the email using Resend
-    const fromEmail = getFormattedSender('Servify');
+    const fromEmail = getFormattedSender('Makayla\'s Cosmetic Studio');
     console.log('Sending payment receipt email with from:', fromEmail, 'to:', email);
     
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: email,
-      subject: `Payment Receipt for ${serviceName}`,
+      subject: `Payment Receipt for ${serviceName} - Makayla's Cosmetic Studio`,
       html
     });
 
@@ -116,13 +116,13 @@ export async function sendAppointmentCancellationEmail({
     );
 
     // Send the email using Resend
-    const fromEmail = getFormattedSender('Servify');
+    const fromEmail = getFormattedSender('Makayla\'s Cosmetic Studio');
     console.log('Sending cancellation email with from:', fromEmail, 'to:', email);
     
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: email,
-      subject: `Your appointment for ${serviceName} has been cancelled`,
+      subject: `Your ${serviceName} appointment has been cancelled - Makayla's Cosmetic Studio`,
       html
     });
 
@@ -178,17 +178,17 @@ export async function sendAppointmentReminderEmail({
     );
 
     // Send the email using Resend
-    const fromEmail = getFormattedSender('Servify');
+    const fromEmail = getFormattedSender('Makayla\'s Cosmetic Studio');
     console.log('Sending appointment reminder email with from:', fromEmail, 'to:', email, 'type:', reminderType);
     
     const reminderTitle = reminderType === '24-hour' 
-      ? 'Appointment Reminder - Tomorrow'
-      : 'Appointment Starting Soon';
+      ? 'Beauty Appointment Reminder - Tomorrow'
+      : 'Your Beauty Appointment Starts Soon';
     
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: email,
-      subject: `${reminderTitle} - ${serviceName}`,
+      subject: `${reminderTitle} - ${serviceName} | Makayla's Cosmetic Studio`,
       html
     });
 

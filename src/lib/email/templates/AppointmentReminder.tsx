@@ -31,10 +31,10 @@ export default function AppointmentReminder({
   bookingId = '12345'
 }: AppointmentReminderProps) {
   const isUrgent = reminderType === '1-hour';
-  const reminderTitle = isUrgent ? 'Your appointment starts soon!' : 'Appointment reminder';
+  const reminderTitle = isUrgent ? 'Your beauty appointment starts soon!' : 'Beauty appointment reminder';
   const reminderMessage = isUrgent 
-    ? 'Your appointment is starting in 1 hour' 
-    : 'Your appointment is scheduled for tomorrow';
+    ? 'Your beauty appointment at Makayla&apos;s Cosmetic Studio is starting in 1 hour' 
+    : 'Your beauty appointment at Makayla&apos;s Cosmetic Studio is scheduled for tomorrow';
 
   return (
     <Html>
@@ -47,8 +47,9 @@ export default function AppointmentReminder({
           
           {/* Header */}
           <Section style={header}>
-            <Text style={logo}>Makaylas Cosmetic Studio</Text>
-            <Text style={headerSubtitle}>
+            <Text style={logo}>Makayla&apos;s Cosmetic Studio</Text>
+            <Text style={headerSubtitle}>Beauty & Wellness Services</Text>
+            <Text style={headerReminder}>
               {isUrgent ? '⏰ Appointment Starting Soon' : '📅 Appointment Reminder'}
             </Text>
           </Section>
@@ -61,7 +62,7 @@ export default function AppointmentReminder({
             
             {/* Main Message */}
             <Text style={message}>
-              {reminderMessage}. We&apos;re looking forward to seeing you!
+              {reminderMessage}. We&apos;re excited to pamper you and help you look and feel your absolute best! ✨
             </Text>
 
             {/* Appointment Card */}
@@ -74,9 +75,9 @@ export default function AppointmentReminder({
               
               <Section style={cardBody}>
                 <Section style={detailRow}>
-                  <Text style={detailIcon}>🏢</Text>
+                  <Text style={detailIcon}>💄</Text>
                   <Section style={detailContent}>
-                    <Text style={detailLabel}>Service</Text>
+                    <Text style={detailLabel}>Beauty Service</Text>
                     <Text style={detailValue}>{serviceName}</Text>
                   </Section>
                 </Section>
@@ -94,6 +95,14 @@ export default function AppointmentReminder({
                   <Section style={detailContent}>
                     <Text style={detailLabel}>Time</Text>
                     <Text style={detailValue}>{time}</Text>
+                  </Section>
+                </Section>
+                
+                <Section style={detailRow}>
+                  <Text style={detailIcon}>📍</Text>
+                  <Section style={detailContent}>
+                    <Text style={detailLabel}>Location</Text>
+                    <Text style={detailValue}>278 U.S. 65 Suite C, Conway, AR 72032</Text>
                   </Section>
                 </Section>
                 
@@ -117,23 +126,24 @@ export default function AppointmentReminder({
               </Button>
             </Section>
 
-            {/* Tips Section */}
+            {/* Beauty Tips Section */}
             <Section style={{...tipsCard, ...(isUrgent ? urgentTipsCard : {})}}>
               <Text style={tipsTitle}>
-                {isUrgent ? '⚡ Quick Reminders' : '💡 Preparation Tips'}
+                {isUrgent ? '⚡ Quick Beauty Reminders' : '💡 Beauty Preparation Tips'}
               </Text>
               <Section style={tipsList}>
                 {isUrgent ? (
                   <>
-                    <Text style={tipItem}>• Please head to your appointment location now</Text>
-                    <Text style={tipItem}>• Call us immediately if you&apos;re running late</Text>
+                    <Text style={tipItem}>• Please head to our studio now - we&apos;re excited to see you!</Text>
+                    <Text style={tipItem}>• Call us at (501) 575-7209 if you&apos;re running late</Text>
                     <Text style={tipItem}>• Have your booking confirmation ready</Text>
                   </>
                 ) : (
                   <>
-                    <Text style={tipItem}>• Plan to arrive 5-10 minutes early</Text>
-                    <Text style={tipItem}>• Bring any necessary documents or items</Text>
-                    <Text style={tipItem}>• Contact us if you need to reschedule</Text>
+                    <Text style={tipItem}>• Arrive 5-10 minutes early for check-in</Text>
+                    <Text style={tipItem}>• Come with a clean face (if applicable to your service)</Text>
+                    <Text style={tipItem}>• Bring inspiration photos or share your beauty goals</Text>
+                    <Text style={tipItem}>• Contact us at (501) 575-7209 if you need to reschedule</Text>
                   </>
                 )}
               </Section>
@@ -144,9 +154,9 @@ export default function AppointmentReminder({
             {/* Footer Actions */}
             <Section style={footerActions}>
               <Text style={footerTitle}>Need to make changes?</Text>
-                             <Text style={footerText}>
-                 If you need to reschedule or have any questions, we&apos;re here to help.
-               </Text>
+              <Text style={footerText}>
+                If you need to reschedule or have any beauty-related questions, we&apos;re here to help make you look and feel amazing!
+              </Text>
               <Button
                 style={secondaryButton}
                 href={`${baseUrl}/appointments/${bookingId}`}
@@ -159,12 +169,13 @@ export default function AppointmentReminder({
 
           {/* Footer */}
           <Section style={footer}>
-            <Text style={footerNote}>
-              This reminder was sent from Makaylas Cosmetic Studio. If you have any questions, please don&apos;t hesitate to contact us.
-            </Text>
-            <Text style={copyright}>
-              © 2024 Makaylas Cosmetic Studio. All rights reserved.
-            </Text>
+                          <Text style={footerNote}>
+                This reminder was sent from Makayla&apos;s Cosmetic Studio. If you have any questions about your beauty appointment, please don&apos;t hesitate to contact us at (501) 575-7209.
+              </Text>
+                          <Text style={copyright}>
+                © 2024 Makayla&apos;s Cosmetic Studio. All rights reserved.<br/>
+                278 U.S. 65 Suite C, Conway, AR 72032
+              </Text>
           </Section>
         </Container>
       </Body>
@@ -172,9 +183,9 @@ export default function AppointmentReminder({
   );
 }
 
-// Modern, clean styles
+// Modern, beauty-focused styles with Makayla's branding
 const main = {
-  backgroundColor: '#f8fafc',
+  backgroundColor: '#fefdf8', // Warm cream background
   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif',
   padding: '20px 0',
 };
@@ -189,7 +200,7 @@ const container = {
 };
 
 const header = {
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', // Golden gradient for beauty brand
   padding: '32px 40px',
   textAlign: 'center' as const,
 };
@@ -199,14 +210,26 @@ const logo = {
   fontSize: '28px',
   fontWeight: '700',
   margin: '0 0 8px 0',
-  letterSpacing: '-0.5px',
+  textShadow: '0 2px 4px rgba(0,0,0,0.2)',
 };
 
 const headerSubtitle = {
   color: 'rgba(255, 255, 255, 0.9)',
+  fontSize: '14px',
+  fontWeight: '400',
+  margin: '0 0 16px 0',
+  letterSpacing: '0.5px',
+};
+
+const headerReminder = {
+  color: '#ffffff',
   fontSize: '16px',
-  fontWeight: '500',
+  fontWeight: '600',
   margin: '0',
+  padding: '8px 16px',
+  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  borderRadius: '20px',
+  display: 'inline-block',
 };
 
 const content = {
@@ -214,37 +237,36 @@ const content = {
 };
 
 const greeting = {
-  color: '#1f2937',
   fontSize: '18px',
   fontWeight: '600',
+  color: '#1f2937',
   margin: '0 0 16px 0',
 };
 
 const message = {
-  color: '#4b5563',
   fontSize: '16px',
   lineHeight: '1.6',
+  color: '#4b5563',
   margin: '0 0 32px 0',
 };
 
 const appointmentCard = {
-  backgroundColor: '#f9fafb',
-  border: '1px solid #e5e7eb',
+  backgroundColor: '#fef3c7', // Light golden background
+  border: '2px solid #fbbf24',
   borderRadius: '12px',
   overflow: 'hidden',
   margin: '24px 0',
 };
 
 const cardHeader = {
-  backgroundColor: '#f3f4f6',
+  backgroundColor: '#f59e0b',
   padding: '16px 24px',
-  borderBottom: '1px solid #e5e7eb',
 };
 
 const cardTitle = {
-  color: '#374151',
-  fontSize: '16px',
-  fontWeight: '600',
+  color: '#ffffff',
+  fontSize: '18px',
+  fontWeight: '700',
   margin: '0',
 };
 
@@ -255,15 +277,13 @@ const cardBody = {
 const detailRow = {
   display: 'flex',
   alignItems: 'flex-start',
-  margin: '0 0 20px 0',
-  padding: '0',
+  margin: '0 0 16px 0',
 };
 
 const detailIcon = {
   fontSize: '20px',
-  margin: '0 16px 0 0',
-  width: '24px',
-  textAlign: 'center' as const,
+  marginRight: '12px',
+  minWidth: '24px',
 };
 
 const detailContent = {
@@ -271,18 +291,18 @@ const detailContent = {
 };
 
 const detailLabel = {
+  fontSize: '12px',
+  fontWeight: '600',
   color: '#6b7280',
-  fontSize: '14px',
-  fontWeight: '500',
-  margin: '0 0 4px 0',
   textTransform: 'uppercase' as const,
   letterSpacing: '0.5px',
+  margin: '0 0 4px 0',
 };
 
 const detailValue = {
-  color: '#111827',
   fontSize: '16px',
   fontWeight: '600',
+  color: '#1f2937',
   margin: '0',
 };
 
@@ -292,42 +312,40 @@ const buttonSection = {
 };
 
 const primaryButton = {
-  backgroundColor: '#667eea',
-  borderRadius: '8px',
+  backgroundColor: '#f59e0b',
   color: '#ffffff',
   fontSize: '16px',
   fontWeight: '600',
   textDecoration: 'none',
-  textAlign: 'center' as const,
-  display: 'inline-block',
   padding: '14px 28px',
-  border: 'none',
-  boxShadow: '0 4px 6px -1px rgba(102, 126, 234, 0.3)',
+  borderRadius: '8px',
+  display: 'inline-block',
+  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
 };
 
 const urgentButton = {
-  backgroundColor: '#ef4444',
-  boxShadow: '0 4px 6px -1px rgba(239, 68, 68, 0.3)',
+  backgroundColor: '#dc2626',
+  animation: 'pulse 2s infinite',
 };
 
 const tipsCard = {
-  backgroundColor: '#fef3c7',
-  border: '1px solid #fbbf24',
+  backgroundColor: '#fef7ed', // Light orange background
+  border: '1px solid #fed7aa',
   borderRadius: '8px',
-  padding: '20px',
+  padding: '24px',
   margin: '24px 0',
 };
 
 const urgentTipsCard = {
-  backgroundColor: '#fee2e2',
-  border: '1px solid #f87171',
+  backgroundColor: '#fef2f2',
+  border: '1px solid #fecaca',
 };
 
 const tipsTitle = {
-  color: '#92400e',
   fontSize: '16px',
-  fontWeight: '600',
-  margin: '0 0 12px 0',
+  fontWeight: '700',
+  color: '#1f2937',
+  margin: '0 0 16px 0',
 };
 
 const tipsList = {
@@ -335,65 +353,65 @@ const tipsList = {
 };
 
 const tipItem = {
-  color: '#92400e',
   fontSize: '14px',
-  lineHeight: '1.6',
+  color: '#4b5563',
   margin: '0 0 8px 0',
+  lineHeight: '1.5',
 };
 
 const divider = {
-  borderColor: '#e5e7eb',
+  border: 'none',
+  borderTop: '1px solid #e5e7eb',
   margin: '32px 0',
 };
 
 const footerActions = {
   textAlign: 'center' as const,
-  margin: '24px 0',
+  padding: '24px 0',
 };
 
 const footerTitle = {
-  color: '#374151',
   fontSize: '16px',
   fontWeight: '600',
+  color: '#1f2937',
   margin: '0 0 8px 0',
 };
 
 const footerText = {
-  color: '#6b7280',
   fontSize: '14px',
+  color: '#6b7280',
+  margin: '0 0 20px 0',
   lineHeight: '1.5',
-  margin: '0 0 16px 0',
 };
 
 const secondaryButton = {
   backgroundColor: 'transparent',
-  border: '2px solid #667eea',
-  borderRadius: '8px',
-  color: '#667eea',
+  color: '#f59e0b',
   fontSize: '14px',
   fontWeight: '600',
   textDecoration: 'none',
-  textAlign: 'center' as const,
-  display: 'inline-block',
   padding: '10px 20px',
+  border: '2px solid #f59e0b',
+  borderRadius: '6px',
+  display: 'inline-block',
 };
 
 const footer = {
   backgroundColor: '#f9fafb',
-  padding: '24px 40px',
+  padding: '32px 40px',
   textAlign: 'center' as const,
-  borderTop: '1px solid #e5e7eb',
 };
 
 const footerNote = {
-  color: '#6b7280',
   fontSize: '14px',
+  color: '#6b7280',
+  margin: '0 0 16px 0',
   lineHeight: '1.5',
-  margin: '0 0 12px 0',
 };
 
 const copyright = {
-  color: '#9ca3af',
   fontSize: '12px',
+  color: '#9ca3af',
   margin: '0',
+  lineHeight: '1.4',
 }; 

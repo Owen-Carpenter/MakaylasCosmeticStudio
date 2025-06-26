@@ -25,7 +25,7 @@ export function getSenderEmail(): string {
   }
   
   // Log what we're falling back to
-  const fallbackEmail = 'noreply@servify-booking.shop';
+  const fallbackEmail = 'noreply@makaylascosmeticstudio.com';
   console.log('Falling back to default email:', fallbackEmail, 'envEmail was:', envEmail);
   
   // Fallback to default verified domain
@@ -37,14 +37,14 @@ export function getSenderEmail(): string {
 /**
  * Get the formatted sender string with name and email
  */
-export function getFormattedSender(name: string = 'Servify'): string {
+export function getFormattedSender(name: string = 'Makayla\'s Cosmetic Studio'): string {
   const email = getSenderEmail();
   
   // Validate the email one more time before formatting
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     console.error('Invalid email detected:', email, 'using fallback');
-    return 'Servify <noreply@servify-booking.shop>';
+    return 'Makayla\'s Cosmetic Studio <noreply@makaylascosmeticstudio.com>';
   }
   
   // Clean the name to avoid any special characters that might break the format
