@@ -121,18 +121,18 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen overflow-x-hidden">
       {/* Hero Section with Gradient Background */}
       <section className="relative py-24 gradient-bg text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-20 -left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse max-md:w-40 max-md:h-40 max-md:-top-10 max-md:-left-10"></div>
-          <div className="absolute top-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:top-20 max-md:right-10"></div>
-          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-yellow-400 rounded-full animate-pulse delay-200 max-md:w-12 max-md:h-12"></div>
-          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-yellow-400 rounded-full animate-pulse delay-400 max-md:w-16 max-md:h-16 max-md:-bottom-5"></div>
+        <div className="absolute inset-0 opacity-15">
+          <div className="absolute -top-20 -left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse max-md:w-40 max-md:h-40 max-md:-top-10 max-md:-left-10 shadow-[0_0_100px_rgba(251,191,36,0.6)] blur-sm"></div>
+          <div className="absolute top-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:top-20 max-md:right-10 shadow-[0_0_80px_rgba(251,191,36,0.5)] blur-sm"></div>
+          <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-yellow-400 rounded-full animate-pulse delay-200 max-md:w-12 max-md:h-12 shadow-[0_0_60px_rgba(251,191,36,0.4)] blur-sm"></div>
+          <div className="absolute -bottom-10 right-1/3 w-30 h-30 bg-yellow-400 rounded-full animate-pulse delay-400 max-md:w-16 max-md:h-16 max-md:-bottom-5 shadow-[0_0_70px_rgba(251,191,36,0.5)] blur-sm"></div>
         </div>
         <div className="content-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight animate-fadeInLeft">
-                <span className="block text-white drop-shadow-lg">Start Your</span>
-                <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-400 bg-clip-text text-transparent drop-shadow-2xl font-black tracking-tight">
+                <span className="block text-white drop-shadow-lg filter drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">Start Your</span>
+                <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-400 bg-clip-text text-transparent font-black tracking-tight filter drop-shadow-[0_0_30px_rgba(251,191,36,0.8)]">
                   Cosmetic Journey
                 </span>
               </h1>
@@ -141,10 +141,10 @@ export default function HomePage() {
               </p>
               <div className="hidden md:flex flex-col sm:flex-row gap-4 pt-4 animate-fadeInLeft delay-300">
                 <Link href="/services">
-                  <Button size="lg" className="servify-btn-secondary hover-scale w-full sm:w-auto">Browse Services</Button>
+                  <Button size="lg" className="servify-btn-secondary hover-scale w-full sm:w-auto shadow-[0_0_20px_rgba(251,191,36,0.4)] hover:shadow-[0_0_30px_rgba(251,191,36,0.6)] transition-all duration-300">Browse Services</Button>
                 </Link>
                 <Link href="/auth/register">
-                  <Button size="lg" className="servify-btn-primary hover-glow w-full sm:w-auto">Create Account</Button>
+                  <Button size="lg" className="servify-btn-primary hover-glow w-full sm:w-auto shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] transition-all duration-300">Create Account</Button>
                 </Link>
               </div>
             </div>
@@ -156,10 +156,10 @@ export default function HomePage() {
           {/* Mobile buttons below model */}
           <div className="md:hidden flex flex-col gap-4 pt-4 animate-fadeInLeft delay-300">
             <Link href="/services">
-              <Button size="lg" className="servify-btn-secondary hover-scale w-full">Browse Services</Button>
+              <Button size="lg" className="servify-btn-secondary hover-scale w-full shadow-[0_0_20px_rgba(251,191,36,0.4)] hover:shadow-[0_0_30px_rgba(251,191,36,0.6)] transition-all duration-300">Browse Services</Button>
             </Link>
             <Link href="/auth/register">
-              <Button size="lg" className="servify-btn-primary hover-glow w-full">Create Account</Button>
+              <Button size="lg" className="servify-btn-primary hover-glow w-full shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] transition-all duration-300">Create Account</Button>
             </Link>
           </div>
         </div>
@@ -190,9 +190,9 @@ export default function HomePage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="text-center p-8 bg-white rounded-2xl shadow-md card-hover reveal-left">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="h-8 w-8 text-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg card-hover reveal-left hover:shadow-[0_20px_50px_rgba(0,0,0,0.1),0_0_30px_rgba(99,102,241,0.2)] transition-all duration-300 border border-gray-100">
+              <div className="bg-gradient-to-br from-primary/20 to-indigo-600/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+                <svg className="h-8 w-8 text-primary animate-pulse filter drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
@@ -202,9 +202,9 @@ export default function HomePage() {
                 Professional lash extensions and precision brow shaping to frame your eyes beautifully and enhance your natural features.
               </p>
             </div>
-            <div className="text-center p-8 bg-white rounded-2xl shadow-md card-hover reveal delay-200">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="h-8 w-8 text-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg card-hover reveal delay-200 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1),0_0_30px_rgba(236,72,153,0.2)] transition-all duration-300 border border-gray-100">
+              <div className="bg-gradient-to-br from-pink-500/20 to-rose-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(236,72,153,0.3)]">
+                <svg className="h-8 w-8 text-pink-600 animate-pulse filter drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
@@ -213,9 +213,9 @@ export default function HomePage() {
                 Customized facial treatments and skin care solutions tailored to your unique skin type and concerns for optimal results.
               </p>
             </div>
-            <div className="text-center p-8 bg-white rounded-2xl shadow-md card-hover reveal-right">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <MapPin className="h-8 w-8 text-primary animate-pulse" />
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg card-hover reveal-right hover:shadow-[0_20px_50px_rgba(0,0,0,0.1),0_0_30px_rgba(34,197,94,0.2)] transition-all duration-300 border border-gray-100">
+              <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                <MapPin className="h-8 w-8 text-green-600 animate-pulse filter drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
               </div>
               <h3 className="text-xl font-bold mb-3">Conway Location</h3>
               <p className="text-slate-600">
@@ -340,17 +340,17 @@ export default function HomePage() {
                 {testimonials.map((testimonial, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
-                      <Card className="bg-white p-6 md:p-8 rounded-2xl shadow-md h-full card-hover">
+                      <Card className="bg-white p-6 md:p-8 rounded-2xl shadow-lg h-full card-hover hover:shadow-[0_20px_50px_rgba(0,0,0,0.1),0_0_25px_rgba(251,191,36,0.2)] transition-all duration-300 border border-gray-100">
                         <CardContent className="p-0">
                           <div className="flex items-center mb-4">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="h-4 w-4 fill-current text-yellow-400" />
+                              <Star key={i} className="h-4 w-4 fill-current text-yellow-400 filter drop-shadow-[0_0_4px_rgba(251,191,36,0.6)]" />
                             ))}
                           </div>
                           <p className="text-slate-600 italic mb-6 text-sm md:text-base">&quot;{testimonial.quote}&quot;</p>
                           <div className="flex items-center">
-                            <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white mr-4 hover-rotate">
-                              <span className="font-bold">{testimonial.name.charAt(0)}</span>
+                            <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white mr-4 hover-rotate shadow-[0_0_15px_rgba(99,102,241,0.4)]">
+                              <span className="font-bold filter drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]">{testimonial.name.charAt(0)}</span>
                             </div>
                             <div>
                               <p className="font-medium text-sm md:text-base">{testimonial.name}</p>
@@ -378,9 +378,9 @@ export default function HomePage() {
           </svg>
         </div>
 
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse max-md:w-30 max-md:h-30 max-md:top-10 max-md:left-10"></div>
-          <div className="absolute bottom-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:bottom-20 max-md:right-10"></div>
+        <div className="absolute inset-0 opacity-15">
+          <div className="absolute top-20 left-20 w-60 h-60 bg-yellow-400 rounded-full animate-pulse max-md:w-30 max-md:h-30 max-md:top-10 max-md:left-10 shadow-[0_0_120px_rgba(251,191,36,0.6)] blur-sm"></div>
+          <div className="absolute bottom-40 right-20 w-40 h-40 bg-yellow-400 rounded-full animate-pulse delay-300 max-md:w-20 max-md:h-20 max-md:bottom-20 max-md:right-10 shadow-[0_0_100px_rgba(251,191,36,0.5)] blur-sm"></div>
         </div>
         <div className="content-container">
           <div className="text-center mb-16 reveal">
@@ -394,8 +394,8 @@ export default function HomePage() {
             <div className="lg:col-span-1">
               <div className="space-y-8">
                 <div className="flex items-center reveal-left">
-                  <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mr-6 hover-scale">
-                    <MapPin className="h-8 w-8 text-white" />
+                  <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mr-6 hover-scale shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+                    <MapPin className="h-8 w-8 text-white filter drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                   </div>
                   <div>
                     <h3 className="font-bold mb-1 text-xl">Our Location</h3>
@@ -404,8 +404,8 @@ export default function HomePage() {
                 </div>
                 
                 <div className="flex items-center reveal-left delay-200">
-                  <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mr-6 hover-scale">
-                    <Mail className="h-8 w-8 text-white" />
+                  <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mr-6 hover-scale shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+                    <Mail className="h-8 w-8 text-white filter drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                   </div>
                   <div>
                     <h3 className="font-bold mb-1 text-xl">Email Us</h3>
@@ -414,8 +414,8 @@ export default function HomePage() {
                 </div>
                 
                 <div className="flex items-center reveal-left delay-300">
-                  <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mr-6 hover-scale">
-                    <Phone className="h-8 w-8 text-white" />
+                  <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mr-6 hover-scale shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+                    <Phone className="h-8 w-8 text-white filter drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                   </div>
                   <div>
                     <h3 className="font-bold mb-1 text-xl">Call Us</h3>
@@ -426,7 +426,7 @@ export default function HomePage() {
             </div>
             
             <div className="lg:col-span-2 reveal-right">
-              <Card className="bg-white/10 backdrop-blur-sm border-white/10 hover-glow">
+              <Card className="bg-white/10 backdrop-blur-sm border-white/10 hover-glow shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] transition-all duration-300">
                 <CardContent className="p-6 md:p-8">
                   {contactMessage.text && (
                     <div className={`mb-6 p-4 rounded-lg ${
