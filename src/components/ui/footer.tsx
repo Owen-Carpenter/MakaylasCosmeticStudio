@@ -33,9 +33,9 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-primary">Services</h3>
             <ul className="space-y-2">
-              <li><Link href="/services?category=consulting" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:translate-x-1 transition-transform inline-block">Consultations</Link></li>
-              <li><Link href="/services?category=beauty" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:translate-x-1 transition-transform inline-block">Beauty & Wellness</Link></li>
-              <li><Link href="/services?category=maintenance" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:translate-x-1 transition-transform inline-block">Maintenance</Link></li>
+              <li><Link href="/services?category=lashes" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:translate-x-1 transition-transform inline-block">Lashes & Brows</Link></li>
+              <li><Link href="/services?category=facials" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:translate-x-1 transition-transform inline-block">Facials</Link></li>
+              <li><Link href="/services?category=waxing" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:translate-x-1 transition-transform inline-block">Waxing</Link></li>
               <li><Link href="/services" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:translate-x-1 transition-transform inline-block">All Services</Link></li>
             </ul>
           </div>
