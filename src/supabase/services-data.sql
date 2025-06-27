@@ -34,7 +34,7 @@ INSERT INTO services (title, details, time, category, price, has_variants) VALUE
 ('Mini Dermaplane Facial', 'Dermaplaning is a service removing the uppermost layers of the face while also taking off all the peach fuzz. Dermaplaning can help reduce the appearance of acne scars & other skin imperfections by revealing newer, undamaged skin. Recommended: every 4-6 weeks.', '40 min', 'facials', 40.00, false),
 ('AHA (Light) Chemical Peel', 'Very effective exfoliants that penetrate several layers deep into the epidermis. AHA dissolves the "glue" connections between skin cells, lifts dead surface cells off, and releases Collagen and Elastin Peptides throughout the underlying Dermis. Can improve many different skin imperfections.', '45 min', 'facials', 60.00, false),
 ('Dermaplane & AHA Chemical Peel', 'A combination of dermaplaning and chemical peel in one session. This makes the chemical peel be able to penetrate deeper and be better absorbed for an overall smoother application.', '70 min', 'facials', 85.00, false),
-('Procell Therapies Treatment', 'This is a complete skin transformation. I will be using a unique micro channelling device to gently stimulate the skin triggering the body''s natural healing response. A minimum series of 3 is recommended for face & body; and a minimum of 5 for the hair. (Can do more) Comes with an aftercare kit.', '45 min', 'facials', 350.00, false),
+('Procell Therapies Treatment', 'This is a complete skin transformation. I will be using a unique micro channelling device to gently stimulate the skin triggering the body''s natural healing response. A minimum series of 3 is recommended for face & body; and a minimum of 5 for the hair. (Can do more) Comes with an aftercare kit.', '45 min', 'facials', 350.00, true),
 
 -- WAXING SERVICES
 ('Lip Wax', 'Hair removal of the lip. Last 2-3 weeks.', '10 min', 'waxing', 10.00, false),
@@ -158,6 +158,31 @@ INSERT INTO service_variants (service_id, variant_name, variant_description, pri
 SELECT s.id, '3 Week Fill', '60% fill for wispy volume lashes', 80.00, '120 min', 4, 'Must have at least 40% of your lash extensions left.'
 FROM services s WHERE s.title = 'Wispy Volume Eyelash Extensions';
 
+-- Procell Therapies Treatment variants
+INSERT INTO service_variants (service_id, variant_name, variant_description, price, time, sort_order, requirements)
+SELECT s.id, 'Procell Therapy (By Itself)', 'Complete skin transformation using micro channelling device. Comes with aftercare kit.', 350.00, '45 min', 1, 'Minimum series of 3 recommended for face & body; minimum of 5 for hair'
+FROM services s WHERE s.title = 'Procell Therapies Treatment';
+
+INSERT INTO service_variants (service_id, variant_name, variant_description, price, time, sort_order, requirements)
+SELECT s.id, 'Procell Therapy With Dermaplaning', 'Procell therapy combined with dermaplaning for enhanced results. $50 deposit required.', 370.00, '75 min', 2, '$50.00 deposit required. Minimum series of 3 recommended for face & body'
+FROM services s WHERE s.title = 'Procell Therapies Treatment';
+
+INSERT INTO service_variants (service_id, variant_name, variant_description, price, time, sort_order, requirements)
+SELECT s.id, 'Procell Therapy With Peel', 'Procell therapy combined with AHA chemical peel. $50 deposit required.', 380.00, '90 min', 3, '$50.00 deposit required. Minimum series of 3 recommended for face & body'
+FROM services s WHERE s.title = 'Procell Therapies Treatment';
+
+INSERT INTO service_variants (service_id, variant_name, variant_description, price, time, sort_order, requirements)
+SELECT s.id, 'Procell With Dermaplaning & Peel', 'Complete treatment combining Procell therapy, dermaplaning, and chemical peel. $50 deposit required.', 400.00, '100 min', 4, '$50.00 deposit required. Most comprehensive skin transformation treatment'
+FROM services s WHERE s.title = 'Procell Therapies Treatment';
+
+INSERT INTO service_variants (service_id, variant_name, variant_description, price, time, sort_order, requirements)
+SELECT s.id, '3 Procell Therapies', 'Package of 3 Procell therapy sessions for optimal results. $100 deposit required.', 899.00, '45 min', 5, '$100.00 deposit required. Recommended minimum series for face & body'
+FROM services s WHERE s.title = 'Procell Therapies Treatment';
+
+INSERT INTO service_variants (service_id, variant_name, variant_description, price, time, sort_order, requirements)
+SELECT s.id, '5 Procell Therapies', 'Package of 5 Procell therapy sessions for hair treatments. $100 deposit required.', 1399.00, '45 min', 6, '$100.00 deposit required. Recommended minimum series for hair treatments'
+FROM services s WHERE s.title = 'Procell Therapies Treatment';
+
 -- Display completion message
 DO $$
 BEGIN
@@ -166,7 +191,8 @@ BEGIN
   RAISE NOTICE '==============================================';
   RAISE NOTICE 'Total services added: 32';
   RAISE NOTICE 'Lash services with variants: 6';
-  RAISE NOTICE 'Service variants added: 24 (4 per lash extension type)';
+  RAISE NOTICE 'Facial services with variants: 1 (Procell Therapies)';
+  RAISE NOTICE 'Service variants added: 30 (24 lash + 6 Procell)';
   RAISE NOTICE 'Categories: Lashes (12), Brows (5), Facials (4), Waxing (13)';
   RAISE NOTICE '==============================================';
 END $$; 
