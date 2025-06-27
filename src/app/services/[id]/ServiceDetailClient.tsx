@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
-import { Service } from "@/lib/services";
-import { Clock, ArrowLeft, MapPin, Check, DollarSign, CalendarIcon } from "lucide-react";
+import { Service, ServiceVariant } from "@/lib/services";
+import { getServiceVariants } from "@/lib/supabase-services";
+import { Clock, ArrowLeft, MapPin, Check, DollarSign, CalendarIcon, Info } from "lucide-react";
 import { format, addMonths, parseISO } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -41,6 +42,9 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
   const { data: session } = useSession();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string>("");
+  const [selectedVariant, setSelectedVariant] = useState<ServiceVariant | null>(null);
+  const [serviceVariants, setServiceVariants] = useState<ServiceVariant[]>([]);
+  const [loadingVariants, setLoadingVariants] = useState(false);
 
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>(ALL_TIME_SLOTS);
   const [timeSlotDisplay, setTimeSlotDisplay] = useState<Record<string, { available: boolean; reason?: string }>>({});
@@ -52,6 +56,32 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
   const handleBack = () => {
     router.back();
   };
+
+  // Load service variants when service changes
+  useEffect(() => {
+    if (service?.has_variants && service.id) {
+      setLoadingVariants(true);
+      getServiceVariants(service.id)
+        .then((variants) => {
+          setServiceVariants(variants);
+          // Auto-select the first variant (usually "Full Set")
+          if (variants.length > 0) {
+            setSelectedVariant(variants[0]);
+          }
+        })
+        .catch((error) => {
+          console.error("Error loading service variants:", error);
+          toast.error("Failed to load service options");
+        })
+        .finally(() => {
+          setLoadingVariants(false);
+        });
+    } else {
+      // Clear variants for services without variants
+      setServiceVariants([]);
+      setSelectedVariant(null);
+    }
+  }, [service]);
 
   // Helper function to parse time strings to minutes
   const parseTimeToMinutes = (timeStr: string) => {
@@ -209,9 +239,10 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     fetchTimeOff();
   }, [selectedDate]);
 
-  // Get service duration value in minutes
-  const getServiceDurationMinutes = (serviceTime: string): number => {
-    const durationMatch = serviceTime.match(/(\d+)/);
+  // Get service duration value in minutes (considering selected variant)
+  const getServiceDurationMinutes = (serviceTime?: string): number => {
+    const timeToUse = serviceTime || (selectedVariant ? selectedVariant.time : service?.time || '60 min');
+    const durationMatch = timeToUse.match(/(\d+)/);
     return durationMatch ? parseInt(durationMatch[1], 10) : 60;
   };
 
@@ -237,7 +268,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     if (!selectedDate || !service) return;
     
     const formattedDate = format(selectedDate, "yyyy-MM-dd");
-    const serviceDurationMinutes = getServiceDurationMinutes(service.time);
+    const serviceDurationMinutes = getServiceDurationMinutes();
     
     // Get bookings for the selected date (active bookings only)
     const dateBookings = existingBookings.filter(booking => {
@@ -302,7 +333,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     if (selectedTime && !available.includes(selectedTime)) {
       setSelectedTime("");
     }
-  }, [selectedDate, service, existingBookings, selectedTime, timeOffPeriods]);
+  }, [selectedDate, service, existingBookings, selectedTime, timeOffPeriods, selectedVariant]);
 
   // If service is null, show error state
   if (!service) {
@@ -363,15 +394,23 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     });
     
     // Create booking payload
+    const finalPrice = selectedVariant ? selectedVariant.price : service.price;
+    const finalDuration = selectedVariant ? selectedVariant.time : service.time;
+    const serviceName = selectedVariant 
+      ? `${service.title} - ${selectedVariant.variant_name}`
+      : service.title;
+
     const bookingData = {
       serviceId: service.id,
-      serviceName: service.title,
+      serviceName: serviceName,
       date: selectedDate,
       time: selectedTime,
-      price: service.price,
-              location: "Makaylas Cosmetic Studio",
-      duration: service.time,
-      userId: session?.user?.id || 'guest'
+      price: finalPrice,
+      location: "Makaylas Cosmetic Studio",
+      duration: finalDuration,
+      userId: session?.user?.id || 'guest',
+      variantId: selectedVariant?.id || null,
+      variantName: selectedVariant?.variant_name || null
     };
     
     try {
@@ -452,13 +491,64 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                 <CardContent className="space-y-4">
                   <p className="text-gray-700 leading-relaxed text-sm md:text-base">{service.details}</p>
                   
+                  {/* Service Variants Selection */}
+                  {service.has_variants && (
+                    <div className="space-y-4 mt-6">
+                      <div className="flex items-center gap-2 text-primary mb-2">
+                        <Info size={18} />
+                        <span className="font-medium text-sm md:text-base">Service Options</span>
+                      </div>
+                      {loadingVariants ? (
+                        <div className="flex justify-center py-4">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                        </div>
+                      ) : serviceVariants.length > 0 ? (
+                        <div className="grid gap-3">
+                          {serviceVariants.map((variant) => (
+                            <div
+                              key={variant.id}
+                              className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                selectedVariant?.id === variant.id
+                                  ? 'border-primary bg-primary/5'
+                                  : 'border-gray-200 hover:border-primary/50'
+                              }`}
+                              onClick={() => setSelectedVariant(variant)}
+                            >
+                              <div className="flex justify-between items-start">
+                                <div className="flex-1">
+                                  <h4 className="font-semibold text-gray-900">{variant.variant_name}</h4>
+                                  {variant.variant_description && (
+                                    <p className="text-sm text-gray-600 mt-1">{variant.variant_description}</p>
+                                  )}
+                                  {variant.requirements && (
+                                    <p className="text-xs text-amber-600 mt-2 bg-amber-50 p-2 rounded">
+                                      <strong>Requirements:</strong> {variant.requirements}
+                                    </p>
+                                  )}
+                                </div>
+                                <div className="text-right ml-4">
+                                  <p className="text-lg font-bold text-primary">${variant.price.toFixed(2)}</p>
+                                  <p className="text-sm text-gray-500">{variant.time}</p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-500">No service options available</p>
+                      )}
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <div className="flex items-center gap-2 text-primary mb-2">
                         <Clock size={18} />
                         <span className="font-medium text-sm md:text-base">Duration</span>
                       </div>
-                      <p className="text-sm md:text-base">{service.time}</p>
+                      <p className="text-sm md:text-base">
+                        {selectedVariant ? selectedVariant.time : service.time}
+                      </p>
                     </div>
                     
                     <div className="bg-gray-50 p-4 rounded-lg">
@@ -466,7 +556,9 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                         <DollarSign size={18} />
                         <span className="font-medium text-sm md:text-base">Price</span>
                       </div>
-                      <p className="text-lg md:text-xl font-bold">${service.price.toFixed(2)}</p>
+                      <p className="text-lg md:text-xl font-bold">
+                        ${(selectedVariant ? selectedVariant.price : service.price).toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -659,11 +751,14 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                     )}
                     {selectedDate && selectedTime && (
                       <div className="text-xs text-gray-600 mt-2">
-                        <p className="font-medium">Service duration: {service.time}</p>
+                        <p className="font-medium">Service duration: {selectedVariant ? selectedVariant.time : service.time}</p>
                         <p>Your appointment will end at approximately {
                           (() => {
                             const startTime = parseTimeToMinutes(selectedTime);
-                            const endTime = startTime + parseInt(service.time.split(' ')[0], 10);
+                            const duration = selectedVariant 
+                              ? parseInt(selectedVariant.time.split(' ')[0], 10)
+                              : parseInt(service.time.split(' ')[0], 10);
+                            const endTime = startTime + duration;
                             return formatMinutesToTimeDisplay(endTime);
                           })()
                         }</p>
@@ -693,8 +788,12 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                 <CardFooter className="bg-gray-50 p-6">
                   <div className="w-full space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Service fee</span>
-                      <span className="font-medium">${service.price.toFixed(2)}</span>
+                      <span className="text-gray-600">
+                        {selectedVariant ? `${selectedVariant.variant_name} fee` : 'Service fee'}
+                      </span>
+                      <span className="font-medium">
+                        ${(selectedVariant ? selectedVariant.price : service.price).toFixed(2)}
+                      </span>
                     </div>
                     <Button 
                       onClick={handleBooking} 

@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS bookings (
   user_id UUID REFERENCES users(id),
   service_id UUID REFERENCES services(id),
   service_name VARCHAR(255) NOT NULL,
+  variant_id UUID REFERENCES service_variants(id), -- Optional: for services with variants
+  variant_name VARCHAR(255), -- Store variant name for easy display
   appointment_date VARCHAR(255) NOT NULL,
   appointment_time VARCHAR(50) NOT NULL,
   status VARCHAR(50) NOT NULL DEFAULT 'pending',
@@ -17,6 +19,7 @@ CREATE TABLE IF NOT EXISTS bookings (
 -- Create indexes for faster querying
 CREATE INDEX IF NOT EXISTS idx_bookings_user_id ON bookings(user_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_service_id ON bookings(service_id);
+CREATE INDEX IF NOT EXISTS idx_bookings_variant_id ON bookings(variant_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
 CREATE INDEX IF NOT EXISTS idx_bookings_payment_status ON bookings(payment_status);
 

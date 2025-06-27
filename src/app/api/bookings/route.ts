@@ -71,6 +71,8 @@ export async function POST(req: Request) {
         userId,
         serviceId: bookingData.serviceId,
         serviceName: bookingData.serviceName,
+        variantId: bookingData.variantId || "",
+        variantName: bookingData.variantName || "",
         date: bookingData.date ? new Date(bookingData.date).toISOString() : "",
         time: bookingData.time || "",
       },
@@ -120,6 +122,8 @@ export async function POST(req: Request) {
         user_id: userId,
         service_id: bookingData.serviceId,
         service_name: bookingData.serviceName,
+        variant_id: bookingData.variantId || null, // Optional variant ID
+        variant_name: bookingData.variantName || null, // Optional variant name
         appointment_date: formatDateForDB(bookingData.date),
         appointment_time: bookingData.time,
         status: 'pending', // Always pending until webhook confirms payment

@@ -15,24 +15,57 @@ CREATE TABLE IF NOT EXISTS services (
   time VARCHAR(50) NOT NULL, -- e.g. "60 min", "2 hours"
   category VARCHAR(100) NOT NULL,
   price DECIMAL(10, 2) NOT NULL,
+  has_variants BOOLEAN DEFAULT FALSE, -- Indicates if service has variants (like different fill periods)
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Create service_variants table for different pricing options
+CREATE TABLE IF NOT EXISTS service_variants (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  service_id UUID NOT NULL REFERENCES services(id) ON DELETE CASCADE,
+  variant_name VARCHAR(255) NOT NULL, -- e.g. "1 Week Fill", "2 Week Fill", "Full Set"
+  variant_description TEXT, -- Additional details about this variant
+  price DECIMAL(10, 2) NOT NULL,
+  time VARCHAR(50) NOT NULL, -- Duration for this specific variant
+  sort_order INTEGER DEFAULT 0, -- For ordering variants consistently
+  requirements TEXT, -- e.g. "Must have 75% or more lashes left"
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(service_id, variant_name)
+);
+
 -- Create an index on category for faster filtering
 CREATE INDEX IF NOT EXISTS idx_services_category ON services(category);
+CREATE INDEX IF NOT EXISTS idx_service_variants_service_id ON service_variants(service_id);
+CREATE INDEX IF NOT EXISTS idx_service_variants_sort_order ON service_variants(service_id, sort_order);
 
 -- Add RLS (Row Level Security) policies
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
+ALTER TABLE service_variants ENABLE ROW LEVEL SECURITY;
 
 -- Policy for public read access to services
 CREATE POLICY "Services are viewable by everyone" 
   ON services FOR SELECT 
   USING (true);
 
--- Policy for admin-only write access
+-- Policy for public read access to service variants
+CREATE POLICY "Service variants are viewable by everyone" 
+  ON service_variants FOR SELECT 
+  USING (true);
+
+-- Policy for admin-only write access to services
 CREATE POLICY "Services can only be modified by admins" 
   ON services FOR ALL 
+  USING (
+    auth.uid() IN (
+      SELECT id FROM users WHERE role = 'admin'
+    )
+  );
+
+-- Policy for admin-only write access to service variants
+CREATE POLICY "Service variants can only be modified by admins" 
+  ON service_variants FOR ALL 
   USING (
     auth.uid() IN (
       SELECT id FROM users WHERE role = 'admin'
