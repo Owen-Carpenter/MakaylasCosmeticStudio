@@ -64,10 +64,8 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
       getServiceVariants(service.id)
         .then((variants) => {
           setServiceVariants(variants);
-          // Auto-select the first variant (usually "Full Set")
-          if (variants.length > 0) {
-            setSelectedVariant(variants[0]);
-          }
+          // Don't auto-select any variant - user must choose
+          setSelectedVariant(null);
         })
         .catch((error) => {
           console.error("Error loading service variants:", error);
@@ -367,6 +365,11 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
       return;
     }
 
+    if (service.has_variants && !selectedVariant) {
+      toast.error("Please select a service option");
+      return;
+    }
+
     // Double-check for time off conflicts before proceeding
     const dateStr = format(selectedDate, 'yyyy-MM-dd');
     const serviceDuration = getServiceDurationMinutes(service.time);
@@ -491,54 +494,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                 <CardContent className="space-y-4">
                   <p className="text-gray-700 leading-relaxed text-sm md:text-base">{service.details}</p>
                   
-                  {/* Service Variants Selection */}
-                  {service.has_variants && (
-                    <div className="space-y-4 mt-6">
-                      <div className="flex items-center gap-2 text-primary mb-2">
-                        <Info size={18} />
-                        <span className="font-medium text-sm md:text-base">Service Options</span>
-                      </div>
-                      {loadingVariants ? (
-                        <div className="flex justify-center py-4">
-                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                        </div>
-                      ) : serviceVariants.length > 0 ? (
-                        <div className="grid gap-3">
-                          {serviceVariants.map((variant) => (
-                            <div
-                              key={variant.id}
-                              className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                                selectedVariant?.id === variant.id
-                                  ? 'border-primary bg-primary/5'
-                                  : 'border-gray-200 hover:border-primary/50'
-                              }`}
-                              onClick={() => setSelectedVariant(variant)}
-                            >
-                              <div className="flex justify-between items-start">
-                                <div className="flex-1">
-                                  <h4 className="font-semibold text-gray-900">{variant.variant_name}</h4>
-                                  {variant.variant_description && (
-                                    <p className="text-sm text-gray-600 mt-1">{variant.variant_description}</p>
-                                  )}
-                                  {variant.requirements && (
-                                    <p className="text-xs text-amber-600 mt-2 bg-amber-50 p-2 rounded">
-                                      <strong>Requirements:</strong> {variant.requirements}
-                                    </p>
-                                  )}
-                                </div>
-                                <div className="text-right ml-4">
-                                  <p className="text-lg font-bold text-primary">${variant.price.toFixed(2)}</p>
-                                  <p className="text-sm text-gray-500">{variant.time}</p>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-sm text-gray-500">No service options available</p>
-                      )}
-                    </div>
-                  )}
+
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                     <div className="bg-gray-50 p-4 rounded-lg">
@@ -627,6 +583,77 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                   <CardDescription className="text-center text-sm md:text-base">Select your preferred date and time</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6 pt-6">
+                  {/* Service Variant Selection */}
+                  {service.has_variants && (
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Service Option <span className="text-red-500">*</span>
+                      </label>
+                      {loadingVariants ? (
+                        <div className="flex justify-center py-4">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                        </div>
+                      ) : serviceVariants.length > 0 ? (
+                        <Select 
+                          onValueChange={(value) => {
+                            const variant = serviceVariants.find(v => v.id === value);
+                            setSelectedVariant(variant || null);
+                          }}
+                          value={selectedVariant?.id || ""}
+                        >
+                          <SelectTrigger className="w-full border-2 border-gray-200 rounded-lg h-12 px-4 hover:border-primary/50 focus:border-primary transition-colors">
+                            <div className="flex justify-between items-center w-full">
+                              {selectedVariant ? (
+                                <>
+                                  <span className="font-medium text-gray-900">{selectedVariant.variant_name}</span>
+                                  <div className="flex items-center gap-3">
+                                    <span className="text-sm text-gray-500">{selectedVariant.time}</span>
+                                    <span className="font-bold text-primary">${selectedVariant.price.toFixed(2)}</span>
+                                  </div>
+                                </>
+                              ) : (
+                                <span className="text-gray-500">Choose your service option...</span>
+                              )}
+                            </div>
+                          </SelectTrigger>
+                          <SelectContent className="w-full min-w-[500px] max-w-lg max-h-[300px] overflow-y-auto">
+                            {serviceVariants.map((variant) => (
+                              <SelectItem 
+                                key={variant.id} 
+                                value={variant.id}
+                                className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 p-0"
+                              >
+                                <div className="w-full p-4 space-y-3">
+                                  <div className="flex justify-between items-center gap-4">
+                                    <span className="font-semibold text-gray-900 text-sm flex-shrink-0">{variant.variant_name}</span>
+                                    <span className="text-base font-bold text-primary flex-shrink-0">${variant.price.toFixed(2)}</span>
+                                  </div>
+                                  <div className="w-full">
+                                    <p className="text-xs text-gray-600 leading-relaxed mb-2">{variant.variant_description}</p>
+                                    <span className="inline-block text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{variant.time}</span>
+                                  </div>
+                                </div>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <p className="text-sm text-gray-500">No service options available</p>
+                      )}
+                      {selectedVariant && selectedVariant.requirements && (
+                        <div className="text-sm text-amber-700 bg-gradient-to-r from-amber-50 to-orange-50 p-4 rounded-lg border border-amber-200 shadow-sm">
+                          <div className="flex items-start gap-3">
+                            <Info size={16} className="mt-0.5 flex-shrink-0 text-amber-600" />
+                            <div>
+                              <div className="font-semibold text-amber-800 mb-1">Requirements:</div>
+                              <div className="text-amber-700">{selectedVariant.requirements}</div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-700">Select Date</label>
                     <div className="border rounded-md overflow-hidden w-full">
@@ -797,11 +824,16 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                     </div>
                     <Button 
                       onClick={handleBooking} 
-                      disabled={!selectedDate || !selectedTime}
+                      disabled={!selectedDate || !selectedTime || (service.has_variants && !selectedVariant)}
                       className="w-full h-12 bg-gradient-to-r from-primary to-indigo-600 hover:from-primary/90 hover:to-indigo-600/90 text-white font-medium text-lg"
                     >
                       Book Now
                     </Button>
+                    {service.has_variants && !selectedVariant && (
+                      <p className="text-xs text-center text-amber-600 bg-amber-50 p-2 rounded">
+                        Please select a service option to continue
+                      </p>
+                    )}
                     <p className="text-xs text-center text-gray-500">
                       By booking, you agree to our terms and conditions.
                     </p>
