@@ -41,7 +41,7 @@ function ServicesContent() {
   const categoryFromUrl = searchParams?.get('category') || "all";
   
   const [activeCategory, setActiveCategory] = useState<string>(categoryFromUrl);
-  const [sortOption, setSortOption] = useState<string>("default");
+  const [sortOption, setSortOption] = useState<string>("price-high");
   const [filteredServices, setFilteredServices] = useState<Service[]>([]);
   const [allServices, setAllServices] = useState<Service[]>([]);
   const [categories, setCategories] = useState<string[]>(["all"]);
@@ -185,10 +185,10 @@ function ServicesContent() {
                   onChange={handleSortChange}
                   style={{ color: "white", background: "rgba(255, 255, 255, 0.2)" }}
                 >
-                  <option value="default" style={{ color: "black", background: "white" }}>Sort by: Default</option>
+                  <option value="price-high" style={{ color: "black", background: "white" }}>Price: High to Low (Default)</option>
                   <option value="price-low" style={{ color: "black", background: "white" }}>Price: Low to High</option>
-                  <option value="price-high" style={{ color: "black", background: "white" }}>Price: High to Low</option>
                   <option value="duration" style={{ color: "black", background: "white" }}>Duration: Short to Long</option>
+                  <option value="default" style={{ color: "black", background: "white" }}>No Sorting</option>
                 </select>
               </div>
             </div>

@@ -86,20 +86,20 @@ export async function POST(req: Request) {
     const { error: upsertUserError } = await supabase
       .from('users')
       .upsert({
-        id: userId,
-        email: session?.user?.email || '',
-        name: session?.user?.name || session?.user?.email?.split('@')[0] || '',
-        role: 'customer'
+          id: userId,
+          email: session?.user?.email || '',
+          name: session?.user?.name || session?.user?.email?.split('@')[0] || '',
+          role: 'customer'
       }, {
         onConflict: 'id'
-      });
-      
+        });
+        
     if (upsertUserError) {
       console.error("Error upserting user:", upsertUserError);
-      return NextResponse.json({
-        success: false,
+        return NextResponse.json({
+          success: false,
         message: "Failed to create or update user account"
-      }, { status: 500 });
+        }, { status: 500 });
     }
     
     console.log("User ensured in database successfully");
