@@ -62,8 +62,49 @@ export default function HomePage() {
       setLoading(true);
       try {
         const services = await getServices();
-        // Get first 3 services as popular services
-        setPopularServices(services.slice(0, 3));
+        
+        // Manually select the most popular and representative services
+        const popularServiceTitles = [
+          'Classic Eyelash Extensions',
+          'Volume Lashes',
+          'Brow Lamination'
+        ];
+        
+        // Find these specific services from the full list
+        const selectedServices = popularServiceTitles.map(title => 
+          services.find(service => service.title === title)
+        ).filter(Boolean) as typeof services;
+        
+        // If we don't have all 3, fill with other appealing services
+        if (selectedServices.length < 3) {
+          const remainingServices = services.filter(service => 
+            !popularServiceTitles.includes(service.title)
+          );
+          
+          // Add other appealing services like facials and waxing
+          const additionalPopular = [
+            'Dermaplane & AHA Chemical Peel',
+            'Lash Lift & Tint',
+            'Brazilian Wax'
+          ];
+          
+          for (const title of additionalPopular) {
+            if (selectedServices.length >= 3) break;
+            const service = remainingServices.find(s => s.title === title);
+            if (service) selectedServices.push(service);
+          }
+          
+          // If still need more, add any remaining services
+          while (selectedServices.length < 3 && remainingServices.length > 0) {
+            const service = remainingServices.find(s => 
+              !selectedServices.some(selected => selected.id === s.id)
+            );
+            if (service) selectedServices.push(service);
+            else break;
+          }
+        }
+        
+        setPopularServices(selectedServices);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching services:", error);
@@ -227,7 +268,7 @@ export default function HomePage() {
           <div className="text-center mb-16 reveal">
             <h2 className="text-4xl font-bold mb-4 text-white">Popular Services</h2>
             <p className="text-white/90 max-w-2xl mx-auto">
-              Book appointments for a wide range of professional services with our easy-to-use platform.
+              Discover our most sought-after beauty treatments designed to enhance your natural beauty and boost your confidence.
             </p>
           </div>
           
