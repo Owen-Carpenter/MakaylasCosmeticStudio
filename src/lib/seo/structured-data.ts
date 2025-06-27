@@ -1,16 +1,16 @@
 import { Service } from '@/lib/services';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com';
 
 // Organization Schema
 export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Servify",
-    "description": "Premium Service Marketplace - Connect with trusted service providers for all your needs",
+    "@type": "BeautySalon",
+    "name": "Makayla's Cosmetic Studio",
+    "description": "Premium eyelash extensions and beauty services with exceptional quality and personalized care",
     "url": baseUrl,
-    "logo": `${baseUrl}/images/logo.png`,
+    "logo": `${baseUrl}/images/mcstudioLogo.png`,
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+1-555-0123",
@@ -24,9 +24,10 @@ export function generateOrganizationSchema() {
       "addressRegion": "Your State"
     },
     "sameAs": [
-      "https://facebook.com/servify",
-      "https://twitter.com/servify",
-      "https://linkedin.com/company/servify"
+      "https://facebook.com/makaylascosmeticstudio",
+      "https://twitter.com/makaylascosmetics",
+      "https://linkedin.com/company/makaylascosmeticstudio",
+      "https://instagram.com/makaylascosmeticstudio"
     ]
   };
 }
@@ -36,9 +37,9 @@ export function generateWebsiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Servify",
+    "name": "Makayla's Cosmetic Studio",
     "url": baseUrl,
-    "description": "Premium Service Marketplace - Connect with trusted service providers for all your needs",
+    "description": "Premium eyelash extensions and beauty services with exceptional quality and personalized care",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
@@ -53,11 +54,12 @@ export function generateWebsiteSchema() {
 // Service Schema
 export function generateServiceSchema(service: Service) {
   const categoryMap: Record<string, string> = {
-    consulting: 'Business Consulting',
-    beauty: 'Beauty Services',
-    maintenance: 'Home Maintenance',
-    health: 'Health Services',
-    education: 'Educational Services'
+    classic: 'Classic Eyelash Extensions',
+    volume: 'Volume Eyelash Extensions',
+    hybrid: 'Hybrid Eyelash Extensions',
+    wispy: 'Wispy Eyelash Extensions',
+    angel: 'Angel/Wet Eyelash Extensions',
+    beauty: 'Beauty Services'
   };
 
   return {
@@ -67,8 +69,8 @@ export function generateServiceSchema(service: Service) {
     "description": service.details,
     "category": categoryMap[service.category] || service.category,
     "provider": {
-      "@type": "Organization",
-      "name": "Servify"
+      "@type": "BeautySalon",
+      "name": "Makayla's Cosmetic Studio"
     },
     "offers": {
       "@type": "Offer",
@@ -87,14 +89,14 @@ export function generateServiceSchema(service: Service) {
 export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Servify",
-    "description": "Premium Service Marketplace offering professional services",
+    "@type": "BeautySalon",
+    "name": "Makayla's Cosmetic Studio",
+    "description": "Premium eyelash extensions and beauty services with exceptional quality and personalized care",
     "url": baseUrl,
     "telephone": "+1-555-0123",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Service Street",
+      "streetAddress": "123 Beauty Lane",
       "addressLocality": "Your City",
       "addressRegion": "Your State",
       "postalCode": "12345",
@@ -109,7 +111,7 @@ export function generateLocalBusinessSchema() {
       "Mo-Fr 09:00-18:00",
       "Sa 10:00-16:00"
     ],
-    "priceRange": "$49-$179",
+    "priceRange": "$40-$140",
     "servedCuisine": [], // Not applicable for services
     "hasMenu": false,
     "acceptsReservations": true
@@ -177,14 +179,14 @@ export function generateArticleSchema({
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Servify",
+      "name": "Makayla's Cosmetic Studio",
       "logo": {
         "@type": "ImageObject",
-        "url": `${baseUrl}/images/logo.png`
+        "url": `${baseUrl}/images/mcstudioLogo.png`
       }
     },
     "url": `${baseUrl}${url}`,
-    "image": image ? `${baseUrl}${image}` : `${baseUrl}/images/og-default.jpg`,
+    "image": image ? `${baseUrl}${image}` : `${baseUrl}/images/mcstudioLogo.png`,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": `${baseUrl}${url}`

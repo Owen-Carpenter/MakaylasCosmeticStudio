@@ -409,7 +409,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
       date: selectedDate,
       time: selectedTime,
       price: finalPrice,
-      location: "Makaylas Cosmetic Studio",
+                      location: "Makayla's Cosmetic Studio",
       duration: finalDuration,
       userId: session?.user?.id || 'guest',
       variantId: selectedVariant?.id || null,
@@ -559,7 +559,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                     <div className="flex items-start gap-2">
                       <MapPin size={18} className="text-primary mt-1 flex-shrink-0" />
                       <div>
-                        <p className="font-medium text-sm md:text-base">Makaylas Cosmetic Studio</p>
+                        <p className="font-medium text-sm md:text-base">Makayla&apos;s Cosmetic Studio</p>
                         <p className="text-gray-600 text-sm md:text-base">278 U.S. 65 Suite C</p>
                         <p className="text-gray-600 text-sm md:text-base">Conway, AR 72032</p>
                       </div>

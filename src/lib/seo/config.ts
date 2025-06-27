@@ -1,44 +1,46 @@
 export const seoConfig = {
   // Site Information
-  siteName: process.env.NEXT_PUBLIC_SITE_NAME || 'Servify',
-  siteDescription: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Premium Service Marketplace - Connect with trusted service providers for all your needs',
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com',
+  siteName: process.env.NEXT_PUBLIC_SITE_NAME || "Makayla's Cosmetic Studio",
+  siteDescription: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Premium eyelash extensions and beauty services with exceptional quality and personalized care',
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com',
   
   // Business Information
   business: {
-    name: process.env.BUSINESS_NAME || 'Servify',
-    address: process.env.BUSINESS_ADDRESS || '123 Service Street, Your City, State 12345',
+    name: process.env.BUSINESS_NAME || "Makayla's Cosmetic Studio",
+    address: process.env.BUSINESS_ADDRESS || '123 Beauty Lane, Your City, State 12345',
     phone: process.env.BUSINESS_PHONE || '+1-555-0123',
-    email: process.env.BUSINESS_EMAIL || 'info@servify.com',
+    email: process.env.BUSINESS_EMAIL || 'info@makaylascosmeticstudio.com',
   },
   
   // Social Media
   social: {
-    twitter: process.env.TWITTER_HANDLE || '@servify',
-    facebook: `https://facebook.com/${process.env.FACEBOOK_PAGE_ID || 'servify'}`,
-    linkedin: `https://linkedin.com/company/${process.env.LINKEDIN_COMPANY_ID || 'servify'}`,
-    instagram: 'https://instagram.com/servify',
+    twitter: process.env.TWITTER_HANDLE || '@makaylascosmetics',
+    facebook: `https://facebook.com/${process.env.FACEBOOK_PAGE_ID || 'makaylascosmeticstudio'}`,
+    linkedin: `https://linkedin.com/company/${process.env.LINKEDIN_COMPANY_ID || 'makaylascosmeticstudio'}`,
+    instagram: 'https://instagram.com/makaylascosmeticstudio',
   },
   
   // Default SEO Values
-  defaultTitle: 'Servify - Premium Service Marketplace',
-  titleTemplate: '%s | Servify',
-  defaultDescription: 'Connect with trusted service providers for all your needs. Book professional services including consulting, beauty, maintenance, and more. Quality guaranteed.',
+  defaultTitle: "Makayla's Cosmetic Studio - Premium Eyelash Extensions & Beauty Services",
+  titleTemplate: "%s | Makayla's Cosmetic Studio",
+  defaultDescription: 'Experience premium eyelash extensions and beauty treatments at Makayla\'s Cosmetic Studio. Professional classic, volume, hybrid, and wispy lash services with exceptional quality and personalized care.',
   defaultKeywords: [
-    'service marketplace',
-    'professional services',
-    'booking platform',
-    'trusted providers',
-    'consulting services',
+    'eyelash extensions',
+    'lash extensions',
+    'classic lashes',
+    'volume lashes',
+    'hybrid lashes',
+    'wispy lashes',
     'beauty services',
-    'home maintenance',
-    'service booking',
-    'quality services',
-    'licensed professionals'
+    'lash fills',
+    'professional lash artist',
+    'cosmetic studio',
+    'beauty salon',
+    'eyelash specialist'
   ],
   
   // Open Graph Defaults
-  ogImage: '/images/og-default.jpg',
+  ogImage: '/images/mcstudioLogo.png',
   ogImageWidth: 1200,
   ogImageHeight: 630,
   
@@ -53,65 +55,65 @@ export const seoConfig = {
   
   // Service Categories with SEO-friendly names
   serviceCategories: {
-    consulting: {
-      name: 'Business Consulting',
-      description: 'Professional business consulting services to help grow your business',
-      keywords: ['business consulting', 'business advice', 'strategic planning', 'business growth']
+    classic: {
+      name: 'Classic Eyelash Extensions',
+      description: 'Natural-looking classic eyelash extensions for everyday elegance',
+      keywords: ['classic lashes', 'natural lashes', 'eyelash extensions', 'classic extensions']
     },
-    beauty: {
-      name: 'Beauty Services',
-      description: 'Professional beauty and wellness services for your personal care',
-      keywords: ['beauty services', 'hair styling', 'facial treatments', 'massage therapy', 'wellness']
+    volume: {
+      name: 'Volume Eyelash Extensions',
+      description: 'Dramatic volume lashes for bold and glamorous looks',
+      keywords: ['volume lashes', 'dramatic lashes', 'full lashes', 'volume extensions']
     },
-    maintenance: {
-      name: 'Home Maintenance',
-      description: 'Reliable home maintenance and repair services for your property',
-      keywords: ['home maintenance', 'home repair', 'plumbing', 'electrical', 'handyman services']
+    hybrid: {
+      name: 'Hybrid Eyelash Extensions',
+      description: 'Perfect blend of classic and volume techniques for versatile looks',
+      keywords: ['hybrid lashes', 'mixed lashes', 'versatile lashes', 'hybrid extensions']
     },
-    health: {
-      name: 'Health Services',
-      description: 'Professional health and medical services for your wellbeing',
-      keywords: ['health services', 'medical consultation', 'healthcare', 'wellness']
+    wispy: {
+      name: 'Wispy Eyelash Extensions',
+      description: 'Textured wispy lashes for a natural yet enhanced appearance',
+      keywords: ['wispy lashes', 'textured lashes', 'natural volume', 'wispy extensions']
     },
-    education: {
-      name: 'Educational Services',
-      description: 'Quality educational and training services for personal development',
-      keywords: ['education services', 'tutoring', 'training', 'learning', 'skill development']
+    fills: {
+      name: 'Eyelash Extension Fills',
+      description: 'Professional lash fills to maintain your beautiful extensions',
+      keywords: ['lash fills', 'extension maintenance', 'lash touch-ups', 'fill appointments']
     }
   },
   
   // FAQ Schema Data
   commonFAQs: [
     {
-      question: "How do I book a service on Servify?",
-      answer: "Booking a service is easy! Browse our services, select the one you need, choose your preferred date and time, and complete the booking process. You'll receive a confirmation email with all the details."
+      question: "How do I book an eyelash extension appointment at Makayla's Cosmetic Studio?",
+      answer: "Booking is easy! Browse our eyelash extension services, select the style you want (classic, volume, hybrid, or wispy), choose your preferred date and time, and complete the booking process. You'll receive a confirmation email with all the details."
     },
     {
-      question: "Are all service providers on Servify licensed and insured?",
-      answer: "Yes, all our service providers are fully licensed, insured, and have undergone thorough background checks. We only work with experienced professionals who meet our high quality standards."
+      question: "How long do eyelash extensions last?",
+      answer: "Eyelash extensions typically last 2-3 weeks with proper care. We recommend fill appointments every 1-3 weeks depending on your natural lash cycle and desired fullness to maintain the best look."
     },
     {
-      question: "What payment methods does Servify accept?",
-      answer: "We accept all major credit cards, PayPal, and bank transfers. Payment is processed securely at the time of booking to confirm your appointment."
+      question: "What's the difference between classic, volume, and hybrid lashes?",
+      answer: "Classic lashes provide a natural look with one extension per natural lash. Volume lashes use multiple lightweight extensions for dramatic fullness. Hybrid combines both techniques for a versatile, textured appearance."
     },
     {
-      question: "Can I reschedule or cancel my appointment?",
-      answer: "Yes, you can reschedule or cancel your appointment up to 24 hours before the scheduled time without any charge. Please contact our customer service or use your account dashboard."
+      question: "Can I reschedule or cancel my lash appointment?",
+      answer: "Yes, you can reschedule or cancel your appointment up to 24 hours before the scheduled time without any charge. Please contact us or use your account dashboard to make changes."
     }
   ],
   
   // Structured Data Templates
   organization: {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Servify",
-    "url": process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com',
-    "logo": `${process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com'}/images/logo.png`,
+    "@type": "BeautySalon",
+    "name": "Makayla's Cosmetic Studio",
+    "url": process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com',
+    "logo": `${process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com'}/images/mcstudioLogo.png`,
     "sameAs": [
-      "https://facebook.com/servify",
-      "https://twitter.com/servify",
-      "https://linkedin.com/company/servify",
-      "https://instagram.com/servify"
+      "https://facebook.com/makaylascosmeticstudio",
+      "https://twitter.com/makaylascosmetics",
+      "https://linkedin.com/company/makaylascosmeticstudio",
+      "https://instagram.com/makaylascosmeticstudio"
     ]
   }
 };
@@ -127,7 +129,7 @@ export function getCategorySEOData(category: string) {
 
 // Helper function to generate page title
 export function generatePageTitle(title: string, includeTemplate = true) {
-  if (includeTemplate && !title.includes('Servify')) {
+  if (includeTemplate && !title.includes("Makayla's Cosmetic Studio")) {
     return `${title} | ${seoConfig.siteName}`;
   }
   return title;

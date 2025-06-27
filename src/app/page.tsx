@@ -136,7 +136,7 @@ export default function HomePage() {
               </span>
             </h1>
             <p className="text-lg md:text-xl opacity-90 max-w-md animate-fadeInLeft delay-200">
-              Makaylas Cosmetic Studio offers premium beauty services with professional appointment booking, payments, and customer care through our modern platform.
+              Makayla&apos;s Cosmetic Studio offers premium beauty services with professional appointment booking, payments, and customer care through our modern platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fadeInLeft delay-300">
               <Link href="/services">
@@ -312,7 +312,7 @@ export default function HomePage() {
           <div className="text-center mb-16 reveal">
             <h2 className="text-4xl font-bold mb-4 gradient-text">What Our Clients Say</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Hear from customers who have experienced our exceptional beauty services at Makaylas Cosmetic Studio.
+              Hear from customers who have experienced our exceptional beauty services at Makayla&apos;s Cosmetic Studio.
             </p>
           </div>
           
@@ -509,7 +509,7 @@ export default function HomePage() {
 const testimonials = [
   {
     name: "Sarah Johnson",
-    quote: "Makaylas Cosmetic Studio completely transformed my beauty routine. The quality of service is exceptional and I feel pampered every visit!"
+    quote: "Makayla's Cosmetic Studio completely transformed my beauty routine. The quality of service is exceptional and I feel pampered every visit!"
   },
   {
     name: "Ashley Martinez",
@@ -521,7 +521,7 @@ const testimonials = [
   },
   {
     name: "Emily Wilson",
-    quote: "As someone who values quality beauty treatments, Makaylas Cosmetic Studio delivers exactly what I need - professional service and amazing results."
+    quote: "As someone who values quality beauty treatments, Makayla's Cosmetic Studio delivers exactly what I need - professional service and amazing results."
   },
   {
     name: "Rachel Davis",

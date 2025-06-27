@@ -15,23 +15,27 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Makaylas Cosmetic Studio - Premium Beauty Services",
-    template: "%s | Makaylas Cosmetic Studio"
+    default: "Makayla's Cosmetic Studio - Premium Eyelash Extensions & Beauty Services",
+    template: "%s | Makayla's Cosmetic Studio"
   },
-  description: "Connect with trusted service providers for all your needs. Book professional services including consulting, beauty, maintenance, and more. Quality guaranteed.",
+  description: "Experience premium eyelash extensions and beauty treatments at Makayla's Cosmetic Studio. Professional classic, volume, hybrid, and wispy lash services with exceptional quality and personalized care.",
   keywords: [
-    "service marketplace",
-    "professional services", 
-    "booking platform",
-    "trusted providers",
-    "consulting services",
+    "eyelash extensions",
+    "lash extensions", 
+    "classic lashes",
+    "volume lashes",
+    "hybrid lashes",
+    "wispy lashes",
     "beauty services",
-    "home maintenance",
-    "service booking"
+    "lash fills",
+    "professional lash artist",
+    "cosmetic studio",
+    "beauty salon",
+    "eyelash specialist"
   ],
-  authors: [{ name: "Makaylas Cosmetic Studio Team" }],
-  creator: "Makaylas Cosmetic Studio",
-  publisher: "Makaylas Cosmetic Studio",
+  authors: [{ name: "Makayla's Cosmetic Studio" }],
+  creator: "Makayla's Cosmetic Studio",
+  publisher: "Makayla's Cosmetic Studio",
   formatDetection: {
     email: false,
     address: false,
@@ -45,23 +49,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: '/',
-    title: 'Makaylas Cosmetic Studio - Premium Beauty Services',
-    description: 'Experience premium beauty treatments at Makaylas Cosmetic Studio. Book professional beauty services with exceptional quality guaranteed.',
-    siteName: 'Makaylas Cosmetic Studio',
+    title: "Makayla's Cosmetic Studio - Premium Eyelash Extensions & Beauty Services",
+    description: 'Experience premium eyelash extensions and beauty treatments at Makayla\'s Cosmetic Studio. Professional classic, volume, hybrid, and wispy lash services with exceptional quality and personalized care.',
+    siteName: "Makayla's Cosmetic Studio",
     images: [
       {
-        url: '/images/og-default.jpg',
+        url: '/images/mcstudioLogo.png',
         width: 1200,
         height: 630,
-                  alt: 'Makaylas Cosmetic Studio - Premium Beauty Services',
+        alt: "Makayla's Cosmetic Studio - Premium Eyelash Extensions & Beauty Services",
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Makaylas Cosmetic Studio - Premium Beauty Services',
-    description: 'Connect with trusted service providers for all your needs.',
-    images: ['/images/og-default.jpg'],
+    title: "Makayla's Cosmetic Studio - Premium Eyelash Extensions & Beauty Services",
+    description: 'Experience premium eyelash extensions and beauty treatments with exceptional quality and personalized care.',
+    images: ['/images/mcstudioLogo.png'],
   },
   robots: {
     index: true,

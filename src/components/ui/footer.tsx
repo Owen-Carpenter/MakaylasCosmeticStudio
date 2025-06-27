@@ -13,7 +13,7 @@ export function Footer() {
       <div className="content-container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent hover:scale-105 transition-transform">Makaylas Cosmetic Studio</h3>
+            <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent hover:scale-105 transition-transform">Makayla&apos;s Cosmetic Studio</h3>
                           <p className="text-gray-600 mb-4">
                 Premium beauty treatments and cosmetic services.
               </p>
@@ -58,7 +58,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-gray-300 text-center text-gray-600">
-                        <p className="mb-2">© {new Date().getFullYear()} Makaylas Cosmetic Studio. All rights reserved.</p>
+                        <p className="mb-2">© {new Date().getFullYear()} Makayla&apos;s Cosmetic Studio. All rights reserved.</p>
           <p className="text-sm text-gray-500">Developed by Owen Carpenter</p>
         </div>
       </div>

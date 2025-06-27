@@ -98,7 +98,7 @@ export function Navigation() {
         <Link href="/" className="z-50 flex items-center h-full py-2">
           <Image 
             src="/images/mcstudioLogo.png" 
-            alt="Makaylas Cosmetic Studio" 
+            alt="Makayla's Cosmetic Studio" 
             width={150}
             height={64}
             className={cn(

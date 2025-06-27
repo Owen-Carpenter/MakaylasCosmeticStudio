@@ -40,7 +40,7 @@ export default function CookiePolicy() {
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">How We Use Cookies</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Makaylas Cosmetic Studio uses cookies to enhance your browsing experience, provide personalized content, and analyze website performance. We use cookies for the following purposes:
+                Makayla&apos;s Cosmetic Studio uses cookies to enhance your browsing experience, provide personalized content, and analyze website performance. We use cookies for the following purposes:
               </p>
               <ul className="list-disc pl-6 text-gray-700 space-y-2">
                 <li>To remember your preferences and settings</li>

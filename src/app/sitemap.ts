@@ -3,7 +3,7 @@ import { getServices } from '@/lib/supabase-services';
 import { Service } from '@/lib/services';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://servify.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com';
   
   // Get all services for dynamic routes with error handling
   let services: Service[] = [];

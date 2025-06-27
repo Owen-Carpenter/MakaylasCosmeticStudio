@@ -1,7 +1,7 @@
 {
-  "name": "Servify - Premium Service Marketplace",
-  "short_name": "Servify",
-  "description": "Connect with trusted service providers for all your needs",
+  "name": "Makayla's Cosmetic Studio - Premium Eyelash Extensions",
+  "short_name": "Makayla's Studio",
+  "description": "Premium eyelash extensions and beauty services with exceptional quality and personalized care",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -9,7 +9,7 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en-US",
-  "categories": ["business", "productivity", "lifestyle"],
+  "categories": ["beauty", "lifestyle", "health"],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -43,7 +43,7 @@
     {
       "name": "Browse Services",
       "short_name": "Services",
-      "description": "Browse all available services",
+      "description": "Browse all available eyelash extension services",
       "url": "/services",
       "icons": [
         {
@@ -55,7 +55,7 @@
     {
       "name": "Book Appointment",
       "short_name": "Book",
-      "description": "Book a new appointment",
+      "description": "Book your eyelash extension appointment",
       "url": "/services",
       "icons": [
         {
@@ -71,14 +71,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Servify Homepage on Desktop"
+      "label": "Makayla's Cosmetic Studio Homepage on Desktop"
     },
     {
       "src": "/screenshots/mobile-1.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Servify Services on Mobile"
+      "label": "Makayla's Cosmetic Studio Services on Mobile"
     }
   ]
 } 

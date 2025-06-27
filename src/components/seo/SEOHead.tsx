@@ -28,7 +28,7 @@ export function SEOHead({
   publishedTime,
   modifiedTime
 }: SEOHeadProps) {
-  const fullTitle = title.includes('Makaylas Cosmetic Studio') ? title : `${title} | Makaylas Cosmetic Studio - Premium Beauty Services`;
+  const fullTitle = title.includes('Makayla\'s Cosmetic Studio') ? title : `${title} | Makayla's Cosmetic Studio - Premium Beauty Services`;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com';
   const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
 
@@ -58,7 +58,7 @@ export function SEOHead({
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={`${baseUrl}${ogImage}`} />
       <meta property="og:image:alt" content={title} />
-      <meta property="og:site_name" content="Makaylas Cosmetic Studio" />
+      <meta property="og:site_name" content="Makayla's Cosmetic Studio" />
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter Card Tags */}
@@ -105,7 +105,7 @@ export function generateMetadata({
   keywords = [],
   noIndex = false
 }: Omit<SEOHeadProps, 'structuredData'>): Metadata {
-  const fullTitle = title.includes('Makaylas Cosmetic Studio') ? title : `${title} | Makaylas Cosmetic Studio`;
+  const fullTitle = title.includes('Makayla\'s Cosmetic Studio') ? title : `${title} | Makayla's Cosmetic Studio`;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://makaylascosmeticstudio.com';
   const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
 
@@ -113,7 +113,7 @@ export function generateMetadata({
     title: fullTitle,
     description,
     keywords: keywords.join(', '),
-    authors: [{ name: 'Makaylas Cosmetic Studio Team' }],
+    authors: [{ name: 'Makayla\'s Cosmetic Studio Team' }],
     robots: noIndex ? 'noindex, nofollow' : 'index, follow',
     alternates: {
       canonical: canonicalUrl
@@ -122,7 +122,7 @@ export function generateMetadata({
       title: fullTitle,
       description,
       url: canonicalUrl,
-      siteName: 'Makaylas Cosmetic Studio',
+      siteName: 'Makayla\'s Cosmetic Studio',
       images: [
         {
           url: `${baseUrl}${ogImage}`,
