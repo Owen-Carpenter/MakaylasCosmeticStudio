@@ -81,36 +81,28 @@ export async function POST(req: Request) {
       cancel_url: getBookingCancelUrl(),
     });
     
-    // First check if user exists in our users table
-    const { data: userData, error: userError } = await supabase
+    // Ensure user exists in our users table (upsert to handle both create and update)
+    console.log("Ensuring user exists in users table...");
+    const { error: upsertUserError } = await supabase
       .from('users')
-      .select('id')
-      .eq('id', userId)
-      .single();
+      .upsert({
+        id: userId,
+        email: session?.user?.email || '',
+        name: session?.user?.name || session?.user?.email?.split('@')[0] || '',
+        role: 'customer'
+      }, {
+        onConflict: 'id'
+      });
       
-    console.log("User check result:", { userData, userError });
-      
-    // If user doesn't exist in our custom users table, we need to add them
-    if (userError && !userData) {
-      console.log("Attempting to create user...");
-      const { error: createUserError } = await supabase
-        .from('users')
-        .insert({
-          id: userId,
-          email: session?.user?.email || '',
-          name: session?.user?.name || session?.user?.email?.split('@')[0] || '',
-          role: 'customer'
-        });
-        
-      if (createUserError) {
-        console.error("Error creating user:", createUserError);
-        return NextResponse.json({
-          success: false,
-          message: "Failed to create user account"
-        }, { status: 500 });
-      }
-      console.log("User created successfully");
+    if (upsertUserError) {
+      console.error("Error upserting user:", upsertUserError);
+      return NextResponse.json({
+        success: false,
+        message: "Failed to create or update user account"
+      }, { status: 500 });
     }
+    
+    console.log("User ensured in database successfully");
     
     // Save a temporary booking record to Supabase with pending status
     // The actual booking will be confirmed via the Stripe webhook once payment is completed
