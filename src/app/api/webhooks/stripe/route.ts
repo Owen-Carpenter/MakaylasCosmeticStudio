@@ -44,11 +44,31 @@ export async function POST(req: Request) {
 
     try {
       // First check if the booking already exists in a pending state
-      const { data: existingBooking } = await supabase
+      // Check for existing booking by ID first
+      console.log('Looking for existing booking with ID:', bookingId);
+      const { data: existingBooking, error: fetchError } = await supabase
         .from('bookings')
         .select('*')
         .eq('id', bookingId)
         .single();
+        
+      if (fetchError) {
+        console.log('Error or no booking found:', fetchError.message);
+      } else {
+        console.log('Found existing booking:', existingBooking);
+      }
+      
+      // Also check if there's already a confirmed booking with this payment intent
+      const { data: confirmedBookings } = await supabase
+        .from('bookings')
+        .select('*')
+        .eq('payment_intent', session.id)
+        .eq('payment_status', 'paid');
+        
+      if (confirmedBookings && confirmedBookings.length > 0) {
+        console.log('Payment already processed for session:', session.id);
+        return NextResponse.json({ success: true, message: 'Payment already processed' });
+      }
 
       // 1. Retrieve service details
       const { data: serviceData } = await supabase
@@ -85,28 +105,12 @@ export async function POST(req: Request) {
         
         console.log(`Successfully updated booking ${bookingId} to confirmed status`);
       } else {
-        // If the booking doesn't exist yet (unlikely but possible), create it
-        console.log('Creating new confirmed booking:', bookingId);
+        // Log this case but don't create a new booking - this should not happen
+        console.error('WARNING: Pending booking not found for payment confirmation:', bookingId);
+        console.error('This suggests a race condition or missing pending booking creation');
         
-        const { error: insertError } = await supabase
-          .from('bookings')
-          .insert({
-            id: bookingId,
-            user_id: userId,
-            service_id: serviceId,
-            service_name: serviceData.title,
-            appointment_date: date,
-            appointment_time: time,
-            status: 'confirmed',
-            payment_status: 'paid',
-            payment_intent: session.payment_intent as string,
-            amount_paid: amountPaid,
-            created_at: new Date().toISOString(),
-          });
-
-        if (insertError) {
-          throw new Error(`Error creating booking: ${insertError.message}`);
-        }
+        // Instead of creating a new booking, return an error
+        throw new Error(`Pending booking not found: ${bookingId}. Payment successful but booking creation failed.`);
       }
 
       // 3. Get user information for the email
