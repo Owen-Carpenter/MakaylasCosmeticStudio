@@ -124,33 +124,92 @@ export async function getUserBookings(userId?: string): Promise<SupabaseBooking[
  */
 export async function getBookingById(id: string): Promise<SupabaseBooking | null> {
   try {
-    // Use a joined query to get booking with customer information
-    const { data, error } = await supabase
-      .from('bookings')
-      .select(`
-        *,
-        users:user_id (
-          name,
-          email
-        )
-      `)
-      .eq('id', id)
-      .single();
+    console.log("Attempting to fetch booking with ID:", id);
     
-    if (error || !data) {
-      console.error("Error fetching booking by ID:", error);
+    // If we're on the client-side, use the API endpoint that has service role access
+    if (typeof window !== 'undefined') {
+      console.log("Fetching booking via API endpoint (client-side)");
+      const response = await fetch(`/api/bookings/${id}`);
+      
+      if (!response.ok) {
+        console.error("API response not ok:", response.status, response.statusText);
+        return null;
+      }
+      
+      const result = await response.json();
+      
+      if (result.success && result.booking) {
+        console.log("Successfully fetched booking from API:", result.booking);
+        return result.booking as SupabaseBooking;
+      } else {
+        console.error("API error fetching booking:", result.message);
+        return null;
+      }
+    }
+    
+    // Server-side: Try to use the database function if it exists
+    try {
+      const { data: functionResult, error: functionError } = await supabase
+        .rpc('get_booking_with_customer', { booking_id: id });
+      
+      if (!functionError && functionResult && functionResult.length > 0) {
+        console.log("Successfully fetched booking using database function:", functionResult[0]);
+        return functionResult[0] as SupabaseBooking;
+      }
+      
+      if (functionError && !functionError.message?.includes('does not exist')) {
+        console.warn("Database function failed, falling back to manual approach:", functionError);
+      }
+    } catch {
+      // Function doesn't exist yet, continue with fallback
+      console.log("Database function not available yet, using fallback approach");
+    }
+    
+    // Fallback: get the booking without joins to check if it exists
+    const { data: basicBooking, error: basicError } = await supabase
+      .from('bookings')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle(); // Use maybeSingle() instead of single() to handle 0 results gracefully
+    
+    if (basicError) {
+      console.error("Error fetching basic booking by ID:", basicError);
       return null;
     }
     
-    // Transform the data to include customer info in the main booking object
-    const customerData = data.users || {};
+    if (!basicBooking) {
+      console.log("No booking found with ID:", id);
+      return null;
+    }
+    
+    console.log("Found basic booking:", basicBooking);
+    
+    // Now try to get customer information separately to avoid join issues
+    let customerData: { name?: string; email?: string } = {};
+    
+    if (basicBooking.user_id) {
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('name, email')
+        .eq('id', basicBooking.user_id)
+        .maybeSingle();
+      
+      if (userError) {
+        console.warn("Could not fetch user data for booking:", userError);
+        // Continue without customer data rather than failing completely
+      } else if (userData) {
+        customerData = userData;
+      }
+    }
+    
+    // Combine booking with customer info
     const bookingWithCustomerInfo = {
-      ...data,
+      ...basicBooking,
       customer_name: customerData.name || null,
       customer_email: customerData.email || null,
-      users: undefined // Remove the nested users object
     };
     
+    console.log("Returning booking with customer info:", bookingWithCustomerInfo);
     return bookingWithCustomerInfo as SupabaseBooking;
   } catch (error) {
     console.error("Error in getBookingById:", error);
@@ -303,19 +362,36 @@ export async function updateBookingDateTime(
  */
 export async function getAllBookings(): Promise<SupabaseBooking[]> {
   try {
-    // For admin operations, we need to use the service role key to bypass RLS
-    // Check if we're in a server environment where we can use service role
-    let adminSupabase = supabase;
-    
-    if (typeof window === 'undefined') {
-      // Server-side: Use service role key if available
-      const { createClient } = await import('@supabase/supabase-js');
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+    // If we're on the client-side, use the API endpoint that has service role access
+    if (typeof window !== 'undefined') {
+      console.log("Fetching all bookings via API endpoint (client-side)");
+      const response = await fetch('/api/bookings/all');
       
-      if (serviceKey && serviceKey !== process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-        adminSupabase = createClient(supabaseUrl, serviceKey);
+      if (!response.ok) {
+        console.error("API response not ok:", response.status, response.statusText);
+        return [];
       }
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log("Successfully fetched bookings from API:", result.bookings.length);
+        return result.bookings as SupabaseBooking[];
+      } else {
+        console.error("API error fetching all bookings:", result.message);
+        return [];
+      }
+    }
+    
+    // Server-side: Use service role key if available
+    console.log("Fetching all bookings server-side");
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+    
+    let adminSupabase = supabase;
+    if (serviceKey && serviceKey !== process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      adminSupabase = createClient(supabaseUrl, serviceKey);
     }
     
     // Use a joined query to get bookings with customer information

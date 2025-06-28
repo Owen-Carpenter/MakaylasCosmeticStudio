@@ -62,17 +62,21 @@ export default function AdminBookingDetailPage({ params }: { params: Promise<{ i
         }
 
         // Load booking details with customer data (using the improved getBookingById)
+        console.log("Loading booking with ID:", bookingId);
         const bookingData = await getBookingById(bookingId);
+        
         if (!bookingData) {
+          console.error("No booking data returned for ID:", bookingId);
           toast({
             variant: "destructive",
-            title: "Error",
-            description: "Booking not found",
+            title: "Booking Not Found",
+            description: `No booking found with ID: ${bookingId}. Please check the booking ID and try again.`,
           });
           router.push("/dashboard");
           return;
         }
         
+        console.log("Successfully loaded booking data:", bookingData);
         setBooking(bookingData);
       } catch (error) {
         console.error("Error loading booking details:", error);

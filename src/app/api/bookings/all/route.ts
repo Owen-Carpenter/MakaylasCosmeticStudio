@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth-options";
 
 // Initialize Supabase
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
@@ -8,6 +10,28 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function GET() {
   try {
+    // Check authentication and admin role
+    const session = await getServerSession(authOptions);
+    
+    if (!session || !session.user) {
+      return NextResponse.json({ 
+        success: false, 
+        message: "Unauthorized" 
+      }, { status: 401 });
+    }
+    
+    // Check if user is admin
+    const isAdmin = session.user.role === 'admin';
+    
+    if (!isAdmin) {
+      return NextResponse.json({ 
+        success: false, 
+        message: "Only admins can access all bookings" 
+      }, { status: 403 });
+    }
+    
+    console.log("Admin user fetching all bookings:", session.user.email);
+    
     // Fetch all bookings with customer information from Supabase
     const { data: bookings, error } = await supabase
       .from('bookings')

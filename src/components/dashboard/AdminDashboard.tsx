@@ -639,8 +639,8 @@ export default function AdminDashboard() {
                     </CardContent>
                   </Card>
                 </div>
-                
-                {/* Recent Bookings */}
+                                 
+                 {/* Recent Bookings */}
                 <Card className="backdrop-blur-sm bg-white/90 shadow-md border-0">
                   <CardHeader className="bg-primary/5 border-b">
                     <CardTitle>Recent Bookings</CardTitle>
@@ -686,7 +686,10 @@ export default function AdminDashboard() {
                                   variant="outline"
                                   size="sm"
                                   className="bg-white min-w-0 flex-shrink-0"
-                                  onClick={() => router.push(`/admin/bookings/${booking.id}`)}
+                                  onClick={() => {
+                                    console.log("Navigating to booking details for ID:", booking.id);
+                                    router.push(`/admin/bookings/${booking.id}`);
+                                  }}
                                 >
                                   Details
                                 </Button>
@@ -982,7 +985,10 @@ export default function AdminDashboard() {
                                   variant="outline"
                                   size="sm"
                                   className="bg-white min-w-0 flex-shrink-0"
-                                  onClick={() => router.push(`/admin/bookings/${booking.id}`)}
+                                  onClick={() => {
+                                    console.log("Navigating to booking details for ID (from all bookings view):", booking.id);
+                                    router.push(`/admin/bookings/${booking.id}`);
+                                  }}
                                 >
                                   Details
                                 </Button>
