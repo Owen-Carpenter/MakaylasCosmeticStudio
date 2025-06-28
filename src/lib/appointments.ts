@@ -48,6 +48,39 @@ function mapSupabaseBookingToAppointment(booking: SupabaseBooking): Appointment 
     effectiveStatus = 'completed';
   }
 
+  // Determine service category based on service name
+  const getServiceCategory = (serviceName: string): string => {
+    const name = serviceName.toLowerCase();
+    
+    // Lash services
+    if (name.includes('lash') || name.includes('extension') || name.includes('eyelash')) {
+      return 'Lash Services';
+    }
+    
+    // Brow services
+    if (name.includes('brow') || name.includes('eyebrow') || name.includes('microblading') || name.includes('tinting')) {
+      return 'Brow Services';
+    }
+    
+    // Facial services
+    if (name.includes('facial') || name.includes('skincare') || name.includes('hydrafacial') || name.includes('chemical peel')) {
+      return 'Facial Services';
+    }
+    
+    // Makeup services
+    if (name.includes('makeup') || name.includes('glam') || name.includes('application')) {
+      return 'Makeup Services';
+    }
+    
+    // Waxing services
+    if (name.includes('wax') || name.includes('hair removal')) {
+      return 'Waxing Services';
+    }
+    
+    // Default category
+    return 'Beauty Services';
+  };
+
   return {
     id: booking.id,
     serviceId: booking.service_id,
@@ -56,11 +89,11 @@ function mapSupabaseBookingToAppointment(booking: SupabaseBooking): Appointment 
     time: booking.appointment_time,
     price: booking.amount_paid,
     status: effectiveStatus,
-    providerName: "Service Provider", // This information would be joined from a providers table in a real app
-    location: "Service Location", // This information would be joined from a locations table in a real app
+    providerName: "Makayla Singleton",
+    location: "Makayla's Cosmetic Studio\n278 U.S. 65 Suite C\nConway, AR 72032",
     duration: "60 min", // This information would be joined from a services table in a real app
     bookingDate: bookingDate,
-    category: "service" // This information would be joined from a services table in a real app
+    category: getServiceCategory(booking.service_name)
   };
 }
 

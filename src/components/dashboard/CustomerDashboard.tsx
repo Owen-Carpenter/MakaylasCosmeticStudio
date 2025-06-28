@@ -258,21 +258,56 @@ export default function CustomerDashboard({ userId }: CustomerDashboardProps) {
         setBookingCounts(counts);
         
         // Convert bookings to appointments format for components that need it
-        const appointmentsData: Appointment[] = processedBookings.map(booking => ({
-          id: booking.id,
-          serviceId: booking.service_id,
-          serviceName: booking.service_name,
-          date: parseDateFromDB(booking.appointment_date),
-          time: booking.appointment_time,
-          price: booking.amount_paid,
-          status: booking.status,
-          userId: booking.user_id,
-          providerName: "Service Provider",
-          location: "Service Location",
-          duration: "60 min",
-          bookingDate: new Date(booking.created_at),
-          category: "service"
-        }));
+        const appointmentsData: Appointment[] = processedBookings.map(booking => {
+          // Determine service category based on service name
+          const getServiceCategory = (serviceName: string): string => {
+            const name = serviceName.toLowerCase();
+            
+            // Lash services
+            if (name.includes('lash') || name.includes('extension') || name.includes('eyelash')) {
+              return 'Lash Services';
+            }
+            
+            // Brow services
+            if (name.includes('brow') || name.includes('eyebrow') || name.includes('microblading') || name.includes('tinting')) {
+              return 'Brow Services';
+            }
+            
+            // Facial services
+            if (name.includes('facial') || name.includes('skincare') || name.includes('hydrafacial') || name.includes('chemical peel')) {
+              return 'Facial Services';
+            }
+            
+            // Makeup services
+            if (name.includes('makeup') || name.includes('glam') || name.includes('application')) {
+              return 'Makeup Services';
+            }
+            
+            // Waxing services
+            if (name.includes('wax') || name.includes('hair removal')) {
+              return 'Waxing Services';
+            }
+            
+            // Default category
+            return 'Beauty Services';
+          };
+
+          return {
+            id: booking.id,
+            serviceId: booking.service_id,
+            serviceName: booking.service_name,
+            date: parseDateFromDB(booking.appointment_date),
+            time: booking.appointment_time,
+            price: booking.amount_paid,
+            status: booking.status,
+            userId: booking.user_id,
+            providerName: "Makayla Singleton",
+            location: "Makayla's Cosmetic Studio\n278 U.S. 65 Suite C\nConway, AR 72032",
+            duration: "60 min",
+            bookingDate: new Date(booking.created_at),
+            category: getServiceCategory(booking.service_name)
+          };
+        });
         
         setAppointments(appointmentsData);
         
