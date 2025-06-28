@@ -33,6 +33,20 @@ interface DbBooking {
   updated_at: string;
 }
 
+interface AvailabilityBooking {
+  id: string;
+  service_id: string;
+  appointment_date: string;
+  appointment_time: string;
+  status: string;
+}
+
+interface AvailabilityResponse {
+  success: boolean;
+  bookings: AvailabilityBooking[];
+  message?: string;
+}
+
 interface ServiceDetailClientProps {
   service: Service | null;
 }
@@ -159,59 +173,38 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     const fetchExistingBookings = async () => {
       setIsLoadingBookings(true);
       try {
-        const response = await fetch('/api/bookings/all');
+        // Use the availability endpoint which only returns non-sensitive booking data
+        const response = await fetch('/api/appointments/availability');
         if (!response.ok) {
-          throw new Error('Failed to fetch bookings');
+          throw new Error('Failed to fetch availability data');
         }
-        const data = await response.json();
-        setExistingBookings(data.bookings || []);
+        const data: AvailabilityResponse = await response.json();
+        
+        if (data.success) {
+          // Transform availability data to match the expected format
+          const transformedBookings = data.bookings.map((booking: AvailabilityBooking) => ({
+            id: booking.id,
+            user_id: "system", // Don't expose real user IDs
+            service_id: booking.service_id,
+            service_name: "Existing Appointment", // Generic name for privacy
+            appointment_date: booking.appointment_date,
+            appointment_time: booking.appointment_time,
+            status: booking.status,
+            payment_status: "paid", // Default for availability checking
+            payment_intent: "",
+            amount_paid: 0,
+            created_at: "",
+            updated_at: ""
+          }));
+          
+          setExistingBookings(transformedBookings);
+        } else {
+          throw new Error(data.message || 'Failed to fetch availability data');
+        }
       } catch (error) {
-        console.error('Error fetching bookings:', error);
-        // Fall back to using demo data if API fails
-        setExistingBookings([
-          {
-            id: "booking-1746753799783",
-            user_id: "521d0a1e-81b7-4df3-9081-e1435c028241",
-            service_id: "4a05b5fa-951f-4a05-a3f2-37b3c505eb45",
-            service_name: "Electrical Repairs",
-            appointment_date: "2025-05-09T05:00:00.000Z",
-            appointment_time: "9:00 AM",
-            status: "confirmed",
-            payment_status: "paid",
-            payment_intent: "cs_test_a1IZZSEVLvq7EQ4ZP6c8m56iiHnzG2TRBLxy5ugVsHfP7zGuZIDlUNw1v5",
-            amount_paid: 0.00,
-            created_at: "2025-05-09 01:23:20.502+00",
-            updated_at: "2025-05-09 01:23:33.047565+00"
-          },
-          {
-            id: "booking-1746754920144",
-            user_id: "521d0a1e-81b7-4df3-9081-e1435c028241",
-            service_id: "495fe372-ba26-4442-b583-6d7d187025a0",
-            service_name: "Financial Planning",
-            appointment_date: "2025-05-10T05:00:00.000Z",
-            appointment_time: "1:00 PM",
-            status: "confirmed",
-            payment_status: "paid",
-            payment_intent: "cs_test_a1JtZrjPyVcM2R8XpoWQU0Ff8FIcepCRFJzYZrPj52pYVKXRGNKpl6ukPy",
-            amount_paid: 0.00,
-            created_at: "2025-05-09 01:42:00.998+00",
-            updated_at: "2025-05-09 01:42:20.495138+00"
-          },
-          {
-            id: "booking-1746755802903",
-            user_id: "521d0a1e-81b7-4df3-9081-e1435c028241",
-            service_id: "4a05b5fa-951f-4a05-a3f2-37b3c505eb45",
-            service_name: "Electrical Repairs",
-            appointment_date: "2025-05-11T05:00:00.000Z",
-            appointment_time: "11:00 AM", 
-            status: "confirmed",
-            payment_status: "paid",
-            payment_intent: "cs_test_a1sJSLTNUjOf2thluxtioZsTajXMNT1yHjIC3u3lGu6zqelwDTJ02qHttz",
-            amount_paid: 0.00,
-            created_at: "2025-05-09 01:56:43.59+00",
-            updated_at: "2025-05-09 01:56:55.915853+00"
-          }
-        ]);
+        console.error('Error fetching availability data:', error);
+        // Fall back to empty array if API fails - better than showing old demo data
+        setExistingBookings([]);
       } finally {
         setIsLoadingBookings(false);
       }
