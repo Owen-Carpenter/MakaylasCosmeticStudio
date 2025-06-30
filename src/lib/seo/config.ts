@@ -7,9 +7,9 @@ export const seoConfig = {
   // Business Information
   business: {
     name: process.env.BUSINESS_NAME || "Makayla's Cosmetic Studio",
-    address: process.env.BUSINESS_ADDRESS || '123 Beauty Lane, Your City, State 12345',
-    phone: process.env.BUSINESS_PHONE || '+1-555-0123',
-    email: process.env.BUSINESS_EMAIL || 'info@makaylascosmeticstudio.com',
+    address: process.env.BUSINESS_ADDRESS || 'Conway, Arkansas 72032',
+    phone: process.env.BUSINESS_PHONE || '+1-501-555-0123',
+    email: process.env.BUSINESS_EMAIL || 'makaylascosmeticstudio@gmail.com',
   },
   
   // Social Media

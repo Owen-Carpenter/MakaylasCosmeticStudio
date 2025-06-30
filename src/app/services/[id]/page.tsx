@@ -23,16 +23,18 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   }
 
   const categoryNames: Record<string, string> = {
-    consulting: 'Business Consulting',
+    classic: 'Classic Eyelash Extensions',
+    volume: 'Volume Eyelash Extensions',
+    hybrid: 'Hybrid Eyelash Extensions',
+    wispy: 'Wispy Eyelash Extensions',
+    angel: 'Angel/Wet Eyelash Extensions',
     beauty: 'Beauty Services',
-    maintenance: 'Home Maintenance',
-    health: 'Health Services',
-    education: 'Educational Services'
+    fills: 'Lash Extension Fills'
   };
 
   const categoryName = categoryNames[service.category] || service.category;
-  const title = `${service.title} - ${categoryName} Service`;
-  const description = `Book ${service.title} service for $${service.price}. ${service.details.substring(0, 150)}...`;
+  const title = `${service.title} - ${categoryName} | Makayla's Cosmetic Studio`;
+  const description = `Book ${service.title} at Makayla's Cosmetic Studio in Conway, Arkansas for $${service.price}. ${service.details.substring(0, 120)}... Professional eyelash extension services with expert care.`;
 
   return {
     title,
@@ -40,30 +42,33 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     keywords: [
       service.title.toLowerCase(),
       service.category,
-      'professional service',
-      'service booking',
-      `${service.category} service`,
-      'trusted provider',
-      'quality service'
+      'eyelash extensions Conway Arkansas',
+      'professional lash artist',
+      'Makayla cosmetic studio',
+      `${service.category} lashes`,
+      'beauty services Conway',
+      'lash extension appointment',
+      'Arkansas lash studio'
     ],
     openGraph: {
       title,
       description,
       url: `/services/${id}`,
       type: 'article',
+      siteName: 'Makayla\'s Cosmetic Studio',
       images: [
         {
-          url: `/images/services/${service.category}.jpg`,
+          url: `/images/mcstudioLogo.png`,
           width: 1200,
           height: 630,
-          alt: `${service.title} - Professional Service`,
+          alt: `${service.title} - Makayla's Cosmetic Studio`,
         }
       ],
     },
     twitter: {
       title,
       description,
-      images: [`/images/services/${service.category}.jpg`],
+      images: [`/images/mcstudioLogo.png`],
     },
     alternates: {
       canonical: `/services/${id}`,

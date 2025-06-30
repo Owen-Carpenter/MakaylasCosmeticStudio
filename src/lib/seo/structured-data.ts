@@ -13,15 +13,16 @@ export function generateOrganizationSchema() {
     "logo": `${baseUrl}/images/mcstudioLogo.png`,
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+1-555-0123",
+      "telephone": "+1-501-575-7209",
       "contactType": "Customer Service",
       "availableLanguage": "English"
     },
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "US",
-      "addressLocality": "Your City",
-      "addressRegion": "Your State"
+      "addressLocality": "Conway",
+      "addressRegion": "Arkansas",
+      "postalCode": "72032"
     },
     "sameAs": [
       "https://facebook.com/makaylascosmeticstudio",
@@ -93,19 +94,18 @@ export function generateLocalBusinessSchema() {
     "name": "Makayla's Cosmetic Studio",
     "description": "Premium eyelash extensions and beauty services with exceptional quality and personalized care",
     "url": baseUrl,
-    "telephone": "+1-555-0123",
+    "telephone": "+1-501-575-7209",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Beauty Lane",
-      "addressLocality": "Your City",
-      "addressRegion": "Your State",
-      "postalCode": "12345",
+      "addressLocality": "Conway",
+      "addressRegion": "Arkansas",
+      "postalCode": "72032",
       "addressCountry": "US"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "40.7128",
-      "longitude": "-74.0060"
+      "latitude": "35.0887",
+      "longitude": "-92.4421"
     },
     "openingHours": [
       "Mo-Fr 09:00-18:00",
