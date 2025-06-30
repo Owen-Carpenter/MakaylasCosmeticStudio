@@ -203,14 +203,34 @@ export default function HomePage() {
       <section id="about" className="py-24 bg-white">
         <div className="content-container">
           <div className="text-center mb-16 reveal">
-            <div className="mb-8">
-              <Image 
-                src="/images/MakaylaProfilePhoto.jpg" 
-                alt="Makayla - Professional Esthetician" 
-                width={128}
-                height={128}
-                className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg border-4 border-primary/20"
-              />
+            <div className="mb-8 flex flex-col items-center gap-6">
+              <div className="relative">
+                <Image 
+                  src="/images/MakaylaProfilePhoto.jpg" 
+                  alt="Makayla - Professional Esthetician" 
+                  width={128}
+                  height={128}
+                  className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-primary/20"
+                />
+                {/* Award badge positioned near the profile */}
+                <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-white rounded-full shadow-lg border-2 border-yellow-400/50 p-1 group hover:scale-110 transition-transform duration-300">
+                  <Image 
+                    src="/images/award.png" 
+                    alt="Professional Achievement Award" 
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-contain filter drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
+                  />
+                </div>
+              </div>
+              
+              {/* Achievement highlight */}
+              <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-50 to-amber-50 px-4 py-2 rounded-full border border-yellow-200/50 shadow-sm">
+                <svg className="h-4 w-4 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-medium text-yellow-800">Certified Professional Esthetician</span>
+              </div>
             </div>
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Makayla&apos;s Cosmetic Studio</h2>
             <p className="text-slate-600 max-w-2xl mx-auto text-lg">
