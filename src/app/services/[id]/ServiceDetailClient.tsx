@@ -594,37 +594,60 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                           }}
                           value={selectedVariant?.id || ""}
                         >
-                          <SelectTrigger className="w-full border-2 border-gray-200 rounded-lg h-12 px-4 hover:border-primary/50 focus:border-primary transition-colors">
-                            <div className="flex justify-between items-center w-full">
+                          <SelectTrigger className="w-full border-2 border-gray-200 rounded-lg h-12 px-3 hover:border-primary/50 focus:border-primary transition-colors">
+                            <div className="flex justify-between items-center w-full gap-2">
                               {selectedVariant ? (
                                 <>
-                                  <span className="font-medium text-gray-900">{selectedVariant.variant_name}</span>
-                                  <div className="flex items-center gap-3">
-                                    <span className="text-sm text-gray-500">{selectedVariant.time}</span>
-                                    <span className="font-bold text-primary">${selectedVariant.price.toFixed(2)}</span>
+                                  <span className="font-medium text-gray-900 text-sm text-left truncate flex-1 min-w-0">
+                                    {selectedVariant.variant_name}
+                                  </span>
+                                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                                    <span className="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
+                                      {selectedVariant.time}
+                                    </span>
+                                    <span className="font-bold text-primary text-sm">
+                                      ${selectedVariant.price.toFixed(2)}
+                                    </span>
                                   </div>
                                 </>
                               ) : (
-                                <span className="text-gray-500">Choose your service option...</span>
+                                <span className="text-gray-500 text-sm text-left">Choose your service option...</span>
                               )}
                             </div>
                           </SelectTrigger>
-                          <SelectContent className="w-full min-w-[500px] max-w-lg max-h-[300px] overflow-y-auto">
+                          <SelectContent className="w-full min-w-[320px] sm:min-w-[400px] max-w-[95vw] sm:max-w-2xl max-h-[50vh] sm:max-h-[400px] overflow-y-auto">
                             {serviceVariants.map((variant) => (
                               <SelectItem 
                                 key={variant.id} 
                                 value={variant.id}
-                                className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 p-0"
+                                className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 p-0 h-auto"
                               >
-                                <div className="w-full p-4 space-y-3">
-                                  <div className="flex justify-between items-center gap-4">
-                                    <span className="font-semibold text-gray-900 text-sm flex-shrink-0">{variant.variant_name}</span>
-                                    <span className="text-base font-bold text-primary flex-shrink-0">${variant.price.toFixed(2)}</span>
+                                <div className="w-full p-3 sm:p-4 space-y-2 sm:space-y-3">
+                                  {/* Header with name and price */}
+                                  <div className="flex justify-between items-start gap-2">
+                                    <div className="flex-1 min-w-0">
+                                      <h4 className="font-semibold text-gray-900 text-sm leading-tight break-words pr-2">
+                                        {variant.variant_name}
+                                      </h4>
+                                    </div>
+                                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 sm:gap-2 flex-shrink-0">
+                                      <span className="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded whitespace-nowrap">
+                                        {variant.time}
+                                      </span>
+                                      <span className="text-sm sm:text-base font-bold text-primary whitespace-nowrap">
+                                        ${variant.price.toFixed(2)}
+                                      </span>
+                                    </div>
                                   </div>
-                                  <div className="w-full">
-                                    <p className="text-xs text-gray-600 leading-relaxed mb-2">{variant.variant_description}</p>
-                                    <span className="inline-block text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{variant.time}</span>
-                                  </div>
+                                  
+                                  {/* Description */}
+                                  {variant.variant_description && (
+                                    <div className="w-full">
+                                      <p className="text-xs text-gray-600 leading-relaxed break-words">
+                                        {variant.variant_description}
+                                      </p>
+                                    </div>
+                                  )}
                                 </div>
                               </SelectItem>
                             ))}
