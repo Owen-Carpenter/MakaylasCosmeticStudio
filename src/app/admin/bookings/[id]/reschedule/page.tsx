@@ -14,9 +14,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { PageLoader } from "@/components/ui/page-loader";
 import { formatDateForDB, isSameDay as isSameDayUtil } from '@/lib/date-utils';
 import { getTimeOffPeriods, TimeOff } from '@/lib/supabase-timeoff';
-
-// All possible time slots
-const ALL_TIME_SLOTS = ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"];
+import { 
+  generateTimeSlotsForDate, 
+  isBusinessOpenOnDate, 
+  validateAppointmentTime 
+} from '@/lib/business-hours';
 
 // Define the booking type to avoid 'any'
 interface DbBooking {
@@ -47,7 +49,8 @@ export default function AdminRescheduleAppointmentPage() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>(ALL_TIME_SLOTS);
+  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+  const [allTimeSlotsForDate, setAllTimeSlotsForDate] = useState<string[]>([]);
   const [timeSlotDisplay, setTimeSlotDisplay] = useState<Record<string, { available: boolean; reason?: string }>>({});
   const [existingBookings, setExistingBookings] = useState<DbBooking[]>([]);
   const [timeOffPeriods, setTimeOffPeriods] = useState<TimeOff[]>([]);
@@ -210,8 +213,23 @@ export default function AdminRescheduleAppointmentPage() {
   useEffect(() => {
     if (!selectedDate || !appointment) return;
     
+    // Check if business is open on selected date
+    if (!isBusinessOpenOnDate(selectedDate)) {
+      setAllTimeSlotsForDate([]);
+      setAvailableTimeSlots([]);
+      setTimeSlotDisplay({});
+      if (selectedTime) {
+        setSelectedTime("");
+      }
+      return;
+    }
+    
     const formattedDate = formatDateForDB(selectedDate);
     const appointmentDurationMinutes = parseInt(appointment.duration.split(' ')[0], 10);
+    
+    // Generate time slots based on business hours for this date
+    const timeSlotsForDate = generateTimeSlotsForDate(selectedDate, 60);
+    setAllTimeSlotsForDate(timeSlotsForDate);
     
     // Get bookings for the selected date, excluding the current appointment
     const dateBookings = existingBookings.filter(booking => {
@@ -224,8 +242,18 @@ export default function AdminRescheduleAppointmentPage() {
     const timeDisplay: Record<string, { available: boolean; reason?: string }> = {};
     
     // Check each time slot against existing bookings and time off
-    const available = ALL_TIME_SLOTS.filter(timeSlot => {
-      // First check time off conflicts
+    const available = timeSlotsForDate.filter(timeSlot => {
+      // First validate against business hours
+      const validation = validateAppointmentTime(selectedDate, timeSlot, appointmentDurationMinutes);
+      if (!validation.isValid) {
+        timeDisplay[timeSlot] = {
+          available: false,
+          reason: validation.reason
+        };
+        return false;
+      }
+      
+      // Check time off conflicts
       const timeOffCheck = isTimeSlotBlockedByTimeOff(timeSlot, selectedDate, appointmentDurationMinutes);
       if (timeOffCheck.blocked) {
         timeDisplay[timeSlot] = {
@@ -481,7 +509,7 @@ export default function AdminRescheduleAppointmentPage() {
                         <SelectValue placeholder="Select a time" />
                       </SelectTrigger>
                       <SelectContent>
-                        {ALL_TIME_SLOTS.map((time) => {
+                        {allTimeSlotsForDate.map((time) => {
                           const timeInfo = timeSlotDisplay[time];
                           const isAvailable = timeInfo?.available !== false;
                           const isCurrentAppointment = 

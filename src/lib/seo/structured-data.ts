@@ -108,8 +108,9 @@ export function generateLocalBusinessSchema() {
       "longitude": "-92.4421"
     },
     "openingHours": [
-      "Mo-Fr 09:00-18:00",
-      "Sa 10:00-16:00"
+      "Mo-Th 06:00-20:00",
+      "Fr 06:00-15:00",
+      "Sa 06:00-13:00"
     ],
     "priceRange": "$40-$140",
     "servedCuisine": [], // Not applicable for services

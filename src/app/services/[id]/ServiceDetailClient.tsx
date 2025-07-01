@@ -14,9 +14,13 @@ import { format, addMonths, parseISO } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { checkTimeOffConflict, getTimeOffForDate, type TimeOff } from "@/lib/supabase-timeoff";
-
-// All possible time slots
-const ALL_TIME_SLOTS = ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"];
+import { 
+  generateTimeSlotsForDate, 
+  isBusinessOpenOnDate, 
+  getBusinessHoursForDate, 
+  validateAppointmentTime,
+  getDayName 
+} from "@/lib/business-hours";
 
 interface DbBooking {
   id: string;
@@ -60,7 +64,8 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
   const [serviceVariants, setServiceVariants] = useState<ServiceVariant[]>([]);
   const [loadingVariants, setLoadingVariants] = useState(false);
 
-  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>(ALL_TIME_SLOTS);
+  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+  const [allTimeSlotsForDate, setAllTimeSlotsForDate] = useState<string[]>([]);
   const [timeSlotDisplay, setTimeSlotDisplay] = useState<Record<string, { available: boolean; reason?: string }>>({});
   const [existingBookings, setExistingBookings] = useState<DbBooking[]>([]);
   const [isLoadingBookings, setIsLoadingBookings] = useState(false);
@@ -258,8 +263,23 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
   useEffect(() => {
     if (!selectedDate || !service) return;
     
+    // Check if business is open on selected date
+    if (!isBusinessOpenOnDate(selectedDate)) {
+      setAllTimeSlotsForDate([]);
+      setAvailableTimeSlots([]);
+      setTimeSlotDisplay({});
+      if (selectedTime) {
+        setSelectedTime("");
+      }
+      return;
+    }
+    
     const formattedDate = format(selectedDate, "yyyy-MM-dd");
     const serviceDurationMinutes = getServiceDurationMinutes();
+    
+    // Generate time slots based on business hours for this date
+    const timeSlotsForDate = generateTimeSlotsForDate(selectedDate, 60); // 60-minute slots
+    setAllTimeSlotsForDate(timeSlotsForDate);
     
     // Get bookings for the selected date (active bookings only)
     const dateBookings = existingBookings.filter(booking => {
@@ -276,8 +296,18 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
     const timeDisplay: Record<string, { available: boolean; reason?: string }> = {};
     
     // Check each time slot against existing bookings and time off
-    const available = ALL_TIME_SLOTS.filter(timeSlot => {
-      // First check time off conflicts
+    const available = timeSlotsForDate.filter((timeSlot: string) => {
+      // First validate against business hours
+      const validation = validateAppointmentTime(selectedDate, timeSlot, serviceDurationMinutes);
+      if (!validation.isValid) {
+        timeDisplay[timeSlot] = {
+          available: false,
+          reason: validation.reason
+        };
+        return false;
+      }
+      
+      // Check time off conflicts
       const timeOffCheck = isTimeSlotBlockedByTimeOff(timeSlot, selectedDate, serviceDurationMinutes);
       if (timeOffCheck.blocked) {
         timeDisplay[timeSlot] = {
@@ -732,11 +762,28 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                       />
                     </div>
                     {selectedDate && (
-                      <div className="text-sm text-gray-500 mt-2 flex items-center justify-center gap-2">
-                        <CalendarIcon className="h-4 w-4" />
-                        <span className="text-center">
-                          {format(selectedDate, "EEEE, MMMM d, yyyy")}
-                        </span>
+                      <div className="text-sm text-gray-500 mt-2 space-y-1">
+                        <div className="flex items-center justify-center gap-2">
+                          <CalendarIcon className="h-4 w-4" />
+                          <span className="text-center">
+                            {format(selectedDate, "EEEE, MMMM d, yyyy")}
+                          </span>
+                        </div>
+                        {(() => {
+                          const businessHours = getBusinessHoursForDate(selectedDate);
+                          if (!businessHours.isOpen) {
+                            return (
+                              <div className="text-center text-red-600 text-xs bg-red-50 p-2 rounded">
+                                Closed on {getDayName(selectedDate.getDay())}s
+                              </div>
+                            );
+                          }
+                          return (
+                            <div className="text-center text-green-600 text-xs bg-green-50 p-2 rounded">
+                              Open {businessHours.openTime} - {businessHours.closeTime}
+                            </div>
+                          );
+                        })()}
                       </div>
                     )}
                   </div>
@@ -762,7 +809,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                             <SelectValue placeholder="Select a time" />
                           </SelectTrigger>
                           <SelectContent>
-                            {ALL_TIME_SLOTS.map((time) => {
+                            {allTimeSlotsForDate.map((time) => {
                               const isAvailable = timeSlotDisplay[time]?.available !== false;
                               return (
                                 <SelectItem 

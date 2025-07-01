@@ -15,9 +15,13 @@ import { useSession } from 'next-auth/react';
 import { PageLoader } from "@/components/ui/page-loader";
 import { formatDateForDB, isSameDay as isSameDayUtil } from '@/lib/date-utils';
 import { getTimeOffPeriods, TimeOff } from '@/lib/supabase-timeoff';
-
-// All possible time slots
-const ALL_TIME_SLOTS = ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"];
+import { 
+  generateTimeSlotsForDate, 
+  isBusinessOpenOnDate, 
+  validateAppointmentTime,
+  getBusinessHoursForDate,
+  getDayName 
+} from '@/lib/business-hours';
 
 // Define the booking type to avoid 'any'
 interface DbBooking {
@@ -54,7 +58,8 @@ export default function RescheduleAppointmentPage() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>(ALL_TIME_SLOTS);
+  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+  const [allTimeSlotsForDate, setAllTimeSlotsForDate] = useState<string[]>([]);
   const [timeSlotDisplay, setTimeSlotDisplay] = useState<Record<string, { available: boolean; reason?: string }>>({});
   const [existingBookings, setExistingBookings] = useState<DbBooking[]>([]);
   const [timeOffPeriods, setTimeOffPeriods] = useState<TimeOff[]>([]);
@@ -207,8 +212,23 @@ export default function RescheduleAppointmentPage() {
   useEffect(() => {
     if (!selectedDate || !appointment) return;
     
+    // Check if business is open on selected date
+    if (!isBusinessOpenOnDate(selectedDate)) {
+      setAllTimeSlotsForDate([]);
+      setAvailableTimeSlots([]);
+      setTimeSlotDisplay({});
+      if (selectedTime) {
+        setSelectedTime("");
+      }
+      return;
+    }
+    
     const formattedDate = formatDateForDB(selectedDate);
     const appointmentDurationMinutes = parseInt(appointment.duration.split(' ')[0], 10);
+    
+    // Generate time slots based on business hours for this date
+    const timeSlotsForDate = generateTimeSlotsForDate(selectedDate, 60);
+    setAllTimeSlotsForDate(timeSlotsForDate);
     
     // Get bookings for the selected date, excluding the current appointment
     const dateBookings = existingBookings.filter(booking => {
@@ -222,8 +242,18 @@ export default function RescheduleAppointmentPage() {
     const timeDisplay: Record<string, { available: boolean; reason?: string }> = {};
     
     // Check each time slot against existing bookings and time off
-    const available = ALL_TIME_SLOTS.filter(timeSlot => {
-      // First check time off conflicts
+    const available = timeSlotsForDate.filter(timeSlot => {
+      // First validate against business hours
+      const validation = validateAppointmentTime(selectedDate, timeSlot, appointmentDurationMinutes);
+      if (!validation.isValid) {
+        timeDisplay[timeSlot] = {
+          available: false,
+          reason: validation.reason
+        };
+        return false;
+      }
+      
+      // Check time off conflicts
       const timeOffCheck = isTimeSlotBlockedByTimeOff(timeSlot, selectedDate, appointmentDurationMinutes);
       if (timeOffCheck.blocked) {
         timeDisplay[timeSlot] = {
@@ -456,11 +486,28 @@ export default function RescheduleAppointmentPage() {
                   />
                 </div>
                 {selectedDate && (
-                  <div className="text-sm text-gray-500 mt-2 flex items-center justify-center gap-2">
-                    <CalendarIcon className="h-4 w-4" />
-                    <span>
-                      Selected: {format(selectedDate, "EEEE, MMMM d, yyyy")}
-                    </span>
+                  <div className="text-sm text-gray-500 mt-2 space-y-1">
+                    <div className="flex items-center justify-center gap-2">
+                      <CalendarIcon className="h-4 w-4" />
+                      <span>
+                        Selected: {format(selectedDate, "EEEE, MMMM d, yyyy")}
+                      </span>
+                    </div>
+                    {(() => {
+                      const businessHours = getBusinessHoursForDate(selectedDate);
+                      if (!businessHours.isOpen) {
+                        return (
+                          <div className="text-center text-red-600 text-xs bg-red-50 p-2 rounded">
+                            Closed on {getDayName(selectedDate.getDay())}s
+                          </div>
+                        );
+                      }
+                      return (
+                        <div className="text-center text-green-600 text-xs bg-green-50 p-2 rounded">
+                          Open {businessHours.openTime} - {businessHours.closeTime}
+                        </div>
+                      );
+                    })()}
                   </div>
                 )}
               </div>
@@ -482,7 +529,7 @@ export default function RescheduleAppointmentPage() {
                         <SelectValue placeholder="Select a time" />
                       </SelectTrigger>
                       <SelectContent>
-                        {ALL_TIME_SLOTS.map((time) => {
+                        {allTimeSlotsForDate.map((time) => {
                           const timeInfo = timeSlotDisplay[time];
                           const isAvailable = timeInfo?.available !== false;
                           const isCurrentAppointment = 
