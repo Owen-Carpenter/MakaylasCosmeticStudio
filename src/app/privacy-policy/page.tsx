@@ -117,9 +117,8 @@ export default function PrivacyPolicy() {
                 <strong>To delete your account and all data:</strong>
               </p>
               <ul className="list-disc list-inside text-gray-700 mb-6 space-y-2">
-                <li>If you signed up with Facebook: Go to your Facebook settings → Apps and Websites → Remove our app</li>
-                <li>If you signed up with email: Contact us at makaylascosmeticstudio@gmail.com</li>
-                <li>You can also contact us directly at makaylascosmeticstudio@gmail.com for data deletion requests</li>
+                <li>Contact us at makaylascosmeticstudio@gmail.com to request account deletion</li>
+                <li>We will process your request within 30 days</li>
               </ul>
             </section>
 

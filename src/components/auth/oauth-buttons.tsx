@@ -51,27 +51,6 @@ export function OAuthButtons({ callbackUrl = "/dashboard", disabled = false, mod
         )}
         {actionText} with Google
       </Button>
-      
-      <Button 
-        variant="outline" 
-        className="w-full backdrop-blur-sm bg-white/80 hover:bg-white/50 shadow-sm border-0 transition-all duration-200"
-        onClick={() => handleOAuthLogin("facebook")}
-        disabled={disabled || loadingProvider !== null}
-      >
-        {loadingProvider === "facebook" ? (
-          <div className="h-4 w-4 mr-2 animate-spin border-2 border-blue-600 border-t-transparent rounded-full" />
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 320 512"
-            className="h-4 w-4 mr-2 text-blue-600"
-            fill="currentColor"
-          >
-            <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
-          </svg>
-        )}
-        {actionText} with Facebook
-      </Button>
     </div>
   );
 } 

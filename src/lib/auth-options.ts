@@ -1,6 +1,5 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { supabase } from "./auth";
 
@@ -17,10 +16,6 @@ export const authOptions: NextAuthOptions = {
           scope: "openid email profile"
         }
       }
-    }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID || "",
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
     }),
     CredentialsProvider({
       name: "Email/Password",
