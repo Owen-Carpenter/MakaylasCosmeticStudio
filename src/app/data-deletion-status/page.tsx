@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Mail } from "lucide-react";
 import { Footer } from "@/components/ui/footer";
 
-export default function DataDeletionStatusPage() {
+function DataDeletionContent() {
   const searchParams = useSearchParams();
   const code = searchParams?.get('code');
 
@@ -69,5 +70,20 @@ export default function DataDeletionStatusPage() {
       
       <Footer />
     </div>
+  );
+}
+
+export default function DataDeletionStatusPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    }>
+      <DataDeletionContent />
+    </Suspense>
   );
 } 
