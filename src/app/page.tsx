@@ -18,6 +18,8 @@ import { Service } from "@/lib/services";
 import { getServices } from "@/lib/supabase-services";
 import { Footer } from "@/components/ui/footer";
 import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 // Dynamically import the eyelash 3D models to avoid SSR issues
 const CosmeticModel = dynamic(() => import("@/components/3d/EyeLashModels"), {
@@ -39,6 +41,8 @@ const formatCategoryName = (category: string) => {
 };
 
 export default function HomePage() {
+  const { data: session } = useSession();
+  const router = useRouter();
   const [popularServices, setPopularServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [contactForm, setContactForm] = useState({
@@ -155,6 +159,18 @@ export default function HomePage() {
       });
     } finally {
       setIsSubmittingContact(false);
+    }
+  };
+
+  // Handle booking click
+  const handleBookNow = (serviceId: string) => {
+    if (!session) {
+      // Redirect to login with callback URL to service detail page
+      const loginUrl = `/auth/login?callbackUrl=${encodeURIComponent(`/services/${serviceId}`)}`;
+      router.push(loginUrl);
+    } else {
+      // User is authenticated, go directly to service detail page
+      router.push(`/services/${serviceId}`);
     }
   };
 
@@ -299,7 +315,7 @@ export default function HomePage() {
               </div>
             ) : popularServices.length > 0 ? (
               popularServices.map((service, index) => (
-                <Link href={`/services/${service.id}`} key={service.id} className="transition-transform hover:scale-[1.02] duration-300">
+                <div key={service.id} className="transition-transform hover:scale-[1.02] duration-300">
                   <Card className="h-full overflow-hidden transition-all duration-300
                     border border-white/20 shadow-xl
                     bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md
@@ -331,14 +347,16 @@ export default function HomePage() {
                       </div>
                     </CardContent>
                     <CardFooter className="border-t border-white/10 pt-4 relative z-10">
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-white 
+                      <Button 
+                        onClick={() => handleBookNow(service.id)}
+                        className="w-full bg-primary hover:bg-primary/90 text-white 
                         backdrop-blur-sm transition-all duration-200 group-hover:shadow-lg group-hover:scale-[1.02]">
-                        <span>Book Now</span>
+                        <span>{!session ? "Sign In to Book" : "Book Now"}</span>
                         <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </CardFooter>
                   </Card>
-                </Link>
+                </div>
               ))
             ) : (
               <div className="col-span-3 text-center py-12 bg-white/10 backdrop-blur-sm rounded-lg">
