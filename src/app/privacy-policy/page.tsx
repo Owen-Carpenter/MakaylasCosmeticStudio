@@ -110,6 +110,16 @@ export default function PrivacyPolicy() {
                 <li><strong>Portability:</strong> Request a copy of your data in a portable format</li>
                 <li><strong>Opt-out:</strong> Unsubscribe from marketing communications</li>
                 <li><strong>Restrict Processing:</strong> Limit how we process your information</li>
+                <li><strong>Objection:</strong> Object to processing of your personal information</li>
+              </ul>
+              
+              <p className="text-gray-700 mb-4">
+                <strong>To delete your account and all data:</strong>
+              </p>
+              <ul className="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li>If you signed up with Facebook: Go to your Facebook settings → Apps and Websites → Remove our app</li>
+                <li>If you signed up with email: Contact us at makaylascosmeticstudio@gmail.com</li>
+                <li>You can also contact us directly at makaylascosmeticstudio@gmail.com for data deletion requests</li>
               </ul>
             </section>
 
