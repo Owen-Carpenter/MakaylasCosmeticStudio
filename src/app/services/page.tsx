@@ -9,7 +9,8 @@ import { initScrollAnimations } from "@/lib/scroll-animations";
 import { Service } from "@/lib/services";
 import { getServices } from "@/lib/supabase-services";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Footer } from "@/components/ui/footer";
 
 // FAQ Data
@@ -38,6 +39,8 @@ const faqItems = [
 
 function ServicesContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { data: session } = useSession();
   const categoryFromUrl = searchParams?.get('category') || "all";
   
   const [activeCategory, setActiveCategory] = useState<string>(categoryFromUrl);
@@ -152,6 +155,18 @@ function ServicesContent() {
     }
   };
 
+  // Handle booking click
+  const handleBookNow = (serviceId: string) => {
+    if (!session) {
+      // Redirect to login with callback URL to service detail page
+      const loginUrl = `/auth/login?callbackUrl=${encodeURIComponent(`/services/${serviceId}`)}`;
+      router.push(loginUrl);
+    } else {
+      // User is authenticated, go directly to service detail page
+      router.push(`/services/${serviceId}`);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden w-full max-w-full">
       <main className="gradient-bg pt-32 pb-20 flex-grow overflow-x-hidden w-full max-w-full">
@@ -244,21 +259,16 @@ function ServicesContent() {
                       animationFillMode: 'both'
                     }}
                   >
-                    <Link 
-                      href={`/services/${service.id}`} 
-                      className="block w-full max-w-full group"
-                    >
-                                             <Card className="h-full overflow-hidden transition-all duration-300 ease-out
+                    <Card className="h-full overflow-hidden transition-all duration-300 ease-out
                          border border-white/20 shadow-xl
                          bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md
                          hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] 
                          hover:border-white/40 
                          hover:scale-[1.02] 
                          hover:-translate-y-1
-                         relative group-hover:bg-gradient-to-br group-hover:from-white/25 group-hover:to-white/10
+                         relative group hover:bg-gradient-to-br hover:from-white/25 hover:to-white/10
                          transform w-full max-w-full
-                         active:scale-[0.99] active:shadow-[0_10px_30px_rgba(255,255,255,0.1)]
-                         cursor-pointer">
+                         active:scale-[0.99] active:shadow-[0_10px_30px_rgba(255,255,255,0.1)]">
                         
                                                  {/* Animated Background Icon */}
                          <div className="absolute inset-0 flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 mx-auto my-auto opacity-[0.08] pointer-events-none select-none z-0 
@@ -319,23 +329,26 @@ function ServicesContent() {
                         
                                                  <CardFooter className="border-t border-white/10 pt-4 relative z-10 w-full max-w-full
                            transition-all duration-300 group-hover:border-white/30 group-hover:bg-white/5">
-                           <Button className="w-full bg-primary hover:bg-primary/90 text-white 
+                           <Button 
+                             onClick={() => handleBookNow(service.id)}
+                             className="w-full bg-primary hover:bg-primary/90 text-white 
                              backdrop-blur-sm transition-all duration-300 
-                             group-hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)] 
-                             group-hover:scale-[1.02] 
-                             group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent
+                             hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)] 
+                             hover:scale-[1.02] 
+                             hover:bg-gradient-to-r hover:from-primary hover:to-accent
                              text-sm relative overflow-hidden
                              before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent
                              before:translate-x-[-100%] before:transition-transform before:duration-700
-                             group-hover:before:translate-x-[100%]">
-                             <span className="relative z-10 transition-transform duration-300">Book Now</span>
+                             hover:before:translate-x-[100%]">
+                             <span className="relative z-10 transition-transform duration-300">
+                               {!session ? "Sign In to Book" : "Book Now"}
+                             </span>
                              <ChevronRight className="h-4 w-4 ml-1 flex-shrink-0 relative z-10
                                transition-all duration-300 
-                               group-hover:translate-x-1 group-hover:drop-shadow-lg" />
+                               hover:translate-x-1 hover:drop-shadow-lg" />
                            </Button>
                          </CardFooter>
                       </Card>
-                    </Link>
                   </div>
                 ))
               ) : (

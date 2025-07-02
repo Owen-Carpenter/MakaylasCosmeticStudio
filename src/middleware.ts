@@ -2,7 +2,24 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 // Public routes that don't require authentication
-const publicRoutes = ['/', '/auth/login', '/auth/register', '/auth/forgot-password', '/auth/reset-password', '/auth/verify', '/auth/error']
+const publicRoutes = [
+  '/', 
+  '/auth/login', 
+  '/auth/register', 
+  '/auth/forgot-password', 
+  '/auth/reset-password', 
+  '/auth/verify', 
+  '/auth/error',
+  '/services',
+  '/privacy-policy',
+  '/terms-of-service',
+  '/cookie-policy'
+]
+
+// Routes that start with these paths are also public
+const publicPathPrefixes = [
+  '/services/', // Allow all service detail pages
+]
 
 // Public API routes that don't require authentication
 const publicApiRoutes = ['/api/auth']
@@ -26,7 +43,8 @@ export async function middleware(request: NextRequest) {
                       pathname.includes('.gltf')
   
   // Check if the path is a public route
-  const isPublicRoute = publicRoutes.some(route => pathname === route)
+  const isPublicRoute = publicRoutes.some(route => pathname === route) ||
+                        publicPathPrefixes.some(prefix => pathname.startsWith(prefix))
   
   // Check if the path is a public API route
   const isPublicApiRoute = publicApiRoutes.some(route => 

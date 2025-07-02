@@ -378,6 +378,13 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
 
   // Handle booking with time off validation
   const handleBooking = async () => {
+    // Check if user is authenticated before proceeding with booking
+    if (!session) {
+      // Redirect to login with callback URL to return to this service after login
+      const loginUrl = `/auth/login?callbackUrl=${encodeURIComponent(window.location.pathname)}`;
+      router.push(loginUrl);
+      return;
+    }
     if (!selectedDate) {
       toast.error("Please select a date");
       return;
@@ -896,16 +903,22 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                       disabled={!selectedDate || !selectedTime || (service.has_variants && !selectedVariant)}
                       className="w-full h-12 bg-gradient-to-r from-primary to-indigo-600 hover:from-primary/90 hover:to-indigo-600/90 text-white font-medium text-lg"
                     >
-                      Book Now
+                      {!session ? "Sign In to Book" : "Book Now"}
                     </Button>
                     {service.has_variants && !selectedVariant && (
                       <p className="text-xs text-center text-amber-600 bg-amber-50 p-2 rounded">
                         Please select a service option to continue
                       </p>
                     )}
-                    <p className="text-xs text-center text-gray-500">
-                      By booking, you agree to our terms and conditions.
-                    </p>
+                    {!session ? (
+                      <p className="text-xs text-center text-blue-600 bg-blue-50 p-2 rounded">
+                                                 You&apos;ll be redirected to sign in before completing your booking
+                      </p>
+                    ) : (
+                      <p className="text-xs text-center text-gray-500">
+                        By booking, you agree to our terms and conditions.
+                      </p>
+                    )}
                   </div>
                 </CardFooter>
               </Card>
