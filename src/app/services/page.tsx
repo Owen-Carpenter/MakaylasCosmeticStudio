@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Clock, ChevronRight, Filter, ArrowUpDown, Loader2, Eye, Sparkles, Heart, Scissors } from "lucide-react";
+import { Clock, ChevronRight, Filter, ArrowUpDown, Loader2, Eye, EyeClosed, Sparkles, Heart, Scissors } from "lucide-react";
 import { initScrollAnimations } from "@/lib/scroll-animations";
 import { Service } from "@/lib/services";
 import { getServices } from "@/lib/supabase-services";
@@ -143,7 +143,7 @@ function ServicesContent() {
     
     switch (category.toLowerCase()) {
       case 'lashes':
-        return <Eye {...iconProps} />;
+        return <EyeClosed {...iconProps} />;
       case 'brows':
         return <Eye {...iconProps} />;
       case 'facials':
